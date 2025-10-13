@@ -22,19 +22,19 @@ namespace WorldOfZuul
             quest = questValue;
         }
 
-        public string getName() {
+        public string GetName() {
             return name;
         }
 
-        public string getRole() {
+        public string GetRole() {
             return role;
         }
 
-        public string getDescription() {
+        public string GetDescription() {
             return description;
         }
 
-        public string getQuest() {
+        public string GetQuest() {
             return quest;
         }
 
