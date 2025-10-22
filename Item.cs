@@ -15,24 +15,36 @@ namespace WorldOfZuul
             value = Value;
         }
 
-        public string getName()
+        public string GetName()
         {
             return name;
         }
 
-        public string getDescription()
+        public string GetDescription()
         {
             return description;
         }
 
-        public float getWeight()
+        public float GetWeight()
         {
             return weight;
         }
 
-        public float getValue()
+        public float GetValue()
         {
             return value;
+        }
+
+        public static bool DoesItemExist(Item item)
+        {
+            if (item != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
