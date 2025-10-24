@@ -12,3 +12,10 @@ For now, there is a basic algorithm for tracking progress (just number out of nu
 ### Storing data
 
 At this moment, we have no idea how to store the data in our game (image maps, NPCs, etc.)
+
+
+# Wishlist
+
+- PNGs for NPC faces
+- check if screen is the right size all the time, not just before the game starts
+- Starting screen with suggestions (don't scroll up, etc.)

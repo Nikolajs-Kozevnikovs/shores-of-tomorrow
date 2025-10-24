@@ -15,5 +15,4 @@ namespace WorldOfZuul
             return ValidCommands.Contains(command);
         }
     }
-
 }
