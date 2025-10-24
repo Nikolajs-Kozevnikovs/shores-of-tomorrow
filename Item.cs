@@ -4,15 +4,15 @@ namespace WorldOfZuul
     {
         private string name;
         private string description;
-        private float weight; // Just in case we need it
-        private float value;
+        // private float weight; // Just in case we need it
+        // private float value; // for selling
 
-        public Item(string Name, string Description, float Weight, float Value)
+        public Item(string Name, string Description)
         {
             name = Name;
             description = Description;
-            weight = Weight;
-            value = Value;
+            // weight = Weight;
+            // value = Value;
         }
 
         public string GetName()
@@ -25,15 +25,15 @@ namespace WorldOfZuul
             return description;
         }
 
-        public float GetWeight()
-        {
-            return weight;
-        }
+        // public float GetWeight()
+        // {
+        //     return weight;
+        // }
 
-        public float GetValue()
-        {
-            return value;
-        }
+        // public float GetValue()
+        // {
+        //     return value;
+        // }
 
         public static bool DoesItemExist(Item item)
         {

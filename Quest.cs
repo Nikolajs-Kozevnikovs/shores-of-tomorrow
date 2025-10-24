@@ -5,7 +5,7 @@ namespace WorldOfZuul
     private string questGiverName;
     private int progress; // how much progress the player has made
     private int objective; // targer progress
-    private bool isDone; 
+    private bool done;
     private int[][] activeTiles; // array of coordinates for the tiles that are active
 
     public Quest(string Description, string QuestGiverName, int Objective, int[][] ActiveTiles) {
@@ -13,12 +13,12 @@ namespace WorldOfZuul
       questGiverName = QuestGiverName;
       objective = Objective;
       progress = 0;
-      isDone = false;
+      done = false;
       activeTiles = ActiveTiles;
     }
 
-    public bool GetIsDone() {
-      return isDone;
+    public bool IsDone() {
+      return done;
     }
 
     public GetQuestGiver() {

@@ -13,7 +13,7 @@ namespace WorldOfZuul
         private string name;
         private string role;
         private string description;
-        private string quest;
+        private List<Quest> quests;
 
         public NPC(string nameValue, string roleValue, string descriptionValue, string questValue) {
             name = nameValue;
@@ -37,11 +37,11 @@ namespace WorldOfZuul
         public string GetQuest() {
             return quest;
         }
-
+        // we'll need to add rendering to that
         public override string ToString() {
             return $"Name: {name}, Role: {role}, Description: {description}, Quest: {quest}";
         }
-
+        // tbd, commandParser in not involved
         public void Talk() {
             Console.WriteLine($"{name} says: Hello!");
             Console.ReadLine();
