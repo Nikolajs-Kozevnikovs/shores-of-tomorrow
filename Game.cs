@@ -36,10 +36,34 @@
             Parser parser = new();
 
             PrintWelcome();
+            // temporary solution
+            while (true)
+            {
+                // Get the current terminal window size
+                int width = Console.WindowWidth;
+                int height = Console.WindowHeight;
 
+                // Check if the terminal size is less than 132x43
+                if (width < 132 || height < 43)
+                {
+                    Console.Clear(); // Clear the console for better readability
+                    Console.WriteLine("Terminal too small. Please increase the size.");
+                }
+                else
+                {
+                    Console.Clear(); // Clear the console before starting the game
+                    break; // Exit the loop after starting the game
+                }
+
+                // Sleep for a while before rechecking
+                Thread.Sleep(1000); // Check every second
+            }
+
+            // TUI.RenderStartWindow()
             bool continuePlaying = true;
             while (continuePlaying)
             {
+
                 Console.WriteLine(currentRoom?.ShortDescription);
                 Console.Write("> ");
 

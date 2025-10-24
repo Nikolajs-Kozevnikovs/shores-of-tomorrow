@@ -32,7 +32,8 @@ namespace WorldOfZuul  {
         {
             if (IsItemInInventory(item))
             {
-                return $"Name: {item.GetName()}\nDescription: {item.GetDescription()}\nWeight: {item.GetWeight()}\nValue: {item.GetValue()}";
+                return $"Name: {item.GetName()}\nDescription: {item.GetDescription()}";
+                // \nWeight: {item.GetWeight()}\nValue: {item.GetValue()}";
             }
             else
             {

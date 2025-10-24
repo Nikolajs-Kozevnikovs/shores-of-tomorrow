@@ -21,26 +21,26 @@ namespace WorldOfZuul
       return done;
     }
 
-    public GetQuestGiver() {
-      return questGiver;
+    public string GetQuestGiver() {
+      return questGiverName;
     }
 
-    public GetDescription() {
+    public string GetDescription() {
       return description;
     }
 
-    public GetQuestProgression() {
-      return {progress, objective};
-    }
+    // public int[] GetQuestProgression() {
+    //   return {progress, objective};
+    // }
 
-    public GetActiveTiles() {
-      return {activeTiles}
-    }
+    // public GetActiveTiles() {
+    //   return {activeTiles}
+    // }
 
-    public IncrementProgress() {
+    public void IncrementProgress() {
       progress += 1;
       if (progress >= objective) {
-         isDone = true;
+         done = true;
       }
     }
 
