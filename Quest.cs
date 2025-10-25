@@ -3,7 +3,7 @@ namespace WorldOfZuul
   public class Quest {
     private string Description { get; }
     private readonly List<Quest> Prerequisites;
-    private string Objective { get; } // targer progress
+    private string Objective { get; } // target progress
     private bool[,] ActiveTiles { get; } // array of coordinates for the tiles where the quest can be completed
     public bool IsCompleted = false;
 
@@ -12,7 +12,7 @@ namespace WorldOfZuul
         Description = description;
         Prerequisites = prerequisites ?? new List<Quest>();
         Objective = objective;
-        ActiveTiles = activeTiles;
+        ActiveTiles = activeTiles; // this must work differently, converting coordinates into a two-dimensional array
     }
 
     public Quest(string description, Quest prerequisite, string objective, bool[,] activeTiles)
