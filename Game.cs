@@ -4,6 +4,7 @@
     {
         private Room? currentRoom;
         private Room? previousRoom;
+        // private List<Quest> activeQuests;
 
         public Game()
         {
@@ -19,13 +20,9 @@
             Room? office = new("Office", "You've entered what seems to be an administration office. There's a large desk with a computer on it, and some bookshelves lining one wall.");
 
             outside.SetExits(null, theatre, lab, pub); // North, East, South, West
-
             theatre.SetExit("west", outside);
-
             pub.SetExit("east", outside);
-
             lab.SetExits(outside, office, null, null);
-
             office.SetExit("west", lab);
 
             currentRoom = outside;
@@ -36,7 +33,7 @@
             Parser parser = new();
 
             PrintWelcome();
-            // temporary solution
+            // temporary solution for window size
             while (true)
             {
                 // Get the current terminal window size
