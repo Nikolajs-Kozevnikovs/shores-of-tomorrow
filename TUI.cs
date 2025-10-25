@@ -16,7 +16,7 @@ class TUI
     // tbd
     string[] canvas = ReadImage("background.txt");
 
-    
+
     // char[,] renderWindow = { {'w', 'a', 'f' },
     //                           {'r', 'b', 'd'} };
     // renderWindow[2, 3] = 'n';
@@ -24,4 +24,3 @@ class TUI
     // Render(renderWindow);
   }
 }
-
