@@ -2,54 +2,41 @@ namespace WorldOfZuul;
 
 class QuestManager
 {
-  private readonly List<Quest> activeQuests = new();
-  private readonly List<Quest> availableQuests = new();
-  private readonly List<Quest> allQuests = new();
+
+  public readonly List<Quest> questList = new();
   private readonly bool[,] activeTiles;
 
   public QuestManager(List<Quest> quests)
   {
-    allQuests = quests;
+    questList = quests;
     activeTiles = new bool[10, 10];
   }
-
-  public void AcceptQuest(Quest quest)
+  // clumsy but it works
+  public void AcceptQuest(string questName)
   {
-    activeQuests.Add(quest);
-    availableQuests.Remove(quest);
+    var q = questList.Find(x => x.Name == questName);
+    q?.Accept();
   }
-
-  public void CompleteQuest(Quest quest)
-  {
-    quest.IsCompleted = true;
-    activeQuests.Remove(quest);
-    UpdateAvailableQuests();
-  }
-
-  public void UpdateAvailableQuests() 
-  {
-    foreach (Quest q in allQuests)
-    {
-      if (!q.IsCompleted && q.ArePrerequisitesCompleted() && !availableQuests.Contains(q))
-      {
-        availableQuests.Add(q);
-      }
-    }
+  // clumsy but it works
+  public void CompleteQuest(string questName, string outcome) {
+    var q = questList.Find(x => x.Name == questName);
+    q?.Complete(outcome);
   }
 
   public void UpdateActiveTiles()
   {
     Array.Clear(activeTiles, 0, activeTiles.Length);
 
-    foreach (Quest q in activeQuests)
+    foreach (Quest q in questList)
     {
-      bool[,] questTiles = q.GetActiveTiles();
-      for (int i = 0; i < activeTiles.GetLength(0); i++)
+      if (q.State != QuestState.Active)
       {
-        for (int j = 0; j < activeTiles.GetLength(1); j++)
-        {
-          activeTiles[i, j] = activeTiles[i, j] || questTiles[i, j];
-        }
+        continue;
+      }
+
+      foreach (int[] coords in q.ActiveTiles)
+      {
+        activeTiles[coords[0], coords[1]] = true;
       }
     }
   }
