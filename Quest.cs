@@ -1,47 +1,52 @@
+using System.Reflection.Metadata.Ecma335;
+
 namespace WorldOfZuul 
 {
-  public class Quest {
-    private string Description { get; }
-    private readonly List<Quest> Prerequisites;
-    private string Objective { get; } // target progress
-    private bool[,] ActiveTiles { get; } // array of coordinates for the tiles where the quest can be completed
-    public bool IsCompleted = false;
+  public enum QuestState { Pending, Completed, Done, Active, Locked };
 
-    public Quest(string description, List<Quest> prerequisites, string objective, bool[,] activeTiles)
+  public class Quest {
+    public string Name { get; private set; }
+    public string Description { get; }
+    public QuestState State { get; set; }
+    // tbd
+    public Dictionary<string, Quest> Outcomes { get; private set; }
+    public string Objective { get; } // target progress
+    public List<int[]> ActiveTiles { get; private set; } // array of coordinates for the tiles where the quest can be completed
+
+    public Quest(string name, string description, List<Quest> prerequisites, string objective, List<int[]> activeTiles, Dictionary<string, Quest> outcomes)
     {
-        Description = description;
-        Prerequisites = prerequisites ?? new List<Quest>();
-        Objective = objective;
-        ActiveTiles = activeTiles; // this must work differently, converting coordinates into a two-dimensional array
+      Name = name;
+      Description = description;
+      Objective = objective;
+      ActiveTiles = activeTiles;
+      Outcomes = outcomes ?? new Dictionary<string, Quest>();
     }
 
-    public Quest(string description, Quest prerequisite, string objective, bool[,] activeTiles)
-        : this(description, new List<Quest> { prerequisite }, objective, activeTiles) {}
-
-    public Quest(string description, string objective, bool[,] activeTiles)
-        : this(description, new List<Quest>(), objective, activeTiles) {}
-
-    public bool ArePrerequisitesCompleted()
+    public void Accept()
     {
-      foreach (Quest q in Prerequisites)
+      State = QuestState.Active;
+    }
+
+    // complete the Quest, unlock the quests that depend on the outcome and lock the ones that don't
+    public void Complete(string outcome)
+    {
+      State = QuestState.Completed;
+
+      if (Outcomes[outcome].State != QuestState.Locked)
       {
-        if (!q.IsCompleted)
-        {
-          return false;
-        }
+        Outcomes[outcome].State = QuestState.Pending;
       }
 
-      return true;
-    }
+      foreach (var o in Outcomes)
+      {
+        if (o.Key == outcome)
+        {
+          continue;
+        }
 
-    public void RemovePrerequisite(Quest quest)
-    {
-      Prerequisites.Remove(quest);
-    }
 
-    public bool[,] GetActiveTiles()
-    {
-      return ActiveTiles;
+        o.Value.State = QuestState.Locked;
+      }
     }
   }
 }
