@@ -1,5 +1,5 @@
 namespace WorldOfZuul;
-
+// you can't have multiple quests as prerequisites
 class QuestManager
 {
 
