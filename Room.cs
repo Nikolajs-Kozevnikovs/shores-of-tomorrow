@@ -4,12 +4,14 @@
     {
         public string ShortDescription { get; private set; }
         public string LongDescription { get; private set; }
+        public string Background { get; }
         public Dictionary<string, Room> Exits { get; private set; } = new();
 
-        public Room(string shortDesc, string longDesc)
+        public Room(string shortDesc, string longDesc, string background)
         {
             ShortDescription = shortDesc;
             LongDescription = longDesc;
+            Background = background;
         }
 
         public void SetExits(Room? north, Room? east, Room? south, Room? west)

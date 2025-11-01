@@ -4,53 +4,85 @@ using Spectre.Console;
 
 namespace WorldOfZuul;
 
-public static class TUI
+public class TUI
 {
   // required terminal dimensions
   private const int RequiredWidth = 132;
   private const int RequiredHeight = 43;
+  private readonly Canvas canvas = new(RequiredWidth, RequiredHeight);
+  private List<List<Color>> Minimap { get; }
 
-  // test function that emulates how it all works
-  public static void Run()
+  public TUI()
   {
-    // load all images required for render
-    string bgPath = "./assets/graphics/img1.txt";   // background
-    string mapPath = "./assets/graphics/map1.txt";  // minimap
-
-    if (!File.Exists(bgPath))
-      throw new FileNotFoundException($"background file not found: {bgPath}");
+    // load the minimap
+    string mapPath = "./assets/graphics/minimap.txt";
     if (!File.Exists(mapPath))
       throw new FileNotFoundException($"map overlay file not found: {mapPath}");
 
-    List<List<Color>> bgColors = ParseTextImage(bgPath);
-    List<List<Color>> mapColors = ParseTextImage(mapPath);
+    Minimap = ParseTextImage(mapPath);
 
-    // create a new canvas of the size 132x43
-    var canvas = new Canvas(RequiredWidth, RequiredHeight);
+    LoadStartScreen();
+    DrawCanvas();
+  }
 
-    // get the background on canvas
-    DrawAnsiLinesOntoCanvas(canvas, bgColors, 0, 0);
 
+  public void DrawCanvas()
+  {
+    Console.Clear();
+    AnsiConsole.Write(canvas);
+  }
+
+
+  private void UpdateMinimap(Room currentRoom)
+  {
     // choose where to put the map
-    int offsetX = RequiredWidth - mapColors[0].Count; // top‑right alignment
+    int offsetX = RequiredWidth - Minimap[0].Count; // top‑right alignment
     int offsetY = 0;                           // top‑aligned
 
     // get the map on canvas
-    DrawAnsiLinesOntoCanvas(canvas, mapColors, offsetX, offsetY);
+    DrawAnsiLinesOntoCanvas(Minimap, offsetX, offsetY);
 
-    // render the canvas
-    AnsiConsole.Write(canvas);
-
-    // temp
-    // draw subtitles below the canvas TEMPORARY SOLUTION
-    string subtitle = "you stand before the ancient gate. what will you do?";
-    int start = Math.Max(0, (RequiredWidth - subtitle.Length) / 2);
-    string padded = new string(' ', start) + $"[bold]{subtitle}[/]";
-    AnsiConsole.MarkupLine(padded);
+    // here we will need to use the position of current room to display where the main character is. Also display the tiles that are active for quests
+    // Something like this:
+    // canvas.setPixel(offsetX+currentPositionX, offsetY+currentPositionY, new Color(255, 0, 0))
   }
 
+
+  public void UpdateBackground(Room currentRoom)
+  {
+    string bgPath = "./assets/graphics/" + currentRoom.Background;
+
+    if (!File.Exists(bgPath))
+      throw new FileNotFoundException($"background file not found: {bgPath}");
+
+    List<List<Color>> bgColors = ParseTextImage(bgPath);
+
+    DrawAnsiLinesOntoCanvas(bgColors, 0, 0);
+
+    UpdateMinimap(currentRoom);
+  }
+
+  // maybe we won't need it after we get Room update and will have the currentRoom from the beginning
+  public void LoadStartScreen()
+  {
+    string bgPath = "./assets/graphics/startScreen.txt";
+
+    if (!File.Exists(bgPath))
+      throw new FileNotFoundException($"background file not found: {bgPath}");
+
+    List<List<Color>> bgColors = ParseTextImage(bgPath);
+
+    DrawAnsiLinesOntoCanvas(bgColors, 0, 0);
+
+    int offsetX = RequiredWidth - Minimap[0].Count; // top‑right alignment
+    int offsetY = 0;
+    DrawAnsiLinesOntoCanvas(Minimap, offsetX, offsetY);
+
+  }
+
+
   // draw the canvas with specified colors
-  private static void DrawAnsiLinesOntoCanvas(Canvas canvas, List<List<Color>> colorsList, int offsetX, int offsetY)
+  private void DrawAnsiLinesOntoCanvas(List<List<Color>> colorsList, int offsetX, int offsetY)
   {
     for (int i = 0; i < colorsList.Count; i++)
     {

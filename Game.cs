@@ -13,11 +13,11 @@
 
         private void CreateRooms()
         {
-            Room? outside = new("Outside", "You are standing outside the main entrance of the university. To the east is a large building, to the south is a computing lab, and to the west is the campus pub.");
-            Room? theatre = new("Theatre", "You find yourself inside a large lecture theatre. Rows of seats ascend up to the back, and there's a podium at the front. It's quite dark and quiet.");
-            Room? pub = new("Pub", "You've entered the campus pub. It's a cozy place, with a few students chatting over drinks. There's a bar near you and some pool tables at the far end.");
-            Room? lab = new("Lab", "You're in a computing lab. Desks with computers line the walls, and there's an office to the east. The hum of machines fills the room.");
-            Room? office = new("Office", "You've entered what seems to be an administration office. There's a large desk with a computer on it, and some bookshelves lining one wall.");
+            Room? outside = new("Outside", "You are standing outside the main entrance of the university. To the east is a large building, to the south is a computing lab, and to the west is the campus pub.", "roomBackground1.txt");
+            Room? theatre = new("Theatre", "You find yourself inside a large lecture theatre. Rows of seats ascend up to the back, and there's a podium at the front. It's quite dark and quiet.", "roomBackground2.txt");
+            Room? pub = new("Pub", "You've entered the campus pub. It's a cozy place, with a few students chatting over drinks. There's a bar near you and some pool tables at the far end.", "roomBackground3.txt");
+            Room? lab = new("Lab", "You're in a computing lab. Desks with computers line the walls, and there's an office to the east. The hum of machines fills the room.", "roomBackground4.txt");
+            Room? office = new("Office", "You've entered what seems to be an administration office. There's a large desk with a computer on it, and some bookshelves lining one wall.", "roomBackground5.txt");
 
             outside.SetExits(null, theatre, lab, pub); // North, East, South, West
             theatre.SetExit("west", outside);
@@ -56,8 +56,7 @@
                 Thread.Sleep(1000); // Check every second
             }
 
-            // TUI.RenderStartWindow()
-            TUI.Run();
+            TUI tui = new();
 
             bool continuePlaying = true;
             while (continuePlaying)
@@ -71,6 +70,7 @@
                 if (string.IsNullOrEmpty(input))
                 {
                     Console.WriteLine("Please enter a command.");
+                    tui.DrawCanvas();
                     continue;
                 }
 
@@ -79,10 +79,11 @@
                 if (command == null)
                 {
                     Console.WriteLine("I don't know that command.");
+                    tui.DrawCanvas();
                     continue;
                 }
 
-                switch(command.Name)
+                switch (command.Name)
                 {
                     case "look":
                         Console.WriteLine(currentRoom?.LongDescription);
@@ -100,6 +101,8 @@
                     case "east":
                     case "west":
                         Move(command.Name);
+                        // this warning will get fixed as soon as we change the rooms structure
+                        tui.UpdateBackground(currentRoom);
                         break;
 
                     case "quit":
@@ -114,6 +117,7 @@
                         Console.WriteLine("I don't know what command.");
                         break;
                 }
+                tui.DrawCanvas();
             }
 
             Console.WriteLine("Thank you for playing World of Zuul!");
