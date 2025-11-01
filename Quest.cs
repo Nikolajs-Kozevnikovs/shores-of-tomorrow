@@ -44,7 +44,6 @@ namespace WorldOfZuul
           continue;
         }
 
-
         o.Value.State = QuestState.Locked;
       }
     }
