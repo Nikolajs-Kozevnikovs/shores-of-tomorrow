@@ -57,6 +57,8 @@
             }
 
             // TUI.RenderStartWindow()
+            TUI.Run();
+
             bool continuePlaying = true;
             while (continuePlaying)
             {
