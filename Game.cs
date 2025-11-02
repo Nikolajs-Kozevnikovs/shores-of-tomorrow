@@ -26,6 +26,13 @@
             office.SetExit("west", lab);
 
             currentRoom = outside;
+            Quest q2 = new("2nd quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
+            Quest q3 = new("Third quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
+            Quest q1 = new("First quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
+            QuestManager qManager = new([ q1, q2, q3]);
+
+            NPC oldGuy = new NPC("NikolasKokkalis", "villager", "just a chill guy", ["Hello, im just a chill guy", "We have big problems here"], q2);
+            outside.SetNPC(oldGuy);
         }
 
         public void Play()
@@ -98,6 +105,20 @@
                     case "east":
                     case "west":
                         Move(command.Name);
+                        break;
+
+                    case "talk":
+                        if (currentRoom.RoomNPC == null) {
+                            Console.WriteLine("No one is here!");
+                            break;
+                        }
+                        
+                        if ( currentRoom.RoomNPC.quest != null && currentRoom.RoomNPC.quest.State == QuestState.Pending) {
+                            currentRoom.RoomNPC.Talk();
+                        } else {
+                            Console.WriteLine("no quest sorry");
+                            //currentRoom.RoomNPC.Dialogue1();
+                        }
                         break;
 
                     case "quit":

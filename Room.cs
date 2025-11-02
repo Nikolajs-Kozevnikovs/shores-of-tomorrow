@@ -5,6 +5,8 @@
         public string ShortDescription { get; private set; }
         public string LongDescription { get; private set; }
         public Dictionary<string, Room> Exits { get; private set; } = new();
+        public NPC? RoomNPC { get; private set ; }
+
 
         public Room(string shortDesc, string longDesc)
         {
@@ -24,6 +26,14 @@
         {
             if (neighbor != null)
                 Exits[direction] = neighbor;
+        }
+
+        public void SetNPC(NPC npc) {
+            RoomNPC = npc;
+        }
+
+        public void RemoveNPC(NPC npc) {
+            RoomNPC = null;
         }
     }
 }
