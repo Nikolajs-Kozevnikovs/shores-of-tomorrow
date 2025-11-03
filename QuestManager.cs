@@ -1,5 +1,4 @@
 namespace WorldOfZuul;
-// you can't have multiple quests as prerequisites
 class QuestManager
 {
 
@@ -9,7 +8,7 @@ class QuestManager
   public QuestManager(List<Quest> quests)
   {
     questList = quests;
-    activeTiles = new bool[10, 10];
+    activeTiles = new bool[7, 8];
   }
   // clumsy but it works
   public void AcceptQuest(string questName)
@@ -30,9 +29,7 @@ class QuestManager
     foreach (Quest q in questList)
     {
       if (q.State != QuestState.Active)
-      {
         continue;
-      }
 
       foreach (int[] coords in q.ActiveTiles)
       {
