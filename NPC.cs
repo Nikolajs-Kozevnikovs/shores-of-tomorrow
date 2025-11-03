@@ -1,19 +1,10 @@
-// class Program
-// {
-//     static void Main() {
-//         NPC person = new NPC("Diego", "fisherman", "boy", "quest");
-//         Console.WriteLine(person.getName());
-//         Console.WriteLine(person);
-//         person.Talk();
-//     }
-// }
 namespace WorldOfZuul 
 {
     public class NPC {
         private string name;
         private string role;
         private string description;
-        public List<string> dialogue;
+        public List<string> dialogues;
         public Quest quest;
         
         
@@ -22,7 +13,7 @@ namespace WorldOfZuul
             name = nameValue;
             role = roleValue; // I am not sure if we need this
             description = descriptionValue;
-            dialogue = dialogueValue;
+            dialogues = dialogueValue;
             quest = questValue;
         }
 
@@ -42,14 +33,11 @@ namespace WorldOfZuul
         //     return quest;
         // }
         // we'll need to add rendering to that
-        // public override string ToString() {
-        //     // return $"Name: {name}, Role: {role}, Description: {description}, Quest: {quest}";
-        // }
-        // tbd, commandParser in not involved
+        
          public void Talk()
         {
-            for (int i = 0; i < dialogue.Count; i++) {
-                Console.WriteLine($"{GetName()}: {dialogue[i]}");
+            for (int i = 0; i < dialogues.Count; i++) {
+                Console.WriteLine($"{GetName()}: {dialogues[i]}");
                 Console.ReadLine();
             }
             
@@ -65,6 +53,6 @@ namespace WorldOfZuul
             {
                 Console.WriteLine("Maybe next time");
             }
-            }
         }
     }
+}
