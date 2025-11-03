@@ -45,4 +45,14 @@ class QuestManager
   {
     return activeTiles;
   }
+  // How do I even do this? I need to find a quest that is pending and I need another funciton that 
+  // would allow me to find an active Quest and trigger dialogue depending on whether the quest is 
+  // pending or active. It requires me to restructure dialogues as well
+  
+  public Quest getActiveNPCQuest(NPC currentNPC) {
+    foreach q in questList {
+      if (q.State == QuestState.Active && q.questGiver.Name == currentNPC.Name) {
+        return q;
+    }
+  }
 }
