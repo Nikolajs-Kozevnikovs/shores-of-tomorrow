@@ -1,9 +1,11 @@
-﻿namespace WorldOfZuul
+﻿using Spectre.Console;
+
+namespace WorldOfZuul
 {
     public class Game
     {
-        private Room? currentRoom;
-        private Room? previousRoom;
+        private int[] currentRoom = [2, 1];
+        private int[]? previousRoom;
         // private List<Quest> activeQuests;
 
         public Game()
@@ -13,31 +15,30 @@
 
         private void CreateRooms()
         {
-            Room? outside = new("Outside", "You are standing outside the main entrance of the university. To the east is a large building, to the south is a computing lab, and to the west is the campus pub.", "roomBackground1.txt");
-            Room? theatre = new("Theatre", "You find yourself inside a large lecture theatre. Rows of seats ascend up to the back, and there's a podium at the front. It's quite dark and quiet.", "roomBackground2.txt");
-            Room? pub = new("Pub", "You've entered the campus pub. It's a cozy place, with a few students chatting over drinks. There's a bar near you and some pool tables at the far end.", "roomBackground3.txt");
-            Room? lab = new("Lab", "You're in a computing lab. Desks with computers line the walls, and there's an office to the east. The hum of machines fills the room.", "roomBackground4.txt");
-            Room? office = new("Office", "You've entered what seems to be an administration office. There's a large desk with a computer on it, and some bookshelves lining one wall.", "roomBackground5.txt");
 
-            outside.SetExits(null, theatre, lab, pub); // North, East, South, West
-            theatre.SetExit("west", outside);
-            pub.SetExit("east", outside);
-            lab.SetExits(outside, office, null, null);
-            office.SetExit("west", lab);
+            
 
-            currentRoom = outside;
-            Quest q2 = new("2nd quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
-            Quest q3 = new("Third quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
-            Quest q1 = new("First quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
-            QuestManager qManager = new([ q1, q2, q3]);
-
-            NPC oldGuy = new NPC("NikolasKokkalis", "villager", "just a chill guy", ["Hello, im just a chill guy", "We have big problems here"], q2);
-            outside.SetNPC(oldGuy);
+            
         }
 
         public void Play()
         {
+            // temporary solution, fix later
             Parser parser = new();
+            Room[][] Rooms = [
+                [new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.txt"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground2.txt"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground3.txt")],
+                [new('O', "Room2", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground5.txt"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.txt"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.txt")],
+                [new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.txt"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.txt"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.txt")],
+                [new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.txt"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.txt"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.txt")]
+            ];
+
+            Quest q2 = new("2nd quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
+            Quest q3 = new("Third quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
+            Quest q1 = new("First quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
+            QuestManager qManager = new([q1, q2, q3]);
+            
+            NPC oldGuy = new("NikolasKokkalis", "villager", "just a chill guy", ["Hello, im just a chill guy", "We have big problems here"], q2);
+            Rooms[2][1].SetNPC(oldGuy);
 
             PrintWelcome();
             // temporary solution for window size
@@ -69,7 +70,7 @@
             while (continuePlaying)
             {
 
-                Console.WriteLine(currentRoom?.ShortDescription);
+                Console.WriteLine(Rooms[currentRoom[0]][currentRoom[1]].ShortDescription);
                 Console.Write("> ");
 
                 string? input = Console.ReadLine();
@@ -93,7 +94,7 @@
                 switch (command.Name)
                 {
                     case "look":
-                        Console.WriteLine(currentRoom?.LongDescription);
+                        Console.WriteLine(Rooms[currentRoom[0]][currentRoom[1]].LongDescription);
                         break;
 
                     case "back":
@@ -109,17 +110,17 @@
                     case "west":
                         Move(command.Name);
                         // this warning will get fixed as soon as we change the rooms structure
-                        tui.UpdateBackground(currentRoom);
+                        tui.UpdateBackground(Rooms[currentRoom[0]][currentRoom[1]]);
                         break;
 
                     case "talk":
-                        if (currentRoom.RoomNPC == null) {
+                        if (Rooms[currentRoom[0]][currentRoom[1]].RoomNPC == null) {
                             Console.WriteLine("No one is here!");
                             break;
                         }
                         
-                        if ( currentRoom.RoomNPC.quest != null && currentRoom.RoomNPC.quest.State == QuestState.Pending) {
-                            currentRoom.RoomNPC.Talk();
+                        if ( Rooms[currentRoom[0]][currentRoom[1]].RoomNPC.quest != null && Rooms[currentRoom[0]][currentRoom[1]].RoomNPC.quest.State == QuestState.Pending) {
+                            Rooms[currentRoom[0]][currentRoom[1]].RoomNPC.Talk();
                         } else {
                             Console.WriteLine("no quest sorry");
                             //currentRoom.RoomNPC.Dialogue1();
@@ -146,15 +147,22 @@
 
         private void Move(string direction)
         {
-            if (currentRoom?.Exits.ContainsKey(direction) == true)
+            switch (direction)
             {
-                previousRoom = currentRoom;
-                currentRoom = currentRoom?.Exits[direction];
+                case "south":
+                    currentRoom[0]++;
+                    break;
+                case "north":
+                    currentRoom[0]--;
+                    break;
+                case "west":
+                    currentRoom[1]++;
+                    break;
+                case "east":
+                    currentRoom[1]++;
+                    break;
             }
-            else
-            {
-                Console.WriteLine($"You can't go {direction}!");
-            }
+            
         }
 
 
