@@ -32,13 +32,10 @@ public class TUI
     AnsiConsole.Write(canvas);
   }
 
-<<<<<<< HEAD
-=======
 
     // char[,] renderWindow = { {'w', 'a', 'f' },
     //                           {'r', 'b', 'd'} };
     // renderWindow[2, 3] = 'n';
->>>>>>> b934b7428f7290cdcc70183558b9e556cf27ad4e
 
   private void UpdateMinimap(Room currentRoom)
   {
@@ -128,8 +125,4 @@ public class TUI
     .ToList();
     return result;
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> b934b7428f7290cdcc70183558b9e556cf27ad4e
