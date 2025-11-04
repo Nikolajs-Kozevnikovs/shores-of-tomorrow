@@ -15,7 +15,7 @@ public class TUI
   public TUI()
   {
     // load the minimap
-    string mapPath = "./assets/graphics/minimap.txt";
+    string mapPath = "./assets/graphics/minimap.csv";
     if (!File.Exists(mapPath))
       throw new FileNotFoundException($"map overlay file not found: {mapPath}");
 
@@ -69,7 +69,7 @@ public class TUI
   // maybe we won't need it after we get Room update and will have the currentRoom from the beginning
   public void LoadStartScreen()
   {
-    string bgPath = "./assets/graphics/startScreen.txt";
+    string bgPath = "./assets/graphics/startScreen.csv";
 
     if (!File.Exists(bgPath))
       throw new FileNotFoundException($"background file not found: {bgPath}");
@@ -103,8 +103,8 @@ public class TUI
       .Select(line => line.Trim())
       .Where(line => !string.IsNullOrWhiteSpace(line))
       .Select(line =>
-        line.Split(' ', StringSplitOptions.RemoveEmptyEntries)
-          .Select(item => item.Split(';', StringSplitOptions.RemoveEmptyEntries))
+        line.Split(';', StringSplitOptions.RemoveEmptyEntries)
+          .Select(item => item.Split(' ', StringSplitOptions.RemoveEmptyEntries))
           .Where(parts => parts.Length >= 3)
           .Select(parts =>
           {

@@ -1,7 +1,7 @@
 from PIL import Image
 
 input_file = "./img1.png"
-output_file = "../graphics/img1.txt"
+output_file = "../graphics/img1.csv"
 
 
 def rgb(r, g, b):
@@ -29,7 +29,7 @@ open(output_file, "w").write(text)
 
 
 input_file = "./map1.png"
-output_file = "../graphics/map1.txt"
+output_file = "../graphics/map1.csv"
 
 
 def rgb(r, g, b):
