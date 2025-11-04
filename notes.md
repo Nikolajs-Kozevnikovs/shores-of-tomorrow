@@ -6,6 +6,9 @@ It would be a good idea to have a separate function called createNPCs() that wou
 Same thing createQuests() for quests, create and then link them together.
 
 
+### IMPORTANT
+If we have a map predefined, then there is no reason to make an image out of it. It would be way more eficient to build it from Rooms array (Room.cs)
+
 # Wishlist
 
 - PNGs for NPC faces

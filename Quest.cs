@@ -13,13 +13,22 @@ namespace WorldOfZuul
     public string Objective { get; } // target progress
     public List<int[]> ActiveTiles { get; private set; } // array of coordinates for the tiles where the quest can be completed
 
-    public Quest(string name, string description, List<Quest> prerequisites, string objective, List<int[]> activeTiles, Dictionary<string, Quest> outcomes)
+    public Quest(string name, string description, string objective, List<int[]> activeTiles, Dictionary<string, Quest> outcomes)
     {
       Name = name;
       Description = description;
       Objective = objective;
       ActiveTiles = activeTiles;
-      Outcomes = outcomes ?? new Dictionary<string, Quest>();
+      Outcomes = outcomes ?? [];
+    }
+
+    public Quest(string name, string description, string objective, List<int[]> activeTiles)
+    {
+      Name = name;
+      Description = description;
+      Objective = objective;
+      ActiveTiles = activeTiles;
+      Outcomes = [];
     }
 
     public void Accept()
