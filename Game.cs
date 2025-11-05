@@ -1,12 +1,16 @@
-﻿using Spectre.Console;
+﻿/* using System;
+using System.Collections.Generic;
+using System.Threading; */
+
+using Spectre.Console;
 
 namespace WorldOfZuul
 {
     public class Game
     {
-        private int[] currentRoom = [2, 1];
-        private int[]? previousRoom;
-        // private List<Quest> activeQuests;
+        // currentRoom: [row, col]
+        private int[] currentRoom = new int[] { 2, 1 };
+        private int[]? previousRoom = null;
 
         public Game()
         {
@@ -15,10 +19,7 @@ namespace WorldOfZuul
 
         private void CreateRooms()
         {
-
-            
-
-            
+            // Room map is provided by Room.Map in Room.cs
         }
 
         public void Play()
@@ -41,6 +42,7 @@ namespace WorldOfZuul
             Rooms[2][1].SetNPC(oldGuy);
 
             PrintWelcome();
+
             // temporary solution for window size
             while (true)
             {
@@ -69,8 +71,8 @@ namespace WorldOfZuul
             bool continuePlaying = true;
             while (continuePlaying)
             {
-
-                Console.WriteLine(Rooms[currentRoom[0]][currentRoom[1]].ShortDescription);
+                var current = Room.GetRoomAt(currentRoom[0], currentRoom[1]);
+                Console.WriteLine(current?.ShortDescription ?? "None");
                 Console.Write("> ");
 
                 string? input = Console.ReadLine();
@@ -94,14 +96,14 @@ namespace WorldOfZuul
                 switch (command.Name)
                 {
                     case "look":
-                        Console.WriteLine(Rooms[currentRoom[0]][currentRoom[1]].LongDescription);
+                        Console.WriteLine(current?.LongDescription ?? "None");
                         break;
 
                     case "back":
                         if (previousRoom == null)
                             Console.WriteLine("You can't go back from here!");
                         else
-                            currentRoom = previousRoom;
+                            currentRoom = new int[] { previousRoom[0], previousRoom[1] };
                         break;
 
                     case "north":
@@ -109,19 +111,25 @@ namespace WorldOfZuul
                     case "east":
                     case "west":
                         Move(command.Name);
-                        // this warning will get fixed as soon as we change the rooms structure
-                        tui.UpdateBackground(Rooms[currentRoom[0]][currentRoom[1]]);
+                        var newRoom = Room.GetRoomAt(currentRoom[0], currentRoom[1]);
+                        if (newRoom != null)
+                            tui.UpdateBackground(newRoom);
                         break;
 
                     case "talk":
-                        if (Rooms[currentRoom[0]][currentRoom[1]].RoomNPC == null) {
+                        var r = Room.GetRoomAt(currentRoom[0], currentRoom[1]);
+                        if (r == null || r.RoomNPC == null)
+                        {
                             Console.WriteLine("No one is here!");
                             break;
                         }
-                        
-                        if ( Rooms[currentRoom[0]][currentRoom[1]].RoomNPC.quest != null && Rooms[currentRoom[0]][currentRoom[1]].RoomNPC.quest.State == QuestState.Pending) {
-                            Rooms[currentRoom[0]][currentRoom[1]].RoomNPC.Talk();
-                        } else {
+
+                        if (r.RoomNPC.quest != null && r.RoomNPC.quest.State == QuestState.Pending)
+                        {
+                            r.RoomNPC.Talk();
+                        }
+                        else
+                        {
                             Console.WriteLine("no quest sorry");
                             //currentRoom.RoomNPC.Dialogue1();
                         }
@@ -147,22 +155,36 @@ namespace WorldOfZuul
 
         private void Move(string direction)
         {
+            int newRow = currentRoom[0];
+            int newCol = currentRoom[1];
+
             switch (direction)
             {
                 case "south":
-                    currentRoom[0]++;
+                    newRow++;
                     break;
                 case "north":
-                    currentRoom[0]--;
+                    newRow--;
                     break;
                 case "west":
-                    currentRoom[1]++;
+                    newCol--;
                     break;
                 case "east":
-                    currentRoom[1]++;
+                    newCol++;
                     break;
             }
-            
+
+            var target = Room.GetRoomAt(newRow, newCol);
+            if (target == null)
+            {
+                Console.WriteLine("You can't go that way.");
+                return;
+            }
+
+            // update previous and current
+            previousRoom = new int[] { currentRoom[0], currentRoom[1] };
+            currentRoom[0] = newRow;
+            currentRoom[1] = newCol;
         }
 
 
