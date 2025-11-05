@@ -28,7 +28,7 @@ public class TUI
 
   public void DrawCanvas()
   {
-    Console.Clear();
+    // Console.Clear();
     AnsiConsole.Write(canvas);
   }
 
@@ -55,6 +55,11 @@ public class TUI
   public void UpdateBackground(Room currentRoom)
   {
     string bgPath = "./assets/graphics/" + currentRoom.Background;
+    if (currentRoom.Background == null)
+    {
+      bgPath += "startScreen.csv";
+    }
+    
 
     if (!File.Exists(bgPath))
       throw new FileNotFoundException($"background file not found: {bgPath}");
