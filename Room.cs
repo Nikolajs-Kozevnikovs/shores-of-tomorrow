@@ -31,18 +31,26 @@ public class Room
     public static readonly Room Factory = new("F", "Factory", "You are in a bustling factory, with machines whirring and workers busy at their tasks.");
     public static readonly Room Blank = new("-", "Blank", "You are in an empty space, nothing to see here.");
 
+    // Helper to create a fresh Room instance from a prototype so each map tile
+    // gets its own mutable Room (so NPCs, state etc. aren't shared).
+    private static Room Clone(Room RoomToBeCloned)
+    {
+        return new Room(RoomToBeCloned.TileIdentifier, RoomToBeCloned.ShortDescription, RoomToBeCloned.LongDescription, RoomToBeCloned.Background);
+    }
+
     // The world map: rows (Y) x columns (X)
     // Map[y, x]
+    // Different Room instances per cell (clones of templates)
     public static readonly Room?[,] Map = new Room?[,]
     {
-        { Ocean, Ocean, Ocean, Ocean, Ocean, Ocean, CoralReef },
-        { Ocean, Ocean, Ocean, Ocean, Ocean, Ocean, Ocean },
-        { Ocean, Ocean, Ocean, Ocean, Ocean, Ocean, Ocean },
-        { Ocean, Ocean, Boat,  Ocean, Ocean, Ocean, Ocean },
-        { SeaShore, SeaShore, SeaShore, SeaShore, SeaShore, SeaShore, SeaShore },
-        { House, Blank, Blank, Blank, Blank, Blank, RecyclingCentre },
-        { Lake, MarineLaboratory, Blank, Townhall, Blank, Blank, Blank },
-        { Factory, Blank, Blank, Blank, Blank, OldMansHouse, Lake2 },
+        { Clone(Ocean), Clone(Ocean), Clone(Ocean), Clone(Ocean), Clone(Ocean), Clone(Ocean), Clone(CoralReef) },
+        { Clone(Ocean), Clone(Ocean), Clone(Ocean), Clone(Ocean), Clone(Ocean), Clone(Ocean), Clone(Ocean) },
+        { Clone(Ocean), Clone(Ocean), Clone(Ocean), Clone(Ocean), Clone(Ocean), Clone(Ocean), Clone(Ocean) },
+        { Clone(Ocean), Clone(Ocean), Clone(Boat),  Clone(Ocean), Clone(Ocean), Clone(Ocean), Clone(Ocean) },
+        { Clone(SeaShore), Clone(SeaShore), Clone(SeaShore), Clone(SeaShore), Clone(SeaShore), Clone(SeaShore), Clone(SeaShore) },
+        { Clone(House), Clone(Blank), Clone(Blank), Clone(Blank), Clone(Blank), Clone(Blank), Clone(RecyclingCentre) },
+        { Clone(Lake), Clone(MarineLaboratory), Clone(Blank), Clone(Townhall), Clone(Blank), Clone(Blank), Clone(Blank) },
+        { Clone(Factory), Clone(Blank), Clone(Blank), Clone(Blank), Clone(Blank), Clone(OldMansHouse), Clone(Lake2) },
     };
 
     public static int Rows => Map.GetLength(0);
