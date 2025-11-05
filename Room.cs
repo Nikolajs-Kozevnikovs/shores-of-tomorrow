@@ -18,10 +18,10 @@ public class Room
 
     // Predefined room types
     public static readonly Room Ocean = new("O", "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv");
-    public static readonly Room CoralReef = new("C", "Coral Reef", "You find yourself amidst a vibrant coral reef, teeming with colorful fish and marine life.");
-    public static readonly Room SeaShore = new("S", "Sea Shore", "You stand on a sandy sea shore, with gentle waves lapping at your feet and the salty breeze in the air.");
-    public static readonly Room House = new("H", "House", "You are inside a cozy house, bla bla bla");
-    public static readonly Room Boat = new("B", "Boat", "You are on a small boat, gently rocking on the waves.");
+    public static readonly Room CoralReef = new("C", "Coral Reef", "You find yourself amidst a vibrant coral reef, teeming with colorful fish and marine life.", "roomBackground2.csv");
+    public static readonly Room SeaShore = new("S", "Sea Shore", "You stand on a sandy sea shore, with gentle waves lapping at your feet and the salty breeze in the air.", "roomBackground3.csv");
+    public static readonly Room House = new("H", "House", "You are inside a cozy house, bla bla bla", "roomBackground4.csv");
+    public static readonly Room Boat = new("B", "Boat", "You are on a small boat, gently rocking on the waves.", "roomBackground5.csv");
     public static readonly Room Lake = new("L", "Lake", "You are at a serene lake, surrounded by trees and mountains.");
     public static readonly Room MarineLaboratory = new("M", "Marine Laboratory", "You are in a high-tech marine laboratory, filled with equipment and research materials.");
     public static readonly Room RecyclingCentre = new("R", "Recycling Centre", "You are at a recycling centre, where waste is processed and sorted.");

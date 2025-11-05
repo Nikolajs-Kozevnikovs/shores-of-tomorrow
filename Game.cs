@@ -26,20 +26,21 @@ namespace WorldOfZuul
         {
             // temporary solution, fix later
             Parser parser = new();
-            Room[][] Rooms = [
-                [new("O", "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new("O", "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground2.csv"), new("O", "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground3.csv")],
-                [new("O", "Room2", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground5.csv"), new("O", "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new("O", "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv")],
-                [new("O", "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new("O", "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new("O", "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv")],
-                [new("O", "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new("O", "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new("O", "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv")]
-            ];
+            // Room[][] Rooms = [
+            //     [new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground2.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground3.csv")],
+            //     [new('O', "Room2", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground5.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv")],
+            //     [new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv")],
+            //     [new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv")]
+            // ];
 
             Quest q2 = new("2nd quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
             Quest q3 = new("Third quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
             Quest q1 = new("First quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
             QuestManager qManager = new([q1, q2, q3]);
-            
+
             NPC oldGuy = new("NikolasKokkalis", "villager", "just a chill guy", ["Hello, im just a chill guy", "We have big problems here"], q2);
-            Rooms[2][1].SetNPC(oldGuy);
+            Room.GetRoomAt(1, 1).SetNPC(oldGuy);
+            // Rooms[2][1].SetNPC(oldGuy);
 
             PrintWelcome();
 
@@ -103,7 +104,7 @@ namespace WorldOfZuul
                         if (previousRoom == null)
                             Console.WriteLine("You can't go back from here!");
                         else
-                            currentRoom = new int[] { previousRoom[0], previousRoom[1] };
+                            currentRoom = [previousRoom[0], previousRoom[1]];
                         break;
 
                     case "north":
