@@ -11,6 +11,7 @@ namespace WorldOfZuul
         // currentRoom: [row, col]
         private int[] currentRoom = new int[] { 2, 1 };
         private int[]? previousRoom = null;
+        private TUI tui = new();
 
         public Game()
         {
@@ -43,44 +44,21 @@ namespace WorldOfZuul
             // Rooms[2][1].SetNPC(oldGuy);
 
             PrintWelcome();
-
-            // temporary solution for window size
-            while (true)
-            {
-                // Get the current terminal window size
-                int width = Console.WindowWidth;
-                int height = Console.WindowHeight;
-
-                // Check if the terminal size is less than 132x43
-                if (width < 132 || height < 43)
-                {
-                    Console.Clear(); // Clear the console for better readability
-                    Console.WriteLine("Terminal too small. Please increase the size.");
-                }
-                else
-                {
-                    Console.Clear(); // Clear the console before starting the game
-                    break; // Exit the loop after starting the game
-                }
-
-                // Sleep for a while before rechecking
-                Thread.Sleep(1000); // Check every second
-            }
-
-            TUI tui = new();
+            tui.WaitForCorrectTerminalSize();
 
             bool continuePlaying = true;
             while (continuePlaying)
             {
                 var current = Room.GetRoomAt(currentRoom[0], currentRoom[1]);
-                Console.WriteLine(current?.ShortDescription ?? "None");
+                tui.WriteLine(current?.ShortDescription ?? "None");
+                tui.DrawCanvas();
                 Console.Write("> ");
 
                 string? input = Console.ReadLine();
 
                 if (string.IsNullOrEmpty(input))
                 {
-                    Console.WriteLine("Please enter a command.");
+                    tui.WriteLine("Please enter a command.");
                     tui.DrawCanvas();
                     continue;
                 }
@@ -89,7 +67,7 @@ namespace WorldOfZuul
 
                 if (command == null)
                 {
-                    Console.WriteLine("I don't know that command.");
+                    tui.WriteLine("I don't know that command.");
                     tui.DrawCanvas();
                     continue;
                 }
@@ -97,12 +75,13 @@ namespace WorldOfZuul
                 switch (command.Name)
                 {
                     case "look":
-                        Console.WriteLine(current?.LongDescription ?? "None");
+                        tui.WriteLine(current?.LongDescription ?? "Nothing to look at");
+                        tui.DrawCanvas();
                         break;
 
                     case "back":
                         if (previousRoom == null)
-                            Console.WriteLine("You can't go back from here!");
+                            tui.WriteLine("You can't go back from here!");
                         else
                             currentRoom = [previousRoom[0], previousRoom[1]];
                         break;
@@ -121,7 +100,7 @@ namespace WorldOfZuul
                         var r = Room.GetRoomAt(currentRoom[0], currentRoom[1]);
                         if (r == null || r.RoomNPC == null)
                         {
-                            Console.WriteLine("No one is here!");
+                            tui.WriteLine("No one is here!");
                             break;
                         }
 
@@ -131,7 +110,7 @@ namespace WorldOfZuul
                         }
                         else
                         {
-                            Console.WriteLine("no quest sorry");
+                            tui.WriteLine("no quest sorry");
                             //currentRoom.RoomNPC.Dialogue1();
                         }
                         break;
@@ -142,10 +121,11 @@ namespace WorldOfZuul
 
                     case "help":
                         PrintHelp();
+                        tui.DrawCanvas();
                         break;
 
                     default:
-                        Console.WriteLine("I don't know what command.");
+                        tui.WriteLine("I don't know what command.");
                         break;
                 }
                 tui.DrawCanvas();
@@ -178,7 +158,7 @@ namespace WorldOfZuul
             var target = Room.GetRoomAt(newRow, newCol);
             if (target == null)
             {
-                Console.WriteLine("You can't go that way.");
+                tui.WriteLine($"You can't go that way!");
                 return;
             }
 
@@ -189,24 +169,21 @@ namespace WorldOfZuul
         }
 
 
-        private static void PrintWelcome()
+        private void PrintWelcome()
         {
-            Console.WriteLine("Welcome to the World of Zuul!");
-            Console.WriteLine("World of Zuul is a new, incredibly boring adventure game.");
+            tui.WriteLine("Welcome to the World of Zuul!");
+            tui.WriteLine("World of Zuul is a new, incredibly boring adventure game.");
             PrintHelp();
-            Console.WriteLine();
+            tui.WriteLine();
         }
 
-        private static void PrintHelp()
+        private void PrintHelp()
         {
-            Console.WriteLine("You are lost. You are alone. You wander");
-            Console.WriteLine("around the university.");
-            Console.WriteLine();
-            Console.WriteLine("Navigate by typing 'north', 'south', 'east', or 'west'.");
-            Console.WriteLine("Type 'look' for more details.");
-            Console.WriteLine("Type 'back' to go to the previous room.");
-            Console.WriteLine("Type 'help' to print this message again.");
-            Console.WriteLine("Type 'quit' to exit the game.");
+            tui.WriteLine("Navigate by typing 'north', 'south', 'east', or 'west'.");
+            tui.WriteLine("Type 'look' for more details.");
+            tui.WriteLine("Type 'back' to go to the previous room.");
+            tui.WriteLine("Type 'help' to print this message again.");
+            tui.WriteLine("Type 'quit' to exit the game.");
         }
     }
 }
