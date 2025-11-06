@@ -128,9 +128,6 @@
 
         private void PrintHelp()
         {
-            tui.WriteLine("You are lost. You are alone. You wander");
-            tui.WriteLine("around the university.");
-            tui.WriteLine();
             tui.WriteLine("Navigate by typing 'north', 'south', 'east', or 'west'.");
             tui.WriteLine("Type 'look' for more details.");
             tui.WriteLine("Type 'back' to go to the previous room.");
