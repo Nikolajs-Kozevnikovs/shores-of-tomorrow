@@ -33,7 +33,7 @@ public class TUI
 
   public void DrawCanvas()
   {
-    // Console.Clear();
+    Console.Clear();
     AnsiConsole.Write(canvas);
     PrintDialogBox(lines);
   }

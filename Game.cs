@@ -45,13 +45,14 @@ namespace WorldOfZuul
 
             PrintWelcome();
             tui.WaitForCorrectTerminalSize();
+            tui.DrawCanvas();
 
             bool continuePlaying = true;
             while (continuePlaying)
             {
                 var current = Room.GetRoomAt(currentRoom[0], currentRoom[1]);
                 tui.WriteLine(current?.ShortDescription ?? "None");
-                tui.DrawCanvas();
+                // tui.DrawCanvas();
                 Console.Write("> ");
 
                 string? input = Console.ReadLine();
@@ -106,7 +107,7 @@ namespace WorldOfZuul
 
                         if (r.RoomNPC.quest != null && r.RoomNPC.quest.State == QuestState.Pending)
                         {
-                            r.RoomNPC.Talk();
+                            r.RoomNPC.Talk(tui);
                         }
                         else
                         {

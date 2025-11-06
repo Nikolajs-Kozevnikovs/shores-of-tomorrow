@@ -34,24 +34,26 @@ namespace WorldOfZuul
         // }
         // we'll need to add rendering to that
         
-         public void Talk()
+         public void Talk(TUI tui)
         {
             for (int i = 0; i < dialogues.Count; i++) {
-                Console.WriteLine($"{GetName()}: {dialogues[i]}");
+                tui.WriteLine($"{GetName()}: {dialogues[i]}");
+                tui.DrawCanvas();
                 Console.ReadLine();
             }
-            
-            Console.WriteLine("Would you help me with " + quest.Name + "? (\"yes\" / \"no\")");
+
+            tui.WriteLine("Would you help me with " + quest.Name + "? (\"yes\" / \"no\")");
+            tui.DrawCanvas();
             string? input = Console.ReadLine()?.ToLower();
 
             if (input == "yes")
             {
                 //Quest.StartQuest();
-                Console.WriteLine("Thanks! "); // can add something
+                tui.WriteLine("Thanks! "); // can add something
             }
             else
             {
-                Console.WriteLine("Maybe next time");
+                tui.WriteLine("Maybe next time");
             }
         }
     }
