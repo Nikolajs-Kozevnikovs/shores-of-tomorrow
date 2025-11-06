@@ -119,7 +119,7 @@ namespace WorldOfZuul
                 tui.DrawCanvas();
             }
 
-            Console.WriteLine("Thank you for playing World of Zuul!");
+            tui.WriteLine("Thank you for playing World of Zuul!");
         }
 
         private void Move(string direction)
