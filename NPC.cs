@@ -41,7 +41,7 @@ namespace WorldOfZuul
                 Console.ReadLine();
             }
             
-            Console.WriteLine("Would you help me with " + quest.Name + "?");
+            Console.WriteLine("Would you help me with " + quest.Name + "? (\"yes\" / \"no\")");
             string? input = Console.ReadLine()?.ToLower();
 
             if (input == "yes")
