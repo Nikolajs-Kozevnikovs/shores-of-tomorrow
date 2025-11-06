@@ -11,28 +11,15 @@ namespace WorldOfZuul
         // currentRoom: [row, col]
         private int[] currentRoom = new int[] { 2, 1 };
         private int[]? previousRoom = null;
-        private TUI tui = new();
+        private readonly TUI tui = new();
 
         public Game()
         {
-            CreateRooms();
         }
-
-        private void CreateRooms()
-        {
-            // Room map is provided by Room.Map in Room.cs
-        }
-
+        
         public void Play()
         {
-            // temporary solution, fix later
-            Parser parser = new();
-            // Room[][] Rooms = [
-            //     [new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground2.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground3.csv")],
-            //     [new('O', "Room2", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground5.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv")],
-            //     [new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv")],
-            //     [new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv"), new('O', "Ocean", "You are in the middle of the vast ocean. The water stretches out in all directions, with no land in sight.", "roomBackground1.csv")]
-            // ];
+            Parser parser = new();   
 
             Quest q2 = new("2nd quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
             Quest q3 = new("Third quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
