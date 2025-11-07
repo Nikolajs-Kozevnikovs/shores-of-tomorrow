@@ -1,54 +1,54 @@
+from pathlib import Path
 from PIL import Image
 
-input_file = "./img1.png"
-output_file = "../graphics/img1.csv"
+try:
+    SCRIPT_DIR = Path(__file__).resolve().parent
+except NameError:
+    SCRIPT_DIR = Path.cwd()
 
+input_dir = SCRIPT_DIR
 
-def rgb(r, g, b):
-    return f"{str(r)};{str(g)};{str(b)} "
-
-
-img = Image.open(input_file)
-width, height = img.size
-
-text = ""
-
-for y in range(height):
-    for x in range(width):
-        pixel = img.getpixel((x, y))
-        r, g, b, _ = pixel
-        s = rgb(r, g, b)
-        text += s
-
-        print(f"({x}, {y})", pixel)
-    text.strip()
-    text += "\n"
-open(output_file, "w").write(text)
-
-
-
-
-input_file = "./map1.png"
-output_file = "../graphics/map1.csv"
-
+output_dir = (SCRIPT_DIR / "../graphics").resolve()
+output_dir.mkdir(parents=True, exist_ok=True)
 
 def rgb(r, g, b):
-    return f"{str(r)};{str(g)};{str(b)} "
+    return f"{r} {g} {b};"
 
+valid_extensions = (".png", ".jpg", ".jpeg")
 
-img = Image.open(input_file)
-width, height = img.size
+for path in sorted(input_dir.iterdir()):
+    if not path.is_file():
+        continue
+    if path.name.startswith("."):
+        continue
+    if path.suffix.lower() not in valid_extensions:
+        continue
 
-text = ""
+    input_path = path
+    output_path = output_dir / f"{path.stem}.csv"
 
-for y in range(height):
-    for x in range(width):
-        pixel = img.getpixel((x, y))
-        r, g, b, _ = pixel
-        s = rgb(r, g, b)
-        text += s
+    print(f"Processing {input_path.name} -> {output_path}")
 
-        print(f"({x}, {y})", pixel)
-    text.strip()
-    text += "\n"
-open(output_file, "w").write(text)
+    try:
+        img = Image.open(input_path).convert("RGBA")
+    except Exception as e:
+        print(f"  Skipping {input_path.name}: cannot open image ({e})")
+        continue
+
+    width, height = img.size
+
+    lines = []
+    for y in range(height):
+        row_parts = []
+        for x in range(width):
+            r, g, b, _ = img.getpixel((x, y))
+            row_parts.append(rgb(r, g, b))
+        lines.append("".join(row_parts))
+
+    try:
+        output_path.write_text("\n".join(lines))
+        print(f"  Saved {output_path.name}")
+    except Exception as e:
+        print(f"  Failed to write {output_path.name}: {e}")
+
+print("Done.")
