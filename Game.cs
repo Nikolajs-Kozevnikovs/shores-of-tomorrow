@@ -26,7 +26,7 @@ namespace WorldOfZuul
             Quest q1 = new("First quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
             QuestManager qManager = new([q1, q2, q3]);
 
-            NPC oldGuy = new("NikolasKokkalis", "villager", "just a chill guy", ["Hello, im just a chill guy", "We have big problems here"], q2);
+            NPC oldGuy = new("Nikolas", "villager", "just a chill guy", ["Hello, im just a chill guy", "We have big problems here"], q2);
             Room.GetRoomAt(1, 1)?.SetNPC(oldGuy);
             // Rooms[2][1].SetNPC(oldGuy);
 

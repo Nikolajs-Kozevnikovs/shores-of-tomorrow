@@ -49,7 +49,7 @@ namespace WorldOfZuul
             if (input == "yes")
             {
                 //Quest.StartQuest();
-                tui.WriteLine("Thanks! "); // can add something
+                tui.WriteLine("Nikolas: Thanks! "); // can add something
             }
             else
             {
