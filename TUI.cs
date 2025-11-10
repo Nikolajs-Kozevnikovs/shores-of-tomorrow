@@ -133,7 +133,7 @@ public class TUI
   {
     // choose where to put the map
     int offsetX = RequiredWidth - Minimap[0].Count; // top‑right alignment
-    int offsetY = 0;                           // top‑aligned
+    int offsetY = 0;                                // top‑aligned
 
     // get the map on canvas
     DrawAnsiLinesOntoCanvas(Minimap, offsetX, offsetY);

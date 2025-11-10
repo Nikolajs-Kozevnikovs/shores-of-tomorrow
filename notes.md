@@ -1,13 +1,17 @@
-# Some notes for the development
-ideas that might help.
+# Big to-do
+- Move our data (Quests, NPCs) into a file, so that it is easier to change it without breaking the code. (json or yaml)
+- Create load functions for those files  **Nikolaj**
+- Make a minimap out of Rooms + pointer + active quests **Arty**
+- Generate assets 
+- Make a plot **Marija**
+- Finish the report
+- Add random events (have them in a separate file?) **Santiago**
+- Add items that would help with Quests (have them in a separate file?)
+- save / load ?
 
-### Storing data
-It would be a good idea to have a separate function called createNPCs() that would create all NPCs and link them to rooms
-Same thing createQuests() for quests, create and then link them together.
 
 
-### IMPORTANT
-If we have a map predefined, then there is no reason to make an image out of it. It would be way more eficient to build it from Rooms array (Room.cs)
+
 
 # Wishlist
 
