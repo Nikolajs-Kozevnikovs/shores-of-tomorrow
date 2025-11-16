@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading; */
 
+using Namotion.Reflection;
 using Spectre.Console;
 
 namespace WorldOfZuul
@@ -9,26 +10,20 @@ namespace WorldOfZuul
     public class Game
     {
         // currentRoom: [row, col]
-        private int[] currentRoom = new int[] { 2, 1 };
-        private int[]? previousRoom = null;
+        private int[] previousCoords = [0, 0];
         private readonly TUI tui = new();
+        private readonly GameState world = new(7, 7);
 
         public Game()
         {
+            // load things from json?
+            previousCoords = [world.PlayerX, world.PlayerY];
+            GameStateLoader.Load(world, "/");
         }
         
         public void Play()
         {
             Parser parser = new();   
-
-            Quest q2 = new("2nd quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
-            Quest q3 = new("Third quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
-            Quest q1 = new("First quest", "Test description", "Test ibjective", [[2, 1], [3, 4]]);
-            QuestManager qManager = new([q1, q2, q3]);
-
-            NPC oldGuy = new("Nikolas", "villager", "just a chill guy", ["Hello, im just a chill guy", "We have big problems here"], q2);
-            Room.GetRoomAt(1, 1)?.SetNPC(oldGuy);
-            // Rooms[2][1].SetNPC(oldGuy);
 
             PrintWelcome();
             tui.WaitForCorrectTerminalSize();
@@ -37,8 +32,8 @@ namespace WorldOfZuul
             bool continuePlaying = true;
             while (continuePlaying)
             {
-                var current = Room.GetRoomAt(currentRoom[0], currentRoom[1]);
-                tui.WriteLine(current?.ShortDescription ?? "None");
+                var currentRoom = world.RoomManager.GetCurrentRoom();
+                tui.WriteLine(currentRoom.Description ?? "None");
                 // tui.DrawCanvas();
                 Console.Write("> ");
 
@@ -63,15 +58,16 @@ namespace WorldOfZuul
                 switch (command.Name)
                 {
                     case "look":
-                        tui.WriteLine(current?.LongDescription ?? "Nothing to look at");
+                        tui.WriteLine(currentRoom.Description ?? "Nothing to look at");
                         tui.DrawCanvas();
                         break;
 
                     case "back":
-                        if (previousRoom == null)
+                        if (previousCoords == null)
                             tui.WriteLine("You can't go back from here!");
                         else
-                            currentRoom = [previousRoom[0], previousRoom[1]];
+                            world.PlayerX = previousCoords[0];
+                            world.PlayerY = previousCoords[1];
                         break;
 
                     case "north":
@@ -79,28 +75,29 @@ namespace WorldOfZuul
                     case "east":
                     case "west":
                         Move(command.Name);
-                        var newRoom = Room.GetRoomAt(currentRoom[0], currentRoom[1]);
-                        if (newRoom != null)
-                            tui.UpdateBackground(newRoom);
+                        tui.UpdateBackground(world.RoomManager.GetCurrentRoom());
                         break;
 
                     case "talk":
-                        var r = Room.GetRoomAt(currentRoom[0], currentRoom[1]);
-                        if (r == null || r.RoomNPC == null)
+                        
+                        if (currentRoom.NPCs.Count == 0)
                         {
                             tui.WriteLine("No one is here!");
                             break;
-                        }
-
-                        if (r.RoomNPC.quest != null && r.RoomNPC.quest.State == QuestState.Pending)
+                        } else
                         {
-                            r.RoomNPC.Talk(tui);
+                            tui.WriteLine("Dialogues are not implemented yet for multiple NPCs in one room");
                         }
-                        else
-                        {
-                            tui.WriteLine("no quest sorry");
-                            //currentRoom.RoomNPC.Dialogue1();
-                        }
+                        // // fix for multiple NPCs
+                        // if (r.RoomNPC.quest != null && r.RoomNPC.quest.State == QuestState.Pending)
+                        // {
+                        //     r.RoomNPC.Talk(tui);
+                        // }
+                        // else
+                        // {
+                        //     tui.WriteLine("no quest sorry");
+                        //     //currentRoom.RoomNPC.Dialogue1();
+                        // }
                         break;
 
                     case "quit":
@@ -124,36 +121,36 @@ namespace WorldOfZuul
 
         private void Move(string direction)
         {
-            int newRow = currentRoom[0];
-            int newCol = currentRoom[1];
+            int newX = world.PlayerX;
+            int newY = world.PlayerY;
 
             switch (direction)
             {
                 case "south":
-                    newRow++;
+                    newX++;
                     break;
                 case "north":
-                    newRow--;
+                    newX--;
                     break;
                 case "west":
-                    newCol--;
+                    newY--;
                     break;
                 case "east":
-                    newCol++;
+                    newY++;
                     break;
             }
 
-            var target = Room.GetRoomAt(newRow, newCol);
-            if (target == null)
+            var target = world.RoomManager.GetRoom(newX, newY);
+            if (target == null || target.TileIdentifier == '-')
             {
-                tui.WriteLine($"You can't go that way!");
+                tui.WriteLine("You can't go that way!");
                 return;
             }
 
             // update previous and current
-            previousRoom = new int[] { currentRoom[0], currentRoom[1] };
-            currentRoom[0] = newRow;
-            currentRoom[1] = newCol;
+            previousCoords = [world.PlayerX, world.PlayerY];
+            world.PlayerX = newX;
+            world.PlayerY = newY;
         }
 
 

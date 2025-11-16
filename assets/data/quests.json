@@ -1,0 +1,22 @@
+{
+  "quests": {
+    "intro": {
+      "title": "Introduction",
+      "description": "Speak with the guard near the entrance.",
+      "state": "not_started",
+      "giverNpc": "guard",
+      "finishNpc": "guard",
+      "visibilityConditions": [],
+      "completionTriggers": [
+        {
+          "type": "talk_to_npc",
+          "npc": "guard"
+        }
+      ],
+      "preQuestDialogue": [
+        "Welcome to the dungeon.",
+        "Stay alert — danger lurks ahead."
+      ]
+    }
+  }
+}
