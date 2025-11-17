@@ -1,7 +1,7 @@
 {
   "npcs": {
     "guard": {
-      "name": "Guard",
+      "name": "Old man",
       "x": 0,
       "y": 0,
       "questsGiven": ["intro"],

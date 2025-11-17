@@ -146,11 +146,15 @@ public class TUI
 
   public void UpdateBackground(Room currentRoom)
   {
-    string bgPath = "./assets/graphics/" + currentRoom.Background;
+    string bgPath = "./assets/graphics/";
+
     if (currentRoom.Background == null)
     {
       bgPath += "startScreen.csv";
-    }
+    } else
+        {
+             bgPath += currentRoom.Background;
+        }
     
 
     if (!File.Exists(bgPath))

@@ -8,18 +8,18 @@
       "tileIdentifier": "S",
       "name": "Start Room",
       "description": "A quiet place where your adventure begins.",
-      "background": "assets/graphics/startScreen.csv",
+      "background": "startScreen.csv",
       "npcs": ["guard"],
       "items": ["Key"],
-      "allowedItems": ["Key"]
+      "allowedItems": []
     },
     {
       "x": 0,
       "y": 1,
-      "tileIdentifier": "-",
+      "tileIdentifier": "H",
       "name": "Hallway",
       "description": "A dimly lit corridor.",
-      "background": "assets/graphics/hallway.csv",
+      "background": "roomBackground1.csv",
       "npcs": [],
       "items": [],
       "allowedItems": []
