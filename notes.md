@@ -1,5 +1,4 @@
 # Big to-do
-- Move our data (Quests, NPCs) into a file, so that it is easier to change it without breaking the code. (json or yaml)
 - Create load functions for those files  **Nikolaj**
 - Make a minimap out of Rooms + pointer + active quests **Arty**
 - Generate assets 
