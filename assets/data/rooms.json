@@ -23,6 +23,17 @@
       "npcs": [],
       "items": [],
       "allowedItems": []
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "tileIdentifier": "H",
+      "name": "Hallway",
+      "description": "A dimly lit corridor.",
+      "background": "roomBackground2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
     }
   ]
 }

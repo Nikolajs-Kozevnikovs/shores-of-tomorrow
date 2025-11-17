@@ -16,7 +16,7 @@ namespace WorldOfZuul
 
         public Game()
         {
-            // load things from json?
+            // load things from json
             GameStateLoader.Load(world, "/");
         }
         

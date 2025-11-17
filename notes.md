@@ -7,7 +7,7 @@
 - Add random events (have them in a separate file?) **Santiago**
 - Add items that would help with Quests (have them in a separate file?)
 - save / load ?
-
+- fix DialogWindow
 
 
 
