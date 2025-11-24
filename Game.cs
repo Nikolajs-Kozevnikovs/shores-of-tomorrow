@@ -13,6 +13,10 @@ namespace WorldOfZuul
         private int[]? previousRoom = null;
         private readonly TUI tui = new();
 
+        private RandomEvents randomEvents = new();
+
+        private bool isInDialogue = false;
+
         public Game()
         {
         }
@@ -68,11 +72,19 @@ namespace WorldOfZuul
                         break;
 
                     case "back":
+                    {
                         if (previousRoom == null)
+                        {
                             tui.WriteLine("You can't go back from here!");
+                        }
                         else
+                        {
                             currentRoom = [previousRoom[0], previousRoom[1]];
+                        }
+
+                        randomEvents.TryTrigger(tui, Room.GetRoomAt(currentRoom[0], currentRoom[1]), false);
                         break;
+                    }
 
                     case "north":
                     case "south":
@@ -82,6 +94,7 @@ namespace WorldOfZuul
                         var newRoom = Room.GetRoomAt(currentRoom[0], currentRoom[1]);
                         if (newRoom != null)
                             tui.UpdateBackground(newRoom);
+                        randomEvents.TryTrigger(tui, Room.GetRoomAt(currentRoom[0], currentRoom[1]), false);
                         break;
 
                     case "talk":
@@ -89,11 +102,14 @@ namespace WorldOfZuul
                         if (r == null || r.RoomNPC == null)
                         {
                             tui.WriteLine("No one is here!");
+                            isInDialogue = false;
+                            randomEvents.TryTrigger(tui, Room.GetRoomAt(currentRoom[0], currentRoom[1]), isInDialogue);
                             break;
                         }
 
                         if (r.RoomNPC.quest != null && r.RoomNPC.quest.State == QuestState.Pending)
                         {
+                            isInDialogue = true;
                             r.RoomNPC.Talk(tui);
                         }
                         else
@@ -114,6 +130,7 @@ namespace WorldOfZuul
 
                     default:
                         tui.WriteLine("I don't know what command.");
+                        randomEvents.TryTrigger(tui, Room.GetRoomAt(currentRoom[0], currentRoom[1]), false);
                         break;
                 }
                 tui.DrawCanvas();
