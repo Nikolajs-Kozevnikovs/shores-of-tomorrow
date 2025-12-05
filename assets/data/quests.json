@@ -3,9 +3,8 @@
     "intro": {
       "title": "Introduction",
       "description": "Speak with the guard near the entrance.",
-      "state": "not_started",
-      "giverNpc": "guard",
-      "finishNpc": "guard",
+      "giverNPC": "guard",
+      "finishNPC": "guard",
       "visibilityConditions": [],
       "completionTriggers": [
         {

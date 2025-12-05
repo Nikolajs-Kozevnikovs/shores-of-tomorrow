@@ -1,11 +1,12 @@
+namespace WorldOfZuul.Logic;
 public class ItemManager
 {
-    private GameState world { get ; }
-    public List<Item> Items {get; set; } = []; // <Name, Item>
+    private readonly GameState World;
+    internal List<Item> Items {get; set; } = []; // <Name, Item>
 
-    public ItemManager(GameState _world)
+    public ItemManager(GameState _World)
     {
-        world = _world;
+        World = _World;
     }
 
     public void MoveToInventory(string itemName)
@@ -31,16 +32,16 @@ public class ItemManager
             return;
         }
 
-        var Room = world.RoomManager.GetRoom(world.PlayerX, world.PlayerY);
-        if (!Room.AllowedItems.Contains(itemName)) {  
+        var room = World.RoomManager.GetRoom(World.PlayerX, World.PlayerY);
+        if (room != null && !room.AllowedItems.Contains(itemName)) {  
             Console.WriteLine("You cannot put this item here!");
             return;
         }
         
         Item.Location.IsHeldByPlayer = false;
-        Item.Location.RoomX = world.PlayerX;
-        Item.Location.RoomY = world.PlayerY;
-        world.RoomManager.PlaceItem(Item.Name, world.PlayerX, world.PlayerY);
+        Item.Location.RoomX = World.PlayerX;
+        Item.Location.RoomY = World.PlayerY;
+        World.RoomManager.PlaceItem(Item.Name, World.PlayerX, World.PlayerY);
     }
 
     public List<Item> GetPlayerInventory()

@@ -1,17 +1,32 @@
+namespace WorldOfZuul.Logic;
+
 public class RoomManager
 {
-    private GameState world;
-    public Room[,] Rooms { get; private set; }
+    private readonly GameState World;
+    public Room[,] Rooms { get; set; }
 
-    public RoomManager(int width, int height, GameState _world)
+    public RoomManager(int width, int height, GameState _World)
     {
         Rooms = new Room[width, height];
-        world = _world;
+        World = _World;
     }
 
-    public Room GetRoom(int x, int y)
+    public void SetRooms(List<RoomEntry> rooms)
     {
-        if (x >= 0 && y >= 0 && x < Rooms.GetLength(0) && y < Rooms.GetLength(1))
+        foreach (RoomEntry room in rooms) {
+            if (room.X >= 0 && room.Y >= 0 && 
+                room.X < Rooms.GetLength(0) && room.Y < Rooms.GetLength(1))
+            {
+                World.RoomManager.Rooms[room.X, room.Y] = room.Room;
+            }
+        }
+    }
+
+
+    public Room? GetRoom(int x, int y)
+    {
+        if (x >= 0 && y >= 0 && 
+            x < Rooms.GetLength(0) && y < Rooms.GetLength(1))
         {
             return Rooms[x, y];
         }
@@ -21,7 +36,7 @@ public class RoomManager
 
     public Room GetCurrentRoom()
     {
-        return Rooms[world.PlayerX, world.PlayerY];
+        return Rooms[World.PlayerX, World.PlayerY];
     }
 
     public void AddNpcToRoom(string npcId, int x, int y)
@@ -51,3 +66,17 @@ public class RoomManager
         }
     }
 }
+
+
+public class RoomEntry
+    {
+        public int X {get; set; }
+        public int Y {get; set; }
+        public Room Room {get; set; }
+        public RoomEntry(int x, int y, Room room)
+        {
+            X = x;
+            Y = y;
+            Room = room;
+        }
+    }

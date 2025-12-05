@@ -1,17 +1,19 @@
-public class GameState
-{
-    public RoomManager RoomManager { get; set; }
-    public NPCManager NPCManager { get; set; }
-    public QuestManager QuestManager { get; set; }
-    public ItemManager ItemManager { get; set; }
-    public int PlayerX {get; set; } = 0;
-    public int PlayerY {get; set; } = 0;
-
-    public GameState(int width, int height)
+namespace WorldOfZuul.Logic {
+    public class GameState
     {
-        RoomManager = new RoomManager(width, height, this);
-        NPCManager = new NPCManager(this);
-        QuestManager = new QuestManager(this);
-        ItemManager = new ItemManager(this);
+        public RoomManager RoomManager { get; set; }
+        public NPCManager NPCManager { get; set; }
+        public QuestManager QuestManager { get; set; }
+        public ItemManager ItemManager { get; set; }
+        public int PlayerX {get; set; } = 0;
+        public int PlayerY {get; set; } = 0;
+
+        public GameState(int width, int height)
+        {
+            RoomManager = new RoomManager(width, height, this);
+            NPCManager = new NPCManager(this);
+            QuestManager = new QuestManager(this);
+            ItemManager = new ItemManager(this);
+        }
     }
 }

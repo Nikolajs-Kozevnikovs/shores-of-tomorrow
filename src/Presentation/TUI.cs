@@ -1,9 +1,7 @@
-using System.ComponentModel.DataAnnotations;
-using System.IO;
 using Spectre.Console;
 
-namespace WorldOfZuul;
-
+namespace WorldOfZuul.Presentation;
+using WorldOfZuul.Logic;
 public class TUI
 {
   // required terminal dimensions

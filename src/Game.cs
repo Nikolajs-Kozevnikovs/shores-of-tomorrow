@@ -1,20 +1,20 @@
-﻿/* using System;
-using System.Collections.Generic;
-using System.Threading; */
-
-namespace WorldOfZuul
+﻿namespace WorldOfZuul
 {
+    using WorldOfZuul.Presentation;
+    using WorldOfZuul.Logic;
+    using WorldOfZuul.Data;
+
     public class Game
     {
         // currentRoom: [row, col]
         private int[]? previousCoords = null;
         private readonly TUI tui = new();
-        private readonly GameState world = new(7, 7);
+        private readonly GameState World = new(7, 7);
 
         public Game()
         {
             // load things from json
-            GameStateLoader.Load(world, "/");
+            GameStateLoader.Load(World, "/");
         }
         
         public void Play()
@@ -25,7 +25,12 @@ namespace WorldOfZuul
             tui.WaitForCorrectTerminalSize();
             tui.DrawCanvas();
             
-            var currentRoom = world.RoomManager.GetCurrentRoom();
+            Room currentRoom = World.RoomManager.GetCurrentRoom();
+            if (currentRoom == null)
+            {
+                Console.WriteLine("Couldn't  fetch curernt room, breaking");
+                return;
+            }
             tui.WriteLine(currentRoom.Description ?? "None");
 
             bool continuePlaying = true;
@@ -65,10 +70,10 @@ namespace WorldOfZuul
                             tui.WriteLine("You can't go back from here!");
                         } else
                         {
-                            world.PlayerX = previousCoords[0];
-                            world.PlayerY = previousCoords[1];
+                            World.PlayerX = previousCoords[0];
+                            World.PlayerY = previousCoords[1];
                             previousCoords = null;
-                            currentRoom = world.RoomManager.GetCurrentRoom();
+                            currentRoom = World.RoomManager.GetCurrentRoom();
                             tui.WriteLine(currentRoom.Description ?? "None");
                             tui.UpdateBackground(currentRoom);
                         }
@@ -79,7 +84,7 @@ namespace WorldOfZuul
                     case "east":
                     case "west":
                         Move(command.Name); // doesn't change current room
-                        currentRoom = world.RoomManager.GetCurrentRoom();
+                        currentRoom = World.RoomManager.GetCurrentRoom();
                         tui.WriteLine(currentRoom.Description ?? "None");
                         tui.UpdateBackground(currentRoom);
                         break;
@@ -127,8 +132,8 @@ namespace WorldOfZuul
 
         private void Move(string direction)
         {
-            int newX = world.PlayerX;
-            int newY = world.PlayerY;
+            int newX = World.PlayerX;
+            int newY = World.PlayerY;
 
             switch (direction)
             {
@@ -146,7 +151,7 @@ namespace WorldOfZuul
                     break;
             }
 
-            var target = world.RoomManager.GetRoom(newX, newY); // no var needed
+            var target = World.RoomManager.GetRoom(newX, newY); // no var needed
             if (target == null || target.TileIdentifier == '-')
             {
                 tui.WriteLine("You can't go that way!");
@@ -154,9 +159,9 @@ namespace WorldOfZuul
             }
 
             // update previous and current
-            previousCoords = [world.PlayerX, world.PlayerY]; // !!!! this is not working
-            world.PlayerX = newX;
-            world.PlayerY = newY;
+            previousCoords = [World.PlayerX, World.PlayerY]; // !!!! this is not working
+            World.PlayerX = newX;
+            World.PlayerY = newY;
         }
 
 

@@ -1,13 +1,12 @@
-﻿namespace WorldOfZuul
+﻿namespace WorldOfZuul.Presentation
 {
-    public class CommandWords
+    internal class CommandWords
     {
-        public List<string> ValidCommands { get; } = new List<string> { "north", "east", "south", "west", "look", "back", "quit", "help", "talk" };
-
-        public bool IsValidCommand(string command)
+        static List<string> ValidCommands = new List<string> { "north", "east", "south", "west", "look", "back", "quit", "help", "talk" };
+        
+        public static bool IsValidCommand(string command)
         {
             return ValidCommands.Contains(command);
         }
     }
 }
-// how dores this work?

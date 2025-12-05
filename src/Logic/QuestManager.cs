@@ -1,11 +1,12 @@
+namespace WorldOfZuul.Logic;
 public class QuestManager
 {
-    private GameState world { get; }
-    public Dictionary<string, Quest> Quests { get; set; } = [];
+    private readonly GameState World;
+    internal Dictionary<string, Quest> Quests { get; set; } = [];
 
-    public QuestManager(GameState _world)
+    public QuestManager(GameState _World)
     {
-        world = _world;
+        World = _World;
     }
 
     public void UpdateQuestVisibility()
@@ -30,26 +31,29 @@ public class QuestManager
             }
         }
     }
-    // I'd love to have a GameState here
     // also need a try for null references
-    public void CheckCompletion(string questName, string interactingNpc = null)
+    public void CheckCompletion(string questName, string ?interactingNpc = null)
     {
         foreach (var trigger in Quests[questName].CompletionTriggers)
         {
-            if (trigger.Type == "move_item")
+            if (trigger.Type == "move_item" && trigger.Room != null && trigger.Item != null)
             {
-                var room = world.RoomManager.GetRoom(trigger.Room[0], trigger.Room[1]);
-                if (room.Items.Contains(trigger.Item))
+                var room = World.RoomManager.GetRoom(trigger.Room[0], trigger.Room[1]);
+                if (room != null && room.Items.Contains(trigger.Item))
                 {
                     Quests[questName].State = "completed";
                     return;
                 }
             }
-            else if (trigger.Type == "talk_to_npc" && interactingNpc == trigger.Npc)
+            else if (trigger.Type == "talk_to_npc" && interactingNpc != null && interactingNpc == trigger.Npc)
             {
                 Quests[questName].State = "completed";
                 return;
-            }
+            } // else
+            // {
+            //     // Console.WriteLine("Error finishing the quest");
+            //     return;
+            // }
         }
     }
 }
