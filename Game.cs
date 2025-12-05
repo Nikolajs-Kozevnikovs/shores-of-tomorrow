@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Threading; */
 
-using Namotion.Reflection;
-using Spectre.Console;
-
 namespace WorldOfZuul
 {
     public class Game
@@ -62,7 +59,7 @@ namespace WorldOfZuul
                         tui.DrawCanvas();
                         break;
 
-                    case "back": // not working!
+                    case "back": 
                         if (previousCoords == null)
                         {
                             tui.WriteLine("You can't go back from here!");
@@ -149,7 +146,7 @@ namespace WorldOfZuul
                     break;
             }
 
-            var target = world.RoomManager.GetRoom(newX, newY);
+            var target = world.RoomManager.GetRoom(newX, newY); // no var needed
             if (target == null || target.TileIdentifier == '-')
             {
                 tui.WriteLine("You can't go that way!");

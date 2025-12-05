@@ -10,7 +10,7 @@ public class TUI
   private const int RequiredWidth = 132;
   private const int RequiredHeight = 43;
   private readonly Canvas canvas = new(RequiredWidth, RequiredHeight);
-  private List<List<Color>> Minimap { get; }
+  private List<List<Color>> Minimap { get; } // list list is not optimal way to store it
   private string[] lines = new string[8];
   private int currentLineIndex = 0;
 
