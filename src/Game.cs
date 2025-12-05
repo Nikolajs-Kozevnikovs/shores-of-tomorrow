@@ -13,8 +13,6 @@
 
         public Game()
         {
-            // load things from json
-            GameStateLoader.Load(World, "/");
         }
         
         public void Play()
