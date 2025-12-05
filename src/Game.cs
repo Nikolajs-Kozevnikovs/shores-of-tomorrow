@@ -11,9 +11,6 @@
         private readonly TUI tui = new();
         private readonly GameState World = new(7, 7);
 
-        public Game()
-        {
-        }
         
         public void Play()
         {
@@ -34,7 +31,6 @@
             bool continuePlaying = true;
             while (continuePlaying)
             {
-                // tui.DrawCanvas();
                 Console.Write("> ");
 
                 string? input = Console.ReadLine();
@@ -93,10 +89,10 @@
                         {
                             tui.WriteLine("No one is here!");
                             break;
-                        } else
-                        {
-                            tui.WriteLine("Dialogues are not implemented yet for multiple NPCs in one room");
-                        }
+                        } 
+                        
+                        tui.WriteLine("Dialogues are not implemented yet for multiple NPCs in one room");
+                        
                         // // fix for multiple NPCs
                         // if (r.RoomNPC.quest != null && r.RoomNPC.quest.State == QuestState.Pending)
                         // {
@@ -115,7 +111,6 @@
 
                     case "help":
                         PrintHelp();
-                        tui.DrawCanvas();
                         break;
 
                     default:

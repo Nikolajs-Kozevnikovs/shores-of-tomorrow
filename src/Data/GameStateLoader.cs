@@ -27,8 +27,6 @@ public static class GameStateLoader
         public int height { get; set; }
         public List<RoomEntry> ?rooms { get; set; }
     }
-    
-
 
     private static void LoadRooms(GameState world, string fileName)
     {
