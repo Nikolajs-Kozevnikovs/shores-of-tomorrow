@@ -1,14 +1,16 @@
-using Spectre.Console;
-
 namespace WorldOfZuul.Presentation;
+
+using Spectre.Console;
 using WorldOfZuul.Logic;
+
 public class TUI
 {
   // required terminal dimensions
   private const int RequiredWidth = 132;
   private const int RequiredHeight = 43;
   private readonly Canvas canvas = new(RequiredWidth, RequiredHeight);
-  private List<List<Color>> Minimap { get; } // list list is not optimal way to store it
+  // actually, we don't even need a minimap array, since we store all rooms in a two-dimensional array
+  private List<List<Color>> Minimap { get; } // list list is not optimal way to store it 
   private string[] lines = new string[8];
   private int currentLineIndex = 0;
 

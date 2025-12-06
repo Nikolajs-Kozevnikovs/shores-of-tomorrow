@@ -11,17 +11,10 @@ public class RoomManager
         World = _World;
     }
 
-    public void SetRooms(List<RoomEntry> rooms)
+    public void SetRoom(Room room, int x, int y)
     {
-        foreach (RoomEntry room in rooms) {
-            if (room.X >= 0 && room.Y >= 0 && 
-                room.X < Rooms.GetLength(0) && room.Y < Rooms.GetLength(1))
-            {
-                World.RoomManager.Rooms[room.X, room.Y] = room.Room;
-            }
-        }
+        Rooms[x, y] = room;
     }
-
 
     public Room? GetRoom(int x, int y)
     {
@@ -68,15 +61,3 @@ public class RoomManager
 }
 
 
-public class RoomEntry
-    {
-        public int X {get; set; }
-        public int Y {get; set; }
-        public Room Room {get; set; }
-        public RoomEntry(int x, int y, Room room)
-        {
-            X = x;
-            Y = y;
-            Room = room;
-        }
-    }

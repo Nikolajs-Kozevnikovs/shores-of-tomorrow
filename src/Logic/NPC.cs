@@ -1,5 +1,5 @@
 namespace WorldOfZuul.Logic;
-internal class NPC
+public class NPC
 {
     public string Name { get; set; }
     public int X { get; set; }  // Room grid coordinates

@@ -3,6 +3,19 @@ namespace WorldOfZuul.Data;
 using System.Text.Json;
 using WorldOfZuul.Logic;
 
+public class RoomEntry
+    {
+        public int X {get; set; }
+        public int Y {get; set; }
+        public Room Room {get; set; }
+        public RoomEntry(int x, int y, Room room)
+        {
+            X = x;
+            Y = y;
+            Room = room;
+        }
+    }
+
 public static class GameStateLoader
 {
     private static readonly JsonSerializerOptions options = new()
@@ -23,10 +36,9 @@ public static class GameStateLoader
     // load rooms
     private class RoomsFile
     {
-        public int width { get; set; }
-        public int height { get; set; }
         public List<RoomEntry> ?rooms { get; set; }
     }
+
 
     private static void LoadRooms(GameState world, string fileName)
     {
@@ -35,10 +47,21 @@ public static class GameStateLoader
 
         if (data != null && data.rooms != null)
         {
-            world.RoomManager.SetRooms(data.rooms);
+            SetRooms(world, data.rooms);
         } else
         {
             Console.WriteLine("Couldn't load rooms from rooms file");
+        }
+    }
+
+    internal static void SetRooms(GameState world, List<RoomEntry> rooms)
+    {
+        foreach (RoomEntry room in rooms) {
+            if (room.X >= 0 && room.Y >= 0 && 
+                room.X < world.RoomManager.Rooms.GetLength(0) && room.Y < world.RoomManager.Rooms.GetLength(1))
+            {
+                world.RoomManager.SetRoom(room.Room, room.X, room.Y);
+            }
         }
     }
 
@@ -54,7 +77,7 @@ public static class GameStateLoader
         var data = JsonSerializer.Deserialize<NpcFile>(json, options);
         if (data != null)
         {
-            world.NPCManager.Npcs = data.npcs;
+            world.NPCManager.NPCs = data.npcs;
         }
     }
 
