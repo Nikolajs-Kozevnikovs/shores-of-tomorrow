@@ -32,16 +32,16 @@ public class ItemManager
             return;
         }
 
-        var room = World.RoomManager.GetRoom(World.PlayerX, World.PlayerY);
+        var room = World.RoomManager.GetRoom(World.Player.X, World.Player.Y);
         if (room != null && !room.AllowedItems.Contains(itemName)) {  
             Console.WriteLine("You cannot put this item here!");
             return;
         }
         
         Item.Location.IsHeldByPlayer = false;
-        Item.Location.RoomX = World.PlayerX;
-        Item.Location.RoomY = World.PlayerY;
-        World.RoomManager.PlaceItem(Item.Name, World.PlayerX, World.PlayerY);
+        Item.Location.RoomX = World.Player.X;
+        Item.Location.RoomY = World.Player.Y;
+        World.RoomManager.PlaceItem(Item.Name, World.Player.X, World.Player.Y);
     }
 
     public List<Item> GetPlayerInventory()

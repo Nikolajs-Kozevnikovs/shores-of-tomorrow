@@ -2,7 +2,7 @@
 {
     using WorldOfZuul.Presentation;
     using WorldOfZuul.Logic;
-    using WorldOfZuul.Data;
+    using NJsonSchema.Validation.FormatValidators;
 
     public class Game
     {
@@ -31,91 +31,17 @@
             bool continuePlaying = true;
             while (continuePlaying)
             {
-                Console.Write("> ");
+                Command ?command = ProcessTurn(parser, ref currentRoom);
 
-                string? input = Console.ReadLine();
-                // check for empty input
-                if (string.IsNullOrEmpty(input))
-                {
-                    tui.WriteLine("Please enter a command.");
-                    tui.DrawCanvas();
-                    continue;
-                }
-                // parse into command
-                Command? command = parser.GetCommand(input);
-                // check if command is invalid
                 if (command == null)
                 {
-                    tui.WriteLine("I don't know that command.");
-                    tui.DrawCanvas();
                     continue;
                 }
 
-                switch (command.Name)
+                // switch was here
+                if (HandleCommand(command, ref currentRoom) == false)
                 {
-                    case "look":
-                        tui.WriteLine(currentRoom.Description ?? "Nothing to look at");
-                        tui.DrawCanvas();
-                        break;
-
-                    case "back": 
-                        if (previousCoords == null)
-                        {
-                            tui.WriteLine("You can't go back from here!");
-                        } else
-                        {
-                            World.PlayerX = previousCoords[0];
-                            World.PlayerY = previousCoords[1];
-                            previousCoords = null;
-                            currentRoom = World.RoomManager.GetCurrentRoom();
-                            tui.WriteLine(currentRoom.Description ?? "None");
-                            tui.UpdateBackground(currentRoom);
-                        }
-                        break;
-
-                    case "north":
-                    case "south":
-                    case "east":
-                    case "west":
-                        Move(command.Name); // doesn't change current room
-                        currentRoom = World.RoomManager.GetCurrentRoom();
-                        tui.WriteLine(currentRoom.Description ?? "None");
-                        tui.UpdateBackground(currentRoom);
-                        break;
-
-                    case "talk":
-                        
-                        if (currentRoom.NPCs.Count == 0)
-                        {
-                            tui.WriteLine("No one is here!");
-                            break;
-                        } 
-                        
-                        tui.WriteLine("Dialogues are not implemented yet for multiple NPCs in one room");
-                        
-                        // // fix for multiple NPCs
-                        // if (r.RoomNPC.quest != null && r.RoomNPC.quest.State == QuestState.Pending)
-                        // {
-                        //     r.RoomNPC.Talk(tui);
-                        // }
-                        // else
-                        // {
-                        //     tui.WriteLine("no quest sorry");
-                        //     //currentRoom.RoomNPC.Dialogue1();
-                        // }
-                        break;
-
-                    case "quit":
-                        continuePlaying = false;
-                        break;
-
-                    case "help":
-                        PrintHelp();
-                        break;
-
-                    default:
-                        tui.WriteLine("I don't know what command.");
-                        break;
+                    continuePlaying = false;
                 }
                 tui.DrawCanvas();
             }
@@ -123,40 +49,94 @@
             tui.WriteLine("Thank you for playing World of Zuul!");
         }
 
-        private void Move(string direction)
+        private Command? ProcessTurn(Parser parser, ref Room currentRoom)
         {
-            int newX = World.PlayerX;
-            int newY = World.PlayerY;
+            Console.Write("> ");
 
-            switch (direction)
+            string? input = Console.ReadLine();
+            // check for empty input
+            if (string.IsNullOrEmpty(input))
             {
-                case "south":
-                    newX++;
-                    break;
-                case "north":
-                    newX--;
-                    break;
-                case "west":
-                    newY--;
-                    break;
-                case "east":
-                    newY++;
-                    break;
+                tui.WriteLine("Please enter a command.");
+                tui.DrawCanvas();
+                return null;
             }
-
-            var target = World.RoomManager.GetRoom(newX, newY); // no var needed
-            if (target == null || target.TileIdentifier == '-')
+            // parse into command
+            Command? command = parser.GetCommand(input);
+            // check if command is invalid
+            if (command == null)
             {
-                tui.WriteLine("You can't go that way!");
-                return;
+                tui.WriteLine("I don't know that command.");
+                tui.DrawCanvas();
+                return null;
             }
-
-            // update previous and current
-            previousCoords = [World.PlayerX, World.PlayerY]; // !!!! this is not working
-            World.PlayerX = newX;
-            World.PlayerY = newY;
+            return command;
         }
 
+        private bool HandleCommand(Command command, ref Room currentRoom)
+        {
+            switch (command.Name)
+            {
+                case "look":
+                    tui.WriteLine(currentRoom.Description ?? "Nothing to look at");
+                    tui.DrawCanvas(); // might be totally unnecessary
+                    break;
+
+                case "back": 
+                    World.Player.Back(tui);
+                    currentRoom = World.RoomManager.GetCurrentRoom();
+                    tui.WriteLine(currentRoom.Description ?? "None");
+                    tui.UpdateBackground(currentRoom);
+                    break;
+
+                case "north":
+                case "south":
+                case "east":
+                case "west":
+                    World.Player.Move(command.Name, tui); // doesn't change current room
+                    currentRoom = World.RoomManager.GetCurrentRoom();
+                    tui.WriteLine(currentRoom.Description ?? "None");
+                    tui.UpdateBackground(currentRoom);
+                    break;
+
+                case "talk":
+                    
+                    if (currentRoom.NPCs.Count == 0)
+                    {
+                        tui.WriteLine("No one is here!");
+                        break;
+                    } 
+                    
+                    tui.WriteLine("Dialogues are not implemented yet for multiple NPCs in one room");
+                    
+                    // // fix for multiple NPCs
+                    // if (r.RoomNPC.quest != null && r.RoomNPC.quest.State == QuestState.Pending)
+                    // {
+                    //     r.RoomNPC.Talk(tui);
+                    // }
+                    // else
+                    // {
+                    //     tui.WriteLine("no quest sorry");
+                    //     //currentRoom.RoomNPC.Dialogue1();
+                    // }
+                    break;
+
+                case "help":
+                    PrintHelp();
+                    break;
+                
+                case "quit":
+                    return false;
+
+                default:
+                    tui.WriteLine("I don't know what command.");
+                    break;
+            }
+
+            return true;
+        }
+
+        
 
         private void PrintWelcome()
         {

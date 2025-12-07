@@ -7,8 +7,8 @@ public class GameState
     public NPCManager NPCManager { get; set; }
     public QuestManager QuestManager { get; set; }
     public ItemManager ItemManager { get; set; }
-    public int PlayerX {get; set; } = 0;
-    public int PlayerY {get; set; } = 0;
+    public Player Player { get; set; }
+    
 
     public GameState(int width, int height)
     {
@@ -16,8 +16,8 @@ public class GameState
         NPCManager = new NPCManager(this);
         QuestManager = new QuestManager(this);
         ItemManager = new ItemManager(this);
+        Player = new Player(0, 0, this);
         // load things from json
         GameStateLoader.Load(this, "/");
-
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Dynamic;
-
-namespace WorldOfZuul.Logic;
+﻿namespace WorldOfZuul.Logic;
 public class Room
 {
     public char TileIdentifier {get; set; } = '-';

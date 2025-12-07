@@ -29,7 +29,7 @@ public class RoomManager
 
     public Room GetCurrentRoom()
     {
-        return Rooms[World.PlayerX, World.PlayerY];
+        return Rooms[World.Player.X, World.Player.Y];
     }
 
     public void AddNpcToRoom(string npcId, int x, int y)
