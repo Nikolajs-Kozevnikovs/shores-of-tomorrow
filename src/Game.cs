@@ -2,12 +2,9 @@
 {
     using WorldOfZuul.Presentation;
     using WorldOfZuul.Logic;
-    using NJsonSchema.Validation.FormatValidators;
 
     public class Game
     {
-        // currentRoom: [row, col]
-        private int[]? previousCoords = null;
         private readonly TUI tui = new();
         private readonly GameState World = new(7, 7);
 
