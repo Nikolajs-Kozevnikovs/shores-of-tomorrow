@@ -53,7 +53,7 @@
                 tui.WriteLine("I don't know that command.");
                 return true;
             }
-
+            // execute the command
             return HandleCommand(command, ref currentRoom);
         }
 
@@ -63,7 +63,7 @@
             switch (command.Name)
             {
                 case "look":
-                    tui.WriteLine(currentRoom.Description ?? "Nothing to look at");
+                    tui.WriteLine(currentRoom.Description ?? "Nothing to look at (devs forgot a description)");
                     break;
 
                 case "back": 
