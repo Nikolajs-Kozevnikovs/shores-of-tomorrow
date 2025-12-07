@@ -16,8 +16,10 @@ public class GameState
         NPCManager = new NPCManager(this);
         QuestManager = new QuestManager(this);
         ItemManager = new ItemManager(this);
-        Player = new Player(0, 0, this);
+        
         // load things from json
         GameStateLoader.Load(this, "/");
+
+        Player = new Player(0, 0, this);
     }
 }

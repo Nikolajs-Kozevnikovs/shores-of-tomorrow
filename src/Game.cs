@@ -2,13 +2,12 @@
 {
     using WorldOfZuul.Presentation;
     using WorldOfZuul.Logic;
-    using Spectre.Console;
 
     public class Game
     {
         private readonly TUI tui = new();
         private readonly GameState World = new(7, 7);
-
+        
         
         public void Play()
         {
@@ -17,24 +16,18 @@
             PrintWelcome();
             tui.WaitForCorrectTerminalSize();
             
-            Room currentRoom = World.RoomManager.GetCurrentRoom();
-            if (currentRoom == null)
-            {
-                Console.WriteLine("Couldn't fetch curernt room, breaking");
-                return;
-            }
-            tui.WriteLine(currentRoom.Description ?? "None");
+            tui.WriteLine(World.Player.CurrentRoom.Description ?? "None");
             tui.DrawCanvas();
 
             bool continuePlaying = true;
             while (continuePlaying)
             {
-                continuePlaying = ProcessUserInput(parser, ref currentRoom);
+                continuePlaying = ProcessUserInput(parser);
                 tui.DrawCanvas();
             }
         }
 
-        private bool ProcessUserInput(Parser parser, ref Room currentRoom)
+        private bool ProcessUserInput(Parser parser)
         {
             Console.Write("> ");
 
@@ -48,70 +41,34 @@
             // parse into command
             Command? command = parser.GetCommand(input);
             // check if command is invalid
-            if (command == null)
+            if (command == null || command.Name == null)
             {
                 tui.WriteLine("I don't know that command.");
                 return true;
             }
             // execute the command
-            return HandleCommand(command, ref currentRoom);
+            return HandleCommand(command);
         }
 
-        private bool HandleCommand(Command command, ref Room currentRoom)
+        private bool HandleCommand(Command command)
         {
-            string? errorText;
             switch (command.Name)
             {
                 case "look":
-                    tui.WriteLine(currentRoom.Description ?? "Nothing to look at (devs forgot a description)");
+                    tui.WriteLine(World.Player.CurrentRoom.Description ?? "Nothing to look at (devs forgot a description)");
                     break;
 
                 case "back": 
-                    errorText = World.Player.Back();
-                    if (errorText == null)
-                    {
-                        currentRoom = World.RoomManager.GetCurrentRoom();
-                        tui.WriteLine(currentRoom.Description ?? "None");
-                        tui.UpdateBackground(currentRoom);
-                        break;
-                    }
-                    tui.WriteLine(errorText);
+                    CatchMoveError(World.Player.Back());
                     break;
-
                 case "north":
                 case "south":
                 case "east":
                 case "west":
-                    errorText = World.Player.Move(command.Name);
-                    if (errorText == null)
-                    {
-                        currentRoom = World.RoomManager.GetCurrentRoom();
-                        tui.WriteLine(currentRoom.Description ?? "None");
-                        tui.UpdateBackground(currentRoom);
-                        break;
-                    } 
-                    tui.WriteLine(errorText);
+                    CatchMoveError(World.Player.Move(command.Name));
                     break;
                 case "talk":
-                    
-                    if (currentRoom.NPCs.Count == 0)
-                    {
-                        tui.WriteLine("No one is here!");
-                        break;
-                    } 
-                    
-                    tui.WriteLine("Dialogues are not implemented yet for multiple NPCs in one room");
-                    
-                    // // fix for multiple NPCs
-                    // if (r.RoomNPC.quest != null && r.RoomNPC.quest.State == QuestState.Pending)
-                    // {
-                    //     r.RoomNPC.Talk(tui);
-                    // }
-                    // else
-                    // {
-                    //     tui.WriteLine("no quest sorry");
-                    //     //currentRoom.RoomNPC.Dialogue1();
-                    // }
+                    TalkToNPC();
                     break;
 
                 case "help":
@@ -130,7 +87,41 @@
             return true;
         }
 
+        // TBD
+        private void TalkToNPC()
+        {
+            if (World.Player.CurrentRoom.NPCs.Count == 0)
+            {
+                tui.WriteLine("No one is here!");
+                return;
+            } 
+                    
+            tui.WriteLine("Dialogues are not implemented yet for multiple NPCs in one room");
+
+            // // fix for multiple NPCs
+            // if (r.RoomNPC.quest != null && r.RoomNPC.quest.State == QuestState.Pending)
+            // {
+            //     r.RoomNPC.Talk(tui);
+            // }
+            // else
+            // {
+            //     tui.WriteLine("no quest sorry");
+            //     //World.Player.CurrentRoom.RoomNPC.Dialogue1();
+            // }
+        }
         
+        private void CatchMoveError(string? errorText)
+        {
+            if (errorText == null)
+            {
+               
+                tui.WriteLine(World.Player.CurrentRoom.Description ?? "None");
+                tui.UpdateBackground(World.Player.CurrentRoom);
+                return;
+            }
+
+            tui.WriteLine(errorText);
+        }
 
         private void PrintWelcome()
         {

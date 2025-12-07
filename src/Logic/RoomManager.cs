@@ -24,7 +24,7 @@ public class RoomManager
             return Rooms[x, y];
         }
 
-        return null; // maybe I should throw an exception instead
+        return null;
     }
 
     public Room GetCurrentRoom()
