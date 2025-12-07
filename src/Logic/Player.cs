@@ -16,7 +16,7 @@ public class Player
         World = world;
     }
     
-    public void Move(string direction, TUI tui)
+    public string? Move(string direction)
     {
         int newX = X;
         int newY = Y;
@@ -40,26 +40,29 @@ public class Player
         Room? target = World.RoomManager.GetRoom(newX, newY);
         if (target == null || target.TileIdentifier == '-')
         {
-            tui.WriteLine("You can't go that way!");
-            return;
+            return "You can't go that way!";
         }
 
         PreviousCoords = [X, Y];
         X = newX;
         Y = newY;
+        
+        return null;
     }
 
-    public void Back(TUI tui)
+    public string? Back()
     {
         if (PreviousCoords == null)
         {
-            tui.WriteLine("You can't go back from here!");
-            return; 
+            return "You can't go back from here!";
+            
         }
 
         X = PreviousCoords[0];
         Y = PreviousCoords[1];
 
         PreviousCoords = null;
+
+        return null;
     }
 }

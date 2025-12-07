@@ -2,6 +2,7 @@
 {
     using WorldOfZuul.Presentation;
     using WorldOfZuul.Logic;
+    using Spectre.Console;
 
     public class Game
     {
@@ -15,38 +16,25 @@
 
             PrintWelcome();
             tui.WaitForCorrectTerminalSize();
-            tui.DrawCanvas();
             
             Room currentRoom = World.RoomManager.GetCurrentRoom();
             if (currentRoom == null)
             {
-                Console.WriteLine("Couldn't  fetch curernt room, breaking");
+                Console.WriteLine("Couldn't fetch curernt room, breaking");
                 return;
             }
             tui.WriteLine(currentRoom.Description ?? "None");
+            tui.DrawCanvas();
 
             bool continuePlaying = true;
             while (continuePlaying)
             {
-                Command ?command = ProcessTurn(parser, ref currentRoom);
-
-                if (command == null)
-                {
-                    continue;
-                }
-
-                // switch was here
-                if (HandleCommand(command, ref currentRoom) == false)
-                {
-                    continuePlaying = false;
-                }
+                continuePlaying = ProcessUserInput(parser, ref currentRoom);
                 tui.DrawCanvas();
             }
-
-            tui.WriteLine("Thank you for playing World of Zuul!");
         }
 
-        private Command? ProcessTurn(Parser parser, ref Room currentRoom)
+        private bool ProcessUserInput(Parser parser, ref Room currentRoom)
         {
             Console.Write("> ");
 
@@ -55,8 +43,7 @@
             if (string.IsNullOrEmpty(input))
             {
                 tui.WriteLine("Please enter a command.");
-                tui.DrawCanvas();
-                return null;
+                return true;
             }
             // parse into command
             Command? command = parser.GetCommand(input);
@@ -64,38 +51,47 @@
             if (command == null)
             {
                 tui.WriteLine("I don't know that command.");
-                tui.DrawCanvas();
-                return null;
+                return true;
             }
-            return command;
+
+            return HandleCommand(command, ref currentRoom);
         }
 
         private bool HandleCommand(Command command, ref Room currentRoom)
         {
+            string? errorText;
             switch (command.Name)
             {
                 case "look":
                     tui.WriteLine(currentRoom.Description ?? "Nothing to look at");
-                    tui.DrawCanvas(); // might be totally unnecessary
                     break;
 
                 case "back": 
-                    World.Player.Back(tui);
-                    currentRoom = World.RoomManager.GetCurrentRoom();
-                    tui.WriteLine(currentRoom.Description ?? "None");
-                    tui.UpdateBackground(currentRoom);
+                    errorText = World.Player.Back();
+                    if (errorText == null)
+                    {
+                        currentRoom = World.RoomManager.GetCurrentRoom();
+                        tui.WriteLine(currentRoom.Description ?? "None");
+                        tui.UpdateBackground(currentRoom);
+                        break;
+                    }
+                    tui.WriteLine(errorText);
                     break;
 
                 case "north":
                 case "south":
                 case "east":
                 case "west":
-                    World.Player.Move(command.Name, tui); // doesn't change current room
-                    currentRoom = World.RoomManager.GetCurrentRoom();
-                    tui.WriteLine(currentRoom.Description ?? "None");
-                    tui.UpdateBackground(currentRoom);
+                    errorText = World.Player.Move(command.Name);
+                    if (errorText == null)
+                    {
+                        currentRoom = World.RoomManager.GetCurrentRoom();
+                        tui.WriteLine(currentRoom.Description ?? "None");
+                        tui.UpdateBackground(currentRoom);
+                        break;
+                    } 
+                    tui.WriteLine(errorText);
                     break;
-
                 case "talk":
                     
                     if (currentRoom.NPCs.Count == 0)
@@ -123,6 +119,7 @@
                     break;
                 
                 case "quit":
+                    tui.WriteLine("Thank you for playing World of Zuul!");
                     return false;
 
                 default:
