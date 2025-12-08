@@ -1,3 +1,5 @@
+// Does not support saving and loading player data
+
 namespace WorldOfZuul.Data;
 
 using System.Text.Json;
@@ -18,6 +20,14 @@ public class RoomEntry
 
 public static class GameStateLoader
 {
+    const string SAVE_PATH = "./assets/saves/";
+
+    public static string[] GetSaves()
+    {
+        string[] folders = Directory.GetDirectories(SAVE_PATH).Select(path => Path.GetFileName(path).ToLower()).ToArray();
+        return folders;
+    }
+
     private static readonly JsonSerializerOptions options = new()
     {
         PropertyNameCaseInsensitive = true,
@@ -33,21 +43,15 @@ public static class GameStateLoader
         LoadItems(world, Path.Combine(directory, "items.json"));
     }
 
-    // load rooms
-    private class RoomsFile
-    {
-        public List<RoomEntry> ?rooms { get; set; }
-    }
-
 
     private static void LoadRooms(GameState world, string fileName)
     {
-        string json = File.ReadAllText($"./assets/data/{fileName}");
-        var data = JsonSerializer.Deserialize<RoomsFile>(json, options);
+        string json = File.ReadAllText($"{SAVE_PATH}{fileName}");
+        var rooms = JsonSerializer.Deserialize<List<RoomEntry>>(json, options);
 
-        if (data != null && data.rooms != null)
+        if (rooms != null)
         {
-            SetRooms(world, data.rooms);
+            SetRooms(world, rooms);
         } else
         {
             Console.WriteLine("Couldn't load rooms from rooms file");
@@ -65,52 +69,37 @@ public static class GameStateLoader
         }
     }
 
-    // load npcs
-    private class NpcFile
-    {
-        public Dictionary<string, NPC> npcs { get; set; } = [];
-    }
 
     private static void LoadNpcs(GameState world, string fileName)
     {
-        string json = File.ReadAllText($"./assets/data/{fileName}");
-        var data = JsonSerializer.Deserialize<NpcFile>(json, options);
-        if (data != null)
+        string json = File.ReadAllText($"{SAVE_PATH}{fileName}");
+        var npcs = JsonSerializer.Deserialize<Dictionary<string, NPC>>(json, options);
+        if (npcs != null)
         {
-            world.NPCManager.NPCs = data.npcs;
+            world.NPCManager.NPCs = npcs;
         }
     }
 
-    // load quests
-    private class QuestFile
-    {
-        public Dictionary<string, Quest> quests { get; set; } = [];
-    }
 
     private static void LoadQuests(GameState world, string fileName)
     {
-        string json = File.ReadAllText($"./assets/data/{fileName}");
-        var data = JsonSerializer.Deserialize<QuestFile>(json, options);
-        if (data != null)
+        string json = File.ReadAllText($"{SAVE_PATH}{fileName}");
+        var quests = JsonSerializer.Deserialize<Dictionary<string, Quest>>(json, options);
+        if (quests != null)
         {
-            world.QuestManager.Quests = data.quests;
+            world.QuestManager.Quests = quests;
         }
     }
 
-    // load items
-    private class ItemFile
-    {
-        public List<Item> items { get; set; } = [];
-    }
 
     private static void LoadItems(GameState world, string fileName)
     {
-        string json = File.ReadAllText($"./assets/data/{fileName}");
-        var data = JsonSerializer.Deserialize<ItemFile>(json, options);
+        string json = File.ReadAllText($"{SAVE_PATH}{fileName}");
+        var items = JsonSerializer.Deserialize<List<Item>>(json, options);
         
-        if (data != null)
+        if (items != null)
         {
-            world.ItemManager.Items = data.items;
+            world.ItemManager.Items = items;
         }
     }
 }

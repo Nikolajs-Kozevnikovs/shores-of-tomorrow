@@ -1,7 +1,7 @@
-﻿namespace WorldOfZuul
+﻿namespace WorldOfZuul.Presentation
 {
-    using WorldOfZuul.Presentation;
     using WorldOfZuul.Logic;
+    using System.Text.RegularExpressions;
 
     public class Game
     {
@@ -15,6 +15,8 @@
 
             PrintWelcome();
             tui.WaitForCorrectTerminalSize();
+
+            ChooseSave();
             
             tui.WriteLine(World.Player.CurrentRoom.Description ?? "None");
             tui.DrawCanvas();
@@ -74,9 +76,12 @@
                 case "help":
                     PrintHelp();
                     break;
-                
+                case "save":
+                    SaveProgress();
+                    break;
                 case "quit":
                     tui.WriteLine("Thank you for playing World of Zuul!");
+                    SaveProgress();
                     return false;
 
                 default:
@@ -122,6 +127,47 @@
 
             tui.WriteLine(errorText);
         }
+        // tbd
+        private void SaveProgress()
+        {
+            Console.WriteLine("Choose a name for your save: \n(English alphabet letters, numbers, underscores and dashes allowed)");
+            Console.Write("> ");
+            string? save_name = Console.ReadLine();
+            while (save_name == null || save_name == "" || !IsValidSaveName(save_name))
+            {
+                Console.WriteLine("Invalid name!");
+                Console.Write("> ");
+                save_name = Console.ReadLine();
+            }
+            World.Save(save_name);
+            tui.WriteLine();
+        }
+        bool IsValidSaveName(string input)
+        {
+            return Regex.IsMatch(input, @"^[A-Za-z0-9_-]+$");
+        }
+        // tbd
+        private void ChooseSave()
+        {
+            string[] existing_saves = World.GetSaves();
+            Console.WriteLine("Choose a save:");
+            foreach (string save in existing_saves) {
+                Console.WriteLine(save);
+            }
+            Console.Write("> ");
+            string? save_name = Console.ReadLine();
+            while (save_name == null || !existing_saves.Contains(save_name))
+            {
+                Console.WriteLine("Can't find a save with the specified save name!");
+                Console.Write("> ");
+                save_name = Console.ReadLine();
+            }
+            
+            World.LoadData(save_name);
+        }
+
+        
+
 
         private void PrintWelcome()
         {

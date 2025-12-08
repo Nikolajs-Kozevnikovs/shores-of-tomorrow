@@ -2,7 +2,7 @@
 {
     internal class CommandWords
     {
-        static List<string> ValidCommands = new List<string> { "north", "east", "south", "west", "look", "back", "quit", "help", "talk" };
+        static List<string> ValidCommands = new List<string> { "north", "east", "south", "west", "look", "back", "quit", "help", "talk", "save" };
         
         public static bool IsValidCommand(string command)
         {

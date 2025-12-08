@@ -1,0 +1,9 @@
+{
+  "guard": {
+    "name": "Old man",
+    "x": 0,
+    "y": 0,
+    "questsGiven": ["intro"],
+    "questsFinishable": ["intro"]
+  }
+}

@@ -1,0 +1,41 @@
+[
+  {
+    "x": 0,
+    "y": 0  ,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Start Room",
+      "description": "A quiet place where your adventure begins.",
+      "background": "startScreen.csv",
+      "npcs": ["guard"],
+      "items": ["Key"],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "room": {
+      "tileIdentifier": "H",
+      "name": "Hallway",
+      "description": "A dimly lit corridor.",
+      "background": "roomBackground1.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 1,
+    "y": 1,
+    "room": {
+      "tileIdentifier": "H",
+      "name": "Hallway",
+      "description": "A dimly lit corridor.",
+      "background": "roomBackground2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  }
+]

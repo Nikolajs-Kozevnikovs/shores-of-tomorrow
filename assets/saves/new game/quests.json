@@ -1,5 +1,4 @@
 {
-  "quests": {
     "intro": {
       "title": "Introduction",
       "description": "Speak with the guard near the entrance.",
@@ -16,6 +15,5 @@
         "Welcome to the dungeon.",
         "Stay alert — danger lurks ahead."
       ]
-    }
   }
 }

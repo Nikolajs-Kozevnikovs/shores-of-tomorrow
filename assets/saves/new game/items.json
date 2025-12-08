@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Key",
+    "location": {
+      "roomX": 0,
+      "roomY": 0,
+      "isHeldByPlayer": false
+    }
+  }
+]
+

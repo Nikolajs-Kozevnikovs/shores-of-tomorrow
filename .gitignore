@@ -54,3 +54,12 @@ TestResult.xml
 nunit-*.xml
 
 .editorconfig
+
+# ignore everything inside saves
+assets/saves/*
+
+# BUT keep this subfolder
+!assets/saves/new game
+
+# and keep its contents
+!assets/keep/new game/**
