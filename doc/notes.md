@@ -1,11 +1,11 @@
 # Big to-do
 - Make a minimap out of Rooms + pointer + active quests
-- Generate assets **Arty**
-- Finish the report 
+- Finish the report
 - Add random events (have them in a separate file?) **Santiago**
 - Add items that would help with Quests
-- save / load ?
 - fix DialogWindow
+- add data to .json files
+- fix "talk" - it is disabled right now 
 
 
 
