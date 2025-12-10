@@ -7,6 +7,8 @@
     {
         private readonly TUI tui = new();
         private readonly GameState World = new(7, 7);
+        private readonly RandomEvents randomEvents = new();
+        private bool isInDialogue = false;
         
         
         public void Play()
@@ -25,6 +27,10 @@
             while (continuePlaying)
             {
                 continuePlaying = ProcessUserInput(parser);
+                if (continuePlaying)
+                {
+                    randomEvents.TryTrigger(tui, World.Player.CurrentRoom, isInDialogue);
+                }
                 tui.DrawCanvas();
             }
         }
@@ -97,9 +103,15 @@
         {
             if (World.Player.CurrentRoom.NPCs.Count == 0)
             {
+                isInDialogue = false;
                 tui.WriteLine("No one is here!");
                 return;
-            } 
+            }
+            
+            else if(World.Player.CurrentRoom.NPCs.Count > 0)
+            {
+                isInDialogue = true;
+            }
                     
             tui.WriteLine("Dialogues are not implemented yet for multiple NPCs in one room");
 
@@ -171,19 +183,21 @@
 
         private void PrintWelcome()
         {
-            tui.WriteLine("Welcome to the World of Zuul!");
-            tui.WriteLine("World of Zuul is a new, incredibly boring adventure game.");
+            tui.WriteLine("Welcome to Shores of Tomorrow");
+            tui.WriteLine("Shores of Tomorrow is a new, incredibly boring game.");
             PrintHelp();
             tui.WriteLine();
         }
 
         private void PrintHelp()
         {
+            tui.WriteLine("---------- Help Menu ---------");
             tui.WriteLine("Navigate by typing 'north', 'south', 'east', or 'west'.");
             tui.WriteLine("Type 'look' for more details.");
             tui.WriteLine("Type 'back' to go to the previous room.");
             tui.WriteLine("Type 'help' to print this message again.");
             tui.WriteLine("Type 'quit' to exit the game.");
+            tui.WriteLine("------------------------------");
         }
     }
 }
