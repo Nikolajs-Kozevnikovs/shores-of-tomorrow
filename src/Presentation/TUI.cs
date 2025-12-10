@@ -9,8 +9,6 @@ public class TUI
   private const int RequiredWidth = 132;
   private const int RequiredHeight = 43;
   private readonly Canvas canvas = new(RequiredWidth, RequiredHeight);
-  // actually, we don't even need a minimap array, since we store all rooms in a two-dimensional array
-  private List<List<Color>> Minimap { get; } // list list is not optimal way to store it 
   private string[] lines = new string[8];
   private int currentLineIndex = 0;
 
@@ -18,13 +16,6 @@ public class TUI
   {
     // Needed to create empty strings
     Clear();
-
-    // load the minimap
-    string mapPath = "./assets/graphics/minimap.csv";
-    if (!File.Exists(mapPath))
-      throw new FileNotFoundException($"map overlay file not found: {mapPath}");
-
-    Minimap = ParseTextImage(mapPath);
 
     LoadStartScreen();
     DrawCanvas();
@@ -125,24 +116,6 @@ public class TUI
     Console.Write($"\x1B[{commandPromptRow};0H");
   }
 
-    // char[,] renderWindow = { {'w', 'a', 'f' },
-    //                           {'r', 'b', 'd'} };
-    // renderWindow[2, 3] = 'n';
-
-  private void UpdateMinimap(Room currentRoom)
-  {
-    // choose where to put the map
-    int offsetX = RequiredWidth - Minimap[0].Count; // top‑right alignment
-    int offsetY = 0;                                // top‑aligned
-
-    // get the map on canvas
-    DrawAnsiLinesOntoCanvas(Minimap, offsetX, offsetY);
-
-    // here we will need to use the position of current room to display where the main character is. Also display the tiles that are active for quests
-    // Something like this:
-    // canvas.setPixel(offsetX+currentPositionX, offsetY+currentPositionY, new Color(255, 0, 0))
-  }
-
 
   public void UpdateBackground(Room currentRoom)
   {
@@ -163,8 +136,6 @@ public class TUI
     List<List<Color>> bgColors = ParseTextImage(bgPath);
 
     DrawAnsiLinesOntoCanvas(bgColors, 0, 0);
-
-    UpdateMinimap(currentRoom);
   }
 
   // maybe we won't need it after we get Room update and will have the currentRoom from the beginning
@@ -178,11 +149,6 @@ public class TUI
     List<List<Color>> bgColors = ParseTextImage(bgPath);
 
     DrawAnsiLinesOntoCanvas(bgColors, 0, 0);
-
-    int offsetX = RequiredWidth - Minimap[0].Count; // top‑right alignment
-    int offsetY = 0;
-    DrawAnsiLinesOntoCanvas(Minimap, offsetX, offsetY);
-
   }
 
 
