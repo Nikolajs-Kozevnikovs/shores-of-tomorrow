@@ -133,7 +133,7 @@ public class TUI
     if (!File.Exists(bgPath))
       throw new FileNotFoundException($"background file not found: {bgPath}");
 
-    List<List<Color>> bgColors = ParseTextImage(bgPath);
+    Color[][] bgColors = ParseTextImage(bgPath);
 
     DrawAnsiLinesOntoCanvas(bgColors, 0, 0);
   }
@@ -146,25 +146,25 @@ public class TUI
     if (!File.Exists(bgPath))
       throw new FileNotFoundException($"background file not found: {bgPath}");
 
-    List<List<Color>> bgColors = ParseTextImage(bgPath);
+    Color[][] bgColors = ParseTextImage(bgPath);
 
     DrawAnsiLinesOntoCanvas(bgColors, 0, 0);
   }
 
 
   // draw the canvas with specified colors
-  private void DrawAnsiLinesOntoCanvas(List<List<Color>> colorsList, int offsetX, int offsetY)
+  private void DrawAnsiLinesOntoCanvas(Color[][] colorsList, int offsetX, int offsetY)
   {
-    for (int i = 0; i < colorsList.Count; i++)
+    for (int i = 0; i < colorsList.Length; i++)
     {
-      for (int j = 0; j < colorsList[i].Count; j++)
+      for (int j = 0; j < colorsList[i].Length; j++)
       {
         canvas.SetPixel(j + offsetX, i + offsetY, colorsList[i][j]);
       }
     }
   }
   
-  private static List<List<Color>> ParseTextImage(string fpath)
+  private static Color[][] ParseTextImage(string fpath)
   {
     var result = File.ReadAllLines(fpath)
       .Select(line => line.Trim())
@@ -187,9 +187,9 @@ public class TUI
 
             return new Color(r, g, b);
           })
-          .ToList()
+          .ToArray()
     )
-    .ToList();
+    .ToArray();
     return result;
   }
 }
