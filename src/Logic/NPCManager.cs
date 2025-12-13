@@ -10,7 +10,7 @@ public class NPCManager
     }
 
 
-    public void MoveNpc(string npcName, int newX, int newY)
+    public void MoveNPC(string npcName, int newX, int newY)
     {
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
         if (NPCs.TryGetValue(npcName, out NPC npc))

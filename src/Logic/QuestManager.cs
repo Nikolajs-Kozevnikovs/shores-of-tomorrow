@@ -31,7 +31,6 @@ public class QuestManager
             }
         }
     }
-    // also need a try for null references
     public void CheckCompletion(string questName, string ?interactingNpc = null)
     {
         foreach (var trigger in Quests[questName].CompletionTriggers)
@@ -42,18 +41,54 @@ public class QuestManager
                 if (room != null && room.Items.Contains(trigger.Item))
                 {
                     Quests[questName].State = "completed";
+                    ApplyQuestCompletionActions(Quests[questName]);
                     return;
                 }
             }
             else if (trigger.Type == "talk_to_npc" && interactingNpc != null && interactingNpc == trigger.Npc)
             {
                 Quests[questName].State = "completed";
+                ApplyQuestCompletionActions(Quests[questName]);
                 return;
             } // else
             // {
             //     // Console.WriteLine("Error finishing the quest");
             //     return;
             // }
+        }
+    }
+
+    private void ApplyQuestCompletionActions(Quest quest)
+    {
+        foreach (var action in quest.OnCompleteActions)
+        {
+            switch (action.Type)
+            {
+                case "move_npc":
+                    if (action.Npc == null)
+                    {
+                        throw new Exception("Wrong action while trying to complete the quest "+quest.Title);
+                    }
+                    World.NPCManager.MoveNPC(action.Npc, action.ToX, action.ToY);
+                    break;
+                // case "spawn_item":
+                //     SpawnItem(action.RoomX, action.RoomY, action.Item);
+                //     break;
+                case "give_item":
+                    if (action.Item == null)
+                    {
+                        throw new Exception("Wrong action while trying to complete the quest "+quest.Title);
+                    }
+                    World.ItemManager.MoveToInventory(action.Item);
+                    break;
+                case "take_item":
+                    if (action.Item == null)
+                    {
+                        throw new Exception("Wrong action while trying to complete the quest "+quest.Title);
+                    }
+                    World.ItemManager.MoveOutOfInventory(action.Item);
+                    break;
+            }
         }
     }
 }

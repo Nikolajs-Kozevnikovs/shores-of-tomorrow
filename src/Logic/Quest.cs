@@ -8,7 +8,9 @@ internal class Quest
     public string? FinishNPC { get; set; }
     public List<VisibilityCondition> VisibilityConditions { get; set; } = [];
     public List<CompletionTrigger> CompletionTriggers { get; set; } = [];
-    public List<string> PreQuestDialogue {get; set; }
+    public List<string> PreQuestDialogue { get; set; } = [];
+    public List<string> CompletionDialogue { get; set; } = [];
+    public List<OnCompleteAction> OnCompleteActions { get; set; } = [];
     // public List<string> RewardItems { get; set; } = [];
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
@@ -17,7 +19,7 @@ internal class Quest
 
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
-    public Quest(string title, string description, string giverNPC, List<VisibilityCondition> visibilityConditions, List<CompletionTrigger> completionTriggers, List<string> preQuestDialogue)
+    public Quest(string title, string description, string giverNPC, List<VisibilityCondition> visibilityConditions, List<CompletionTrigger> completionTriggers, List<string> preQuestDialogue, List<string> completionDialogue, List<OnCompleteAction> onCompleteActions)
     {
         Title = title;
         Description = description;
@@ -25,10 +27,12 @@ internal class Quest
         VisibilityConditions = visibilityConditions;
         CompletionTriggers = completionTriggers;
         PreQuestDialogue = preQuestDialogue;
+        CompletionDialogue = completionDialogue;
+        OnCompleteActions = onCompleteActions;
     }
 
-    public Quest(string title, string description, string giverNPC, string finishNPC, List<VisibilityCondition> visibilityConditions, List<CompletionTrigger> completionTriggers, List<string> preQuestDialogue)
-    : this(title, description, giverNPC, visibilityConditions, completionTriggers, preQuestDialogue)
+    public Quest(string title, string description, string giverNPC, string finishNPC, List<VisibilityCondition> visibilityConditions, List<CompletionTrigger> completionTriggers, List<string> preQuestDialogue, List<string> completionDialogue, List<OnCompleteAction> onCompleteActions)
+    : this(title, description, giverNPC, visibilityConditions, completionTriggers, preQuestDialogue, completionDialogue, onCompleteActions)
     {
         FinishNPC = finishNPC;
     }
@@ -46,4 +50,13 @@ public class CompletionTrigger
     public int[]? Room { get; set; } // [x, y] for "zone_item"
     public string? Zone { get; set; } // zone ID for "zone_item"
     public string? Npc { get; set; } // for "talk_to_npc"
+}
+
+public class OnCompleteAction
+{
+    public string? Type { get; set; }
+    public int ToX { get; set; }
+    public int ToY { get; set; }
+    public string? Npc { get; set; }
+    public string? Item {get; set; }
 }

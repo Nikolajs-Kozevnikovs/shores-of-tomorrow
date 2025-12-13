@@ -49,7 +49,7 @@
   },
   "charity_manager": {
     "name": "Phil",
-    "profession": "Charity centre manager",
+    "profession": "Charity center manager",
     "x": 0,
     "y": 0,
     "questsGiven": [],
@@ -57,7 +57,7 @@
   },
   "recycling_centre_manager": {
     "name": "Matias",
-    "profession": "Recycling centre manager",
+    "profession": "Recycling center manager",
     "x": 0,
     "y": 0,
     "questsGiven": [],

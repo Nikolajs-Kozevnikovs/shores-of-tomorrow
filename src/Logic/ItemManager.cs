@@ -2,7 +2,7 @@ namespace WorldOfZuul.Logic;
 public class ItemManager
 {
     private readonly GameState World;
-    internal List<Item> Items {get; set; } = []; // <Name, Item>
+    internal List<Item> Items { get; set; } = []; // <Name, Item>
 
     public ItemManager(GameState _World)
     {
@@ -11,16 +11,23 @@ public class ItemManager
 
     public void MoveToInventory(string itemName)
     {
-        var Item = Items.Find(x => x.Name == itemName);
-        if (Item == null)
+        var items = Items.Where(x => x.Name == itemName).ToList();
+        if (items.Count() == 0)
         {
-            Console.WriteLine("No such item found");
-            return;
+            Console.WriteLine("No items matching the name found");
         }
-
-        Item.Location.IsHeldByPlayer = true;
-        Item.Location.RoomX = null;
-        Item.Location.RoomY = null;
+        foreach (Item item in items)
+        {
+            if (!item.Location.IsHeldByPlayer && 
+            item.Location.RoomX == World.Player.X && item.Location.RoomY == World.Player.Y)
+            {
+                item.Location.IsHeldByPlayer = true;
+                item.Location.RoomX = null;
+                item.Location.RoomY = null;
+                return;
+            }
+        }
+        Console.WriteLine("There is no such item in the room!");        
     }
 
     public void MoveOutOfInventory(string itemName)

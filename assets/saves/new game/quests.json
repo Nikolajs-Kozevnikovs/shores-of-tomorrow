@@ -14,6 +14,16 @@
       "preQuestDialogue": [
         "Welcome to the dungeon.",
         "Stay alert — danger lurks ahead."
-      ]
+      ],
+      "completionDialogue": [
+        "Welcome to our lovely town!"
+      ],
+      "onCompleteActions": [
+      {
+        "type": "move_npc",
+        "npc": "guard",
+        "to": { "x": 1, "y": 1 }
+      }
+    ]
   }
 }
