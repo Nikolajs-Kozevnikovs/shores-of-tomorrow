@@ -22,8 +22,8 @@ public class TUI
 
     private readonly List<string> lines = new List<string>();
 
-    private const int DialogWidth = 60; // fixed width for dialog box
-    private const int DialogHeight = 9; // fixed height for dialog box
+    private const int DialogWidth = 70; // fixed width for dialog box
+    private const int DialogHeight = 12; // fixed height for dialog box
     private const int DialogPadding = 1;
 
     public TUI()
@@ -50,7 +50,7 @@ public class TUI
             if (width < RequiredWidth || height < RequiredHeight)
             {
                 Console.Clear();
-                Console.WriteLine($"Terminal too small. Need at least {RequiredWidth}x{RequiredHeight}.");
+                Console.WriteLine($"Terminal is too small. Need at least {RequiredWidth}x{RequiredHeight}.");
             }
             else
             {
