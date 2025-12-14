@@ -6,7 +6,7 @@
       "tileIdentifier": "T",
       "name": "Townhall",
       "description": "A cozy place where your adventure begins.",
-      "background": "startScreen.csv",
+      "background": "townhall.csv",
       "npcs": [],
       "items": [],
       "allowedItems": []
@@ -27,7 +27,7 @@
   },
   {
     "x": 0,
-       "y": 2,
+    "y": 2,
     "room": {
       "tileIdentifier": "B",
       "name": "Fishing Boat",

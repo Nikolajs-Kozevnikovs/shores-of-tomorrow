@@ -1,4 +1,4 @@
-﻿namespace WorldOfZuul.Presentation
+namespace WorldOfZuul.Presentation
 {
     using WorldOfZuul.Logic;
     using System.Text.RegularExpressions;
@@ -7,18 +7,19 @@
     {
         private readonly TUI tui = new();
         private readonly GameState World = new(7, 7);
-        
-        
+
+
         public void Play()
         {
-            Parser parser = new();   
+            Parser parser = new();
 
-            PrintWelcome();
             tui.WaitForCorrectTerminalSize();
 
             ChooseSave();
-            
+
             tui.WriteLine(World.Player.CurrentRoom.Description ?? "None");
+            PrintWelcome();
+
             tui.DrawCanvas();
 
             bool continuePlaying = true;
@@ -57,29 +58,36 @@
             switch (command.Name)
             {
                 case "look":
+                    tui.ClearDialogBoxLines();
                     tui.WriteLine(World.Player.CurrentRoom.Description ?? "Nothing to look at (devs forgot a description)");
                     break;
 
-                case "back": 
+                case "back":
+                    tui.ClearDialogBoxLines();
                     CatchMoveError(World.Player.Back());
                     break;
                 case "north":
                 case "south":
                 case "east":
                 case "west":
+                    tui.ClearDialogBoxLines();
                     CatchMoveError(World.Player.Move(command.Name));
                     break;
                 case "talk":
+                    tui.ClearDialogBoxLines();
                     TalkToNPC();
                     break;
 
                 case "help":
+                    tui.ClearDialogBoxLines();
                     PrintHelp();
                     break;
                 case "save":
+                    tui.ClearDialogBoxLines();
                     SaveProgress();
                     break;
                 case "quit":
+                    tui.ClearDialogBoxLines();
                     tui.WriteLine("Thank you for playing World of Zuul!");
                     SaveProgress();
                     return false;
@@ -99,8 +107,8 @@
             {
                 tui.WriteLine("No one is here!");
                 return;
-            } 
-                    
+            }
+
             tui.WriteLine("Dialogues are not implemented yet for multiple NPCs in one room");
 
             // // fix for multiple NPCs
@@ -114,12 +122,12 @@
             //     //World.Player.CurrentRoom.RoomNPC.Dialogue1();
             // }
         }
-        
+
         private void CatchMoveError(string? errorText)
         {
             if (errorText == null)
             {
-               
+
                 tui.WriteLine(World.Player.CurrentRoom.Description ?? "None");
                 tui.UpdateBackground(World.Player.CurrentRoom);
                 return;
@@ -127,15 +135,15 @@
 
             tui.WriteLine(errorText);
         }
-        
+
         private void SaveProgress()
         {
-            Console.WriteLine("Choose a name for your save: \n(English alphabet letters, numbers, underscores and dashes allowed)");
+            tui.WriteLine("Choose a name for your save: \n(English alphabet letters, numbers, underscores and dashes allowed)");
             Console.Write("> ");
             string? save_name = Console.ReadLine();
             while (save_name == null || save_name == "" || !IsValidSaveName(save_name))
             {
-                Console.WriteLine("Invalid name!");
+                tui.WriteLine("Invalid name!");
                 Console.Write("> ");
                 save_name = Console.ReadLine();
             }
@@ -150,31 +158,33 @@
         private void ChooseSave()
         {
             string[] existing_saves = World.GetSaves();
-            Console.WriteLine("Choose a save:");
-            foreach (string save in existing_saves) {
-                Console.WriteLine(save);
+            tui.WriteLine("Choose a save:");
+            foreach (string save in existing_saves)
+            {
+                tui.WriteLine(save);
             }
             Console.Write("> ");
             string? save_name = Console.ReadLine();
             while (save_name == null || !existing_saves.Contains(save_name))
             {
-                Console.WriteLine("Can't find a save with the specified save name!");
+                tui.WriteLine("Can't find a save with the specified save name!");
                 Console.Write("> ");
                 save_name = Console.ReadLine();
             }
-            
+
             World.LoadData(save_name);
         }
 
-        
+
 
 
         private void PrintWelcome()
         {
             tui.WriteLine("Welcome to the World of Zuul!");
             tui.WriteLine("World of Zuul is a new, incredibly boring adventure game.");
-            PrintHelp();
             tui.WriteLine();
+
+            PrintHelp();
         }
 
         private void PrintHelp()
