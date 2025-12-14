@@ -13,7 +13,7 @@
         
         public void Play()
         {
-            Parser parser = new();   
+            Parser parser = new();
 
             PrintWelcome();
             tui.WaitForCorrectTerminalSize();
@@ -158,7 +158,7 @@
         {
             return Regex.IsMatch(input, @"^[A-Za-z0-9_-]+$");
         }
-        // tbd
+        
         private void ChooseSave()
         {
             string[] existing_saves = World.GetSaves();
@@ -166,6 +166,7 @@
             foreach (string save in existing_saves) {
                 Console.WriteLine(save);
             }
+
             Console.Write("> ");
             string? save_name = Console.ReadLine();
             while (save_name == null || !existing_saves.Contains(save_name))
