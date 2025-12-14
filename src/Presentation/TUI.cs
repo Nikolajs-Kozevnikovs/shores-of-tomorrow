@@ -1,8 +1,8 @@
 namespace WorldOfZuul.Presentation;
 
 using System.Text;
-// using Spectre.Console;
-using WorldOfZuul.Logic; // remove if collisions with local Color
+using System.Collections.Generic;
+using WorldOfZuul.Logic;
 
 public readonly struct Color
 {
@@ -20,11 +20,10 @@ public class TUI
     // two-dimensional array, stores Color values for each pixel on the screen.
     private readonly Color[,] pixelBuffer = new Color[RequiredWidth, RequiredHeight];
 
-    private readonly string[] lines = new string[8];
-    private int currentLineIndex = 0;
+    private readonly List<string> lines = new List<string>();
 
     private const int DialogWidth = 60; // fixed width for dialog box
-    private const int DialogHeight = 7; // fixed height for dialog box
+    private const int DialogHeight = 9; // fixed height for dialog box
     private const int DialogPadding = 1;
 
     public TUI()
@@ -65,8 +64,7 @@ public class TUI
 
     public void Clear()
     {
-        for (int i = 0; i < lines.Length; i++) lines[i] = "";
-        currentLineIndex = 0;
+        lines.Clear();
         for (int y = 0; y < RequiredHeight; y++)
             for (int x = 0; x < RequiredWidth; x++)
                 pixelBuffer[x, y] = new Color(0, 0, 0);
@@ -74,19 +72,16 @@ public class TUI
 
     public void WriteLine(string line = "\n")
     {
-        // Clear all lines in the dialog box before outputting new content
-        for (int i = 0; i < lines.Length; i++) lines[i] = "";
-        currentLineIndex = 0;
-
         string[] newLines = line.Split('\n');
         foreach (string newLine in newLines)
         {
-            if (currentLineIndex >= lines.Length)
+            var wrappedLines = WrapLine(newLine, DialogWidth - DialogPadding * 2).ToList();
+            lines.AddRange(wrappedLines);
+
+            while (lines.Count > DialogHeight - DialogPadding * 2)
             {
-                for (int i = 1; i < lines.Length; i++) lines[i - 1] = lines[i];
-                currentLineIndex--;
+                lines.RemoveAt(0);
             }
-            lines[currentLineIndex++] = newLine;
         }
         DrawCanvas();
     }
@@ -113,7 +108,7 @@ public class TUI
         }
     }
 
-    private void PrintDialogBox(string[] inputLines)
+    private void PrintDialogBox(IEnumerable<string> inputLines)
     {
         var wrapped = new List<string>();
         foreach (var l in inputLines)
@@ -146,6 +141,12 @@ public class TUI
         if (inputRow > Console.WindowHeight) inputRow = Console.WindowHeight;
         if (inputRow < 1) inputRow = 1;
         Console.Write($"\x1B[{inputRow};0H");
+    }
+
+    public void ClearDialogBoxLines()
+    {
+        lines.Clear();
+        DrawCanvas();
     }
 
     public void UpdateBackground(Room currentRoom)
@@ -231,4 +232,3 @@ public class TUI
         return result;
     }
 }
-

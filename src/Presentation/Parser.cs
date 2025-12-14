@@ -1,4 +1,4 @@
-﻿namespace WorldOfZuul.Presentation
+namespace WorldOfZuul.Presentation
 {
     public class Parser
     {
