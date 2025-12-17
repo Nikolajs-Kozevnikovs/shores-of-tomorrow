@@ -1,8 +1,5 @@
-// Does not support saving and loading player data
-
 namespace WorldOfZuul.Data;
 
-using System.Runtime.Versioning;
 using System.Text.Json;
 using WorldOfZuul.Logic;
 

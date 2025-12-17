@@ -1,4 +1,3 @@
-// Does not support player data
 namespace WorldOfZuul.Data;
 
 using System.Text.Json;
