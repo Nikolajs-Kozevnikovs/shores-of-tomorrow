@@ -6,7 +6,7 @@
     public class Game
     {
         private readonly TUI tui = new();
-        private readonly GameState World = new(7, 7);
+        private readonly GameState World = new(10, 10);
         private readonly RandomEvents randomEvents = new();
         private bool isInDialogue = false;
         

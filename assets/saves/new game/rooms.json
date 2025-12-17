@@ -13,6 +13,383 @@
     }
   },
   {
+    "x": 1,
+    "y": 2,
+    "room": {
+      "tileIdentifier": "B",
+      "name": "Fishing Boat",
+      "description": "A small wooden boat gently rocks on the water, ready for short trips offshore.",
+      "background": "boat.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 7,
+    "y": 3,
+    "room": {
+      "tileIdentifier": "C",
+      "name": "Coral reef",
+      "description": "A colorful underwater area filled with fish and sharp coral formations.",
+      "background": "coralReef.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 3,
+    "y": 4,
+    "room": {
+      "tileIdentifier": "F",
+      "name": "Fish shop",
+      "description": "A cramped shop where freshly caught fish are cleaned and sold.",
+      "background": "fishShop.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 5,
+    "y": 8,
+    "room": {
+      "tileIdentifier": "R",
+      "name": "Recycling centre",
+      "description": "A busy facility where old materials are sorted, processed, and reused.",
+      "background": "recyclingCentre.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 5,
+    "y": 5,
+    "room": {
+      "tileIdentifier": "F",
+      "name": "Factory",
+      "description": "A loud industrial building filled with machinery and crates.",
+      "background": "factory.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 5,
+    "y": 2,
+    "room": {
+      "tileIdentifier": "N",
+      "name": "Nikkolas's house",
+      "description": "A small and cluttered home that smells faintly of wood and old books.",
+      "background": "house1.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 3,
+    "y": 5,
+    "room": {
+      "tileIdentifier": "L",
+      "name": "Laboratory",
+      "description": "A tidy room filled with tools, samples, and half-finished research.",
+      "background": "laboratory.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 3,
+    "y": 3,
+    "room": {
+      "tileIdentifier": "P",
+      "name": "Food charity point",
+      "description": "A modest shelter where volunteers hand out simple meals to those in need.",
+      "background": "foodCharity.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 3,
+    "y": 2,
+    "room": {
+      "tileIdentifier": "D",
+      "name": "Road",
+      "description": "A road connecting all every building in this town",
+      "background": "lake1.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 4,
+    "y": 2,
+    "room": {
+      "tileIdentifier": "D",
+      "name": "Road",
+      "description": "A road connecting all every building in this town",
+      "background": "lake1.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 4,
+    "y": 3,
+    "room": {
+      "tileIdentifier": "D",
+      "name": "Road",
+      "description": "A road connecting all every building in this town",
+      "background": "lake1.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 4,
+    "y": 4,
+    "room": {
+      "tileIdentifier": "D",
+      "name": "Road",
+      "description": "A road connecting all every building in this town",
+      "background": "lake1.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 4,
+    "y": 5,
+    "room": {
+      "tileIdentifier": "D",
+      "name": "Road",
+      "description": "A road connecting all every building in this town",
+      "background": "lake1.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 4,
+    "y": 6,
+    "room": {
+      "tileIdentifier": "D",
+      "name": "Road",
+      "description": "A road connecting all every building in this town",
+      "background": "lake1.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 4,
+    "y": 7,
+    "room": {
+      "tileIdentifier": "D",
+      "name": "Road",
+      "description": "A road connecting all every building in this town",
+      "background": "lake1.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 5,
+    "y": 6,
+    "room": {
+      "tileIdentifier": "D",
+      "name": "Road",
+      "description": "A road connecting all every building in this town",
+      "background": "lake1.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 3,
+    "y": 6,
+    "room": {
+      "tileIdentifier": "D",
+      "name": "Road",
+      "description": "A road connecting all every building in this town",
+      "background": "lake1.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 3,
+    "y": 1,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 4,
+    "y": 1,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 5,
+    "y": 1,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 6,
+    "y": 2,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 5,
+    "y": 3,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 5,
+    "y": 4,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 6,
+    "y": 4,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 6,
+    "y": 5,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 6,
+    "y": 6,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 6,
+    "y": 7,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 3,
+    "y": 7,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 2,
+    "y": 6,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
     "x": 0,
     "y": 1,
     "room": {
@@ -26,65 +403,52 @@
     }
   },
   {
-    "x": 0,
-    "y": 2,
-    "room": {
-      "tileIdentifier": "B",
-      "name": "Fishing Boat",
-      "description": "A small wooden boat gently rocks on the water, ready for short trips offshore.",
-      "background": "boat.csv",
-      "npcs": [],
-      "items": [],
-      "allowedItems": []
-    }
-  },
-  {
-    "x": 0,
-    "y": 3,
-    "room": {
-      "tileIdentifier": "C",
-      "name": "Coral reef",
-      "description": "A colorful underwater area filled with fish and sharp coral formations.",
-      "background": "coralReef.csv",
-      "npcs": [],
-      "items": [],
-      "allowedItems": []
-    }
-  },
-  {
-    "x": 0,
-    "y": 4,
-    "room": {
-      "tileIdentifier": "F",
-      "name": "Fish shop",
-      "description": "A cramped shop where freshly caught fish are cleaned and sold.",
-      "background": "fishShop.csv",
-      "npcs": [],
-      "items": [],
-      "allowedItems": []
-    }
-  },
-  {
-    "x": 0,
+    "x": 2,
     "y": 5,
     "room": {
-      "tileIdentifier": "R",
-      "name": "Recycling centre",
-      "description": "A busy facility where old materials are sorted, processed, and reused.",
-      "background": "recyclingCentre.csv",
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
       "npcs": [],
       "items": [],
       "allowedItems": []
     }
   },
   {
-    "x": 1,
-    "y": 0,
+    "x": 2,
+    "y": 4,
     "room": {
-      "tileIdentifier": "F",
-      "name": "Factory",
-      "description": "A loud industrial building filled with machinery and crates.",
-      "background": "factory.csv",
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 2,
+    "y": 3,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 2,
+    "y": 2,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
       "npcs": [],
       "items": [],
       "allowedItems": []
@@ -95,22 +459,256 @@
     "y": 1,
     "room": {
       "tileIdentifier": "O",
-      "name": "Old guy's house",
-      "description": "A small and cluttered home that smells faintly of wood and old books.",
-      "background": "house1.csv",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
       "npcs": [],
       "items": [],
       "allowedItems": []
     }
   },
   {
-    "x": 1,
+    "x": 2,
+    "y": 1,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 3,
+    "y": 0,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 4,
+    "y": 0,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 5,
+    "y": 0,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 6,
+    "y": 0,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 6,
+    "y": 1,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 7,
+    "y": 1,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 7,
     "y": 2,
     "room": {
-      "tileIdentifier": "L",
-      "name": "Laboratory",
-      "description": "A tidy room filled with tools, samples, and half-finished research.",
-      "background": "laboratory.csv",
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 6,
+    "y": 3,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 7,
+    "y": 4,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 7,
+    "y": 5,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 7,
+    "y": 6,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 7,
+    "y": 7,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 7,
+    "y": 8,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 6,
+    "y": 8,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 5,
+    "y": 8,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 4,
+    "y": 8,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 3,
+    "y": 8,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 2,
+    "y": 8,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
       "npcs": [],
       "items": [],
       "allowedItems": []
@@ -118,12 +716,64 @@
   },
   {
     "x": 1,
-    "y": 3,
+    "y": 8,
     "room": {
-      "tileIdentifier": "P",
-      "name": "Food charity point",
-      "description": "A modest shelter where volunteers hand out simple meals to those in need.",
-      "background": "foodCharity.csv",
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 1,
+    "y": 7,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 2,
+    "y": 7,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 1,
+    "y": 6,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 1,
+    "y": 5,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
       "npcs": [],
       "items": [],
       "allowedItems": []
@@ -133,10 +783,413 @@
     "x": 1,
     "y": 4,
     "room": {
-      "tileIdentifier": "D",
-      "name": "Driveway",
-      "description": "A road connecting all the building in this town",
-      "background": "house1.csv",
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 1,
+    "y": 3,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Ocean",
+      "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
+      "background": "ocean.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 0,
+    "y": 0,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 7,
+    "y": 0,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 8,
+    "y": 0,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 8,
+    "y": 1,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 8,
+    "y": 2,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 8,
+    "y": 3,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 8,
+    "y": 4,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 8,
+    "y": 5,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 8,
+    "y": 6,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 8,
+    "y": 7,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 8,
+    "y": 8,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 8,
+    "y": 9,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 7,
+    "y": 9,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 6,
+    "y": 9,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 5,
+    "y": 9,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 4,
+    "y": 9,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 3,
+    "y": 9,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 2,
+    "y": 9,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 1,
+    "y": 9,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 0,
+    "y": 9,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 0,
+    "y": 8,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 0,
+    "y": 7,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 0,
+    "y": 6,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 0,
+    "y": 5,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 0,
+    "y": 4,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 0,
+    "y": 3,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 0,
+    "y": 2,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 0,
+    "y": 1,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 1,
+    "y": 3,
+    "room": {
+      "tileIdentifier": "O",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "lake2.csv",
       "npcs": [],
       "items": [],
       "allowedItems": []
