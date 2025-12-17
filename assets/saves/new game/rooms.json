@@ -1,13 +1,13 @@
 [
   {
-    "x": 0,
-    "y": 0,
+    "x": 3,
+    "y": 5,
     "room": {
       "tileIdentifier": "T",
       "name": "Townhall",
       "description": "A cozy place where your adventure begins.",
       "background": "townhall.csv",
-      "npcs": [],
+      "npcs": ["Nikkolas"],
       "items": [],
       "allowedItems": []
     }
@@ -20,7 +20,7 @@
       "name": "Fishing Boat",
       "description": "A small wooden boat gently rocks on the water, ready for short trips offshore.",
       "background": "boat.csv",
-      "npcs": [],
+      "npcs": ["Nikolja"],
       "items": [],
       "allowedItems": []
     }
@@ -33,7 +33,7 @@
       "name": "Coral reef",
       "description": "A colorful underwater area filled with fish and sharp coral formations.",
       "background": "coralReef.csv",
-      "npcs": [],
+      "npcs": ["Poacher"],
       "items": [],
       "allowedItems": []
     }
@@ -46,7 +46,7 @@
       "name": "Fish shop",
       "description": "A cramped shop where freshly caught fish are cleaned and sold.",
       "background": "fishShop.csv",
-      "npcs": [],
+      "npcs": ["Artyom"],
       "items": [],
       "allowedItems": []
     }
@@ -59,7 +59,7 @@
       "name": "Recycling centre",
       "description": "A busy facility where old materials are sorted, processed, and reused.",
       "background": "recyclingCentre.csv",
-      "npcs": [],
+      "npcs": ["Matias"],
       "items": [],
       "allowedItems": []
     }
@@ -72,7 +72,7 @@
       "name": "Factory",
       "description": "A loud industrial building filled with machinery and crates.",
       "background": "factory.csv",
-      "npcs": [],
+      "npcs": ["Alexandr"],
       "items": [],
       "allowedItems": []
     }
@@ -91,14 +91,14 @@
     }
   },
   {
-    "x": 3,
-    "y": 5,
+    "x": 6,
+    "y": 7,
     "room": {
       "tileIdentifier": "L",
       "name": "Laboratory",
       "description": "A tidy room filled with tools, samples, and half-finished research.",
       "background": "laboratory.csv",
-      "npcs": [],
+      "npcs": ["Lila"],
       "items": [],
       "allowedItems": []
     }
@@ -108,10 +108,10 @@
     "y": 3,
     "room": {
       "tileIdentifier": "P",
-      "name": "Food charity point",
+      "name": "Food charity",
       "description": "A modest shelter where volunteers hand out simple meals to those in need.",
       "background": "foodCharity.csv",
-      "npcs": [],
+      "npcs": ["Phil"],
       "items": [],
       "allowedItems": []
     }
@@ -280,7 +280,7 @@
       "name": "Seashore",
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
-      "npcs": [],
+      "npcs": ["Jorge"],
       "items": [],
       "allowedItems": []
     }
@@ -340,32 +340,6 @@
   {
     "x": 6,
     "y": 6,
-    "room": {
-      "tileIdentifier": "S",
-      "name": "Seashore",
-      "description": "A quiet stretch of coast where small waves break against the sand.",
-      "background": "seashore.csv",
-      "npcs": [],
-      "items": [],
-      "allowedItems": []
-    }
-  },
-  {
-    "x": 6,
-    "y": 7,
-    "room": {
-      "tileIdentifier": "S",
-      "name": "Seashore",
-      "description": "A quiet stretch of coast where small waves break against the sand.",
-      "background": "seashore.csv",
-      "npcs": [],
-      "items": [],
-      "allowedItems": []
-    }
-  },
-  {
-    "x": 3,
-    "y": 7,
     "room": {
       "tileIdentifier": "S",
       "name": "Seashore",
@@ -379,6 +353,19 @@
   {
     "x": 2,
     "y": 6,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 3,
+    "y": 7,
     "room": {
       "tileIdentifier": "S",
       "name": "Seashore",
@@ -449,7 +436,7 @@
       "name": "Seashore",
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
-      "npcs": [],
+      "npcs": ["Mariha"],
       "items": [],
       "allowedItems": []
     }
