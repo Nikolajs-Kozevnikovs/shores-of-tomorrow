@@ -128,5 +128,18 @@
       "items": [],
       "allowedItems": []
     }
+  },
+  {
+    "x": 1,
+    "y": 4,
+    "room": {
+      "tileIdentifier": "D",
+      "name": "Driveway",
+      "description": "A road connecting all the building in this town",
+      "background": "house1.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
   }
 ]

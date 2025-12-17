@@ -2,21 +2,22 @@
 
 namespace WorldOfZuul.Data;
 
+using System.Runtime.Versioning;
 using System.Text.Json;
 using WorldOfZuul.Logic;
 
 public class RoomEntry
+{
+    public int X {get; set; }
+    public int Y {get; set; }
+    public Room Room {get; set; }
+    public RoomEntry(int x, int y, Room room)
     {
-        public int X {get; set; }
-        public int Y {get; set; }
-        public Room Room {get; set; }
-        public RoomEntry(int x, int y, Room room)
-        {
-            X = x;
-            Y = y;
-            Room = room;
-        }
+        X = x;
+        Y = y;
+        Room = room;
     }
+}
 
 public static class GameStateLoader
 {
@@ -41,6 +42,7 @@ public static class GameStateLoader
         LoadNpcs(world, Path.Combine(directory, "npcs.json"));
         LoadQuests(world, Path.Combine(directory, "quests.json"));
         LoadItems(world, Path.Combine(directory, "items.json"));
+        // LoadPlayer(world, Path.Combine(directory, "player.json"));
     }
 
 
@@ -101,5 +103,17 @@ public static class GameStateLoader
         {
             world.ItemManager.Items = items;
         }
+    }
+    // special function
+    public static void LoadPlayer(GameState world, string directoryName)
+    {
+        string json = File.ReadAllText($"{SAVE_PATH}{Path.Combine(directoryName, "player.json")}");
+        var player = JsonSerializer.Deserialize<int[]>(json, options);
+
+        if (player != null)
+        {
+            world.Player = new Player(player[0], player[1], world);
+        }
+
     }
 }

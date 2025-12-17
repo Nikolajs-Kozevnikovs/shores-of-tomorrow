@@ -3,6 +3,7 @@ namespace WorldOfZuul.Data;
 
 using System.Text.Json;
 using WorldOfZuul.Logic;
+using WorldOfZuul.Presentation;
 
 public static class GameStateSaver
 {
@@ -12,7 +13,7 @@ public static class GameStateSaver
         WriteIndented = true
     };
 
-    public static void Save(GameState world, string directory)
+    public static void Save(GameState world, string directory, TUI tui)
     {
         string directory_path = $"{SAVE_PATH}/{directory}";
 
@@ -24,22 +25,24 @@ public static class GameStateSaver
             File.Create(Path.Combine(directory_path, "npcs.json")).Dispose();
             File.Create(Path.Combine(directory_path, "quests.json")).Dispose();
             File.Create(Path.Combine(directory_path, "items.json")).Dispose();
+            File.Create(Path.Combine(directory_path, "player.json")).Dispose();
         } else
         {
-            Console.WriteLine("Directory already exists! Are you sure you want to override the save (yes, no)?");
+            tui.WriteLine("");
+            tui.WriteLine("Directory already exists! Are you sure you want to override the save (yes, no)?");
             Console.Write("> ");
 
             string? ans = Console.ReadLine();
             while (ans == null || (ans != "yes" && ans != "no"))
             {
-                Console.WriteLine("Wrong input");
+                tui.WriteLine("Wrong input");
                 Console.Write("> ");
                 ans = Console.ReadLine();
             }
 
             if (ans == "no")
             {
-                Console.WriteLine("Cancelling the save.");
+                tui.WriteLine("Cancelling the save.");
                 return;
             }
 
@@ -48,6 +51,9 @@ public static class GameStateSaver
         SaveNpcs(world, directory);
         SaveQuests(world, directory);
         SaveItems(world, directory);
+        SavePlayer(world, directory);
+        tui.WriteLine("");
+        tui.WriteLine("Saved successfully!");
     }
     public static void SaveRooms(GameState world, string fileName)
     {
@@ -87,4 +93,11 @@ public static class GameStateSaver
         File.WriteAllText($"{SAVE_PATH}/{fileName}/items.json", jsonString);
     }
      
+
+    public static void SavePlayer(GameState world, string fileName)
+    {
+        int[] coords = [world.Player.X, world.Player.Y];
+        string jsonString = JsonSerializer.Serialize(coords, options);
+        File.WriteAllText($"{SAVE_PATH}/{fileName}/player.json", jsonString);
+    }
 }

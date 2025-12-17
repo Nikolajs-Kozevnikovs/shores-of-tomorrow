@@ -159,7 +159,7 @@
                 Console.Write("> ");
                 save_name = Console.ReadLine();
             }
-            World.Save(save_name);
+            World.Save(save_name, tui);
             tui.WriteLine();
         }
         bool IsValidSaveName(string input)
