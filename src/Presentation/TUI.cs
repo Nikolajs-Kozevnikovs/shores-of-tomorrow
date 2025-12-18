@@ -35,7 +35,7 @@ public class TUI
 
     public void DrawCanvas()
     {
-        Console.Clear();
+        // Console.Clear();
         RenderBufferToConsole();
         PrintDialogBox(lines);
     }

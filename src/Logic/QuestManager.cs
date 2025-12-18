@@ -1,23 +1,22 @@
-using SixLabors.ImageSharp.Processing.Processors.Convolution;
-using WorldOfZuul.Presentation;
-
 namespace WorldOfZuul.Logic;
 public class QuestManager
 {
     private readonly GameState World;
     public  Dictionary<string, Quest> Quests { get; set; } = [];
 
-    public QuestManager(GameState _World)
+    public QuestManager(GameState world)
     {
-        World = _World;
+        World = world;
     }
 
-    public void UpdateQuestVisibility()
+    public void UpdateQuestVisibility(Quest q)
     {
-        foreach (var quest in Quests.Values)
+        foreach (var questKey in Quests.Keys)
         {
+            Quest quest = Quests[questKey];
             if (quest.State == "locked")
             {
+                Console.WriteLine($"checking quest {quest.Title}");
                 bool visible = true;
                 foreach (var questCompleted in quest.VisibilityConditions)
                 {
@@ -28,7 +27,8 @@ public class QuestManager
                     }
                     
                 }
-                if (visible) quest.State = "available";
+                if (visible) 
+                    Quests[questKey].State = "available";
             }
         }
     }
@@ -48,7 +48,7 @@ public class QuestManager
                 {
                     quest.State = "completed";
                     ApplyQuestCompletionActions(Quests[questName]);
-                    UpdateQuestVisibility();
+                    UpdateQuestVisibility(quest);
                     World.Player.ActiveQuestName = null;
                     return true;
                 }
@@ -57,7 +57,7 @@ public class QuestManager
             {
                 quest.State = "completed";
                 ApplyQuestCompletionActions(Quests[questName]);
-                UpdateQuestVisibility();
+                UpdateQuestVisibility(quest);
                 World.Player.ActiveQuestName = null;
                 return true;
             } 

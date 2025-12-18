@@ -12,7 +12,7 @@
     "profession": "Local fisherman",
     "x": 6,
     "y": 2,
-    "questsGiven": [],
+    "questsGiven": ["Fishing"],
     "questsFinishable": []
   },
   "Nikolja": {
@@ -20,7 +20,7 @@
     "profession": "Fisherman",
     "x": 1,
     "y": 2,
-    "questsGiven": [],
+    "questsGiven": ["Fishing on the boat"],
     "questsFinishable": []
   },
   "Santino": {
@@ -28,7 +28,7 @@
     "profession": "Poacher",
     "x": 7,
     "y": 3,
-    "questsGiven": [],
+    "questsGiven": ["Poacher"],
     "questsFinishable": []
   },
   "Mariha": {
@@ -36,7 +36,7 @@
     "profession": "Little girl",
     "x": 2,
     "y": 2,
-    "questsGiven": [],
+    "questsGiven": ["Help or sell"],
     "questsFinishable": []
   },
   "Artyom": {
@@ -44,7 +44,7 @@
     "profession": "Local fish shop manager",
     "x": 3,
     "y": 4,
-    "questsGiven": [],
+    "questsGiven": ["Sell fish"],
     "questsFinishable": []
   },
   "Phil": {
@@ -53,14 +53,14 @@
     "x": 3,
     "y": 3,
     "questsGiven": [],
-    "questsFinishable": []
+    "questsFinishable": ["Charity"]
   },
   "Matias": {
     "name": "Matias",
     "profession": "Recycling center manager",
     "x": 5,
     "y": 8,
-    "questsGiven": [],
+    "questsGiven": ["Recycling"],
     "questsFinishable": []
   },
   "Alexandr": {
@@ -68,7 +68,7 @@
     "profession": "Factory owner",
     "x": 5,
     "y": 5,
-    "questsGiven": [],
+    "questsGiven": ["Factory"],
     "questsFinishable": []
   },
   "Lila": {
@@ -76,7 +76,7 @@
     "profession": "Marine biologist",
     "x": 6,
     "y": 7,
-    "questsGiven": [],
+    "questsGiven": ["Marine biologist"],
     "questsFinishable": []
   }
 }

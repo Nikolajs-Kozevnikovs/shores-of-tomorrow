@@ -3,9 +3,8 @@ public class Quest
 {
     public string Title { get; set; }
     public string Description { get; set; }
-    public string State { get; set; } = "not_started"; // "available", "in_progress", "completed"
+    public string State { get; set; } = "locked"; // "available", "in_progress", "completed"
     public string GiverNPC { get; set; }
-    public string? FinishNPC { get; set; }
     public List<string> VisibilityConditions { get; set; } = [];
     public List<CompletionTrigger> CompletionTriggers { get; set; } = [];
     public List<string> PreQuestDialogue { get; set; } = [];
@@ -15,8 +14,6 @@ public class Quest
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     public Quest() {}
-    
-
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     public Quest(string title, string description, string giverNPC, List<string> visibilityConditions, List<CompletionTrigger> completionTriggers, List<string> preQuestDialogue, List<string> completionDialogue, List<OnCompleteAction> onCompleteActions)
@@ -29,12 +26,6 @@ public class Quest
         PreQuestDialogue = preQuestDialogue;
         CompletionDialogue = completionDialogue;
         OnCompleteActions = onCompleteActions;
-    }
-
-    public Quest(string title, string description, string giverNPC, string finishNPC, List<string> visibilityConditions, List<CompletionTrigger> completionTriggers, List<string> preQuestDialogue, List<string> completionDialogue, List<OnCompleteAction> onCompleteActions)
-    : this(title, description, giverNPC, visibilityConditions, completionTriggers, preQuestDialogue, completionDialogue, onCompleteActions)
-    {
-        FinishNPC = finishNPC;
     }
 
     public Quest(string title, string description, string giverNPC, string finishNPC, List<string> visibilityConditions, List<CompletionTrigger> completionTriggers, List<string> preQuestDialogue, List<string> completionDialogue, List<OnCompleteAction> onCompleteActions, string state)

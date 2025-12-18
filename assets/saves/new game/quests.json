@@ -32,11 +32,10 @@
     ],
     "state": "available"
   },
-  "fishing": {
+  "Fishing": {
     "title": "Fishing",
     "description": "Meet Jeorge next to Nikkolas's house",
     "giverNPC": "Nikkolas",
-    "finishNPC": "Jeorge",
     "visibilityConditions": ["Welcome"],
     "completionTriggers": [
       {
