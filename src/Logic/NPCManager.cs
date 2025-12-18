@@ -22,4 +22,16 @@ public class NPCManager
         }
 #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
     }
+
+    public NPC GetNPC(string npcName)
+    {
+        NPC? npc = NPCs[npcName];
+        
+        if (npc == null)
+        {
+            throw new Exception("Error occured when trying to find an npc!");
+        }
+
+        return npc;
+    }
 }

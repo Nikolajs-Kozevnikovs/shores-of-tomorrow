@@ -61,39 +61,41 @@
 
         private bool HandleCommand(Command command)
         {
+            tui.ClearDialogBoxLines();
             switch (command.Name)
             {
                 case "look":
-                    tui.ClearDialogBoxLines();
                     tui.WriteLine(World.Player.CurrentRoom.Description ?? "Nothing to look at (devs forgot a description)");
+                    if (World.Player.CurrentRoom.NPCs.Count != 0) 
+                    {
+                        foreach (string npcName in World.Player.CurrentRoom.NPCs)
+                        {
+                            NPC npc = World.NPCManager.GetNPC(npcName);
+                            tui.WriteLine($"You see {npc.Name}, {npc.Profession}");
+                        }
+                    }
                     break;
 
                 case "back":
-                    tui.ClearDialogBoxLines();
                     CatchMoveError(World.Player.Back());
                     break;
                 case "north":
                 case "south":
                 case "east":
                 case "west":
-                    tui.ClearDialogBoxLines();
                     CatchMoveError(World.Player.Move(command.Name));
                     break;
                 case "talk":
-                    tui.ClearDialogBoxLines();
-                    TalkToNPC();
+                    TalkToNPC(command.SecondWord);
                     break;
 
                 case "help":
-                    tui.ClearDialogBoxLines();
                     PrintHelp();
                     break;
                 case "save":
-                    tui.ClearDialogBoxLines();
                     SaveProgress();
                     break;
                 case "quit":
-                    tui.ClearDialogBoxLines();
                     tui.WriteLine("Thank you for playing World of Zuul!");
                     SaveProgress();
                     return false;
@@ -107,32 +109,108 @@
         }
 
         // TBD
-        private void TalkToNPC()
+        private void TalkToNPC(string? secondCommandWord)
         {
-            if (World.Player.CurrentRoom.NPCs.Count == 0)
+            List<string> npcs = World.Player.CurrentRoom.NPCs;
+            // if there are no NPCs
+            if (npcs.Count == 0)
             {
                 isInDialogue = false;
                 tui.WriteLine("No one is here!");
                 return;
             }
-            
-            else if(World.Player.CurrentRoom.NPCs.Count > 0)
+
+            NPC? npc;
+            // if there is one NPC
+            if (npcs.Count == 1)
             {
                 isInDialogue = true;
+                npc = World.NPCManager.GetNPC(npcs[0]);
             }
-                    
-            tui.WriteLine("Dialogues are not implemented yet for multiple NPCs in one room");
+            // if there are multiple NPCs
+            else
+            {
+                // if user doesn't specify which NPC to talk to
+                if (secondCommandWord == null)
+                {
+                    tui.WriteLine("There are multiple NPCs in this room! To choose NPC to talk to, use 'talk [number]'");
+                    tui.WriteLine("Available NPCs:");
+                    for (int i = 0; i < npcs.Count; i++)
+                    {
+                        npc = World.NPCManager.GetNPC(npcs[i]);
+                        tui.WriteLine($"{i+1}. {npc.Name}");
+                    }
+                    return;
+                }
+                // if user specifies which NPC to talk to, check if the number is in range
+                int npcNumber = int.Parse(secondCommandWord) - 1;
 
-            // // fix for multiple NPCs
-            // if (r.RoomNPC.quest != null && r.RoomNPC.quest.State == QuestState.Pending)
-            // {
-            //     r.RoomNPC.Talk(tui);
-            // }
-            // else
-            // {
-            //     tui.WriteLine("no quest sorry");
-            //     //World.Player.CurrentRoom.RoomNPC.Dialogue1();
-            // }
+                if (npcNumber > npcs.Count)
+                {
+                    tui.WriteLine("Number is out of range of available NPCs");
+                    tui.WriteLine("To check available NPCs in this Room, type 'talk'");
+                }
+                npc = World.NPCManager.GetNPC(npcs[npcNumber]);
+            }
+
+            // finally, talk to the NPC
+            isInDialogue = true;
+            // if there is no quest active
+            if (World.Player.ActiveQuestName == null)
+            {
+                Quest? q = World.QuestManager.FindAvailableQuest(npc);
+                // no availabe quests -> default dialogue
+                if (q == null)
+                {
+                    tui.WriteLine($"{npc.Name}: Hi! How's your day goin'?");
+                    return;
+                }
+                // if available quest is found -> preQuestDialogue + add 
+                for (int i = 0; i < q.PreQuestDialogue.Count; i++)
+                {
+                    tui.WriteLine($"{npc.Name}: {q.PreQuestDialogue[i]}");
+                    Console.ReadKey();
+                }
+                tui.WriteLine("");
+                tui.WriteLine("Would you be down to do this?");
+                Console.Write("> ");
+                string? text = Console.ReadLine();
+
+                if (text != null && text == "yes")
+                {
+                    q.State = "active";
+                    World.Player.ActiveQuestName = q.Title;
+                    tui.WriteLine($"Quest Accepted: {q.Title}");
+                } else
+                {
+                    tui.WriteLine("Well, come back when you'll change your mind.");
+                }
+                return;
+            }
+
+            // if there is an active quest
+            Quest quest = World.QuestManager.GetQuest(World.Player.ActiveQuestName);
+            bool isCompleted = World.QuestManager.CheckCompletion(
+                questName: World.Player.ActiveQuestName,
+                interactingNpc: npc.Name
+            );
+
+            if (isCompleted)
+            {
+                for (int i = 0; i < quest.CompletionDialogue.Count; i++)
+                {
+                    tui.WriteLine($"{npc.Name}: {quest.CompletionDialogue[i]}");
+                    Console.ReadKey();
+                }
+            } else
+            {
+                for (int i = 0; i < quest.CompletionDialogue.Count; i++)
+                {
+                    tui.WriteLine($"{npc.Name}: {quest.CompletionDialogue[i]}");
+                    Console.ReadKey();
+                }
+                tui.WriteLine("You haven't met the criteria to finish this quest!");
+            }
         }
 
         private void CatchMoveError(string? errorText)
@@ -141,6 +219,15 @@
             {
 
                 tui.WriteLine(World.Player.CurrentRoom.Description ?? "None");
+
+                if (World.Player.CurrentRoom.NPCs.Count != 0) 
+                    {
+                        foreach (string npcName in World.Player.CurrentRoom.NPCs)
+                        {
+                            NPC npc = World.NPCManager.GetNPC(npcName);
+                            tui.WriteLine($"You see {npc.Name}, {npc.Profession}");
+                        }
+                    }
                 tui.UpdateBackground(World.Player.CurrentRoom);
                 return;
             }

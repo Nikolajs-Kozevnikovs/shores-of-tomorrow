@@ -1,8 +1,11 @@
+using SixLabors.ImageSharp.Processing.Processors.Convolution;
+using WorldOfZuul.Presentation;
+
 namespace WorldOfZuul.Logic;
 public class QuestManager
 {
     private readonly GameState World;
-    internal Dictionary<string, Quest> Quests { get; set; } = [];
+    public  Dictionary<string, Quest> Quests { get; set; } = [];
 
     public QuestManager(GameState _World)
     {
@@ -13,49 +16,54 @@ public class QuestManager
     {
         foreach (var quest in Quests.Values)
         {
-            if (quest.State == "not_started")
+            if (quest.State == "locked")
             {
                 bool visible = true;
-                foreach (var condition in quest.VisibilityConditions)
+                foreach (var questCompleted in quest.VisibilityConditions)
                 {
-                    foreach (string QuestId in condition.CompletedQuestIds)
+                    if (Quests[questCompleted].State != "completed")
                     {
-                        if (Quests[QuestId].State != "completed")
-                        {
-                            visible = false;
-                            break;
-                        }
+                        visible = false;
+                        break;
                     }
+                    
                 }
                 if (visible) quest.State = "available";
             }
         }
     }
-    public void CheckCompletion(string questName, string ?interactingNpc = null)
+    public bool CheckCompletion(string questName, string ?interactingNpc)
     {
-        foreach (var trigger in Quests[questName].CompletionTriggers)
+        Quest quest = Quests[questName];
+
+        if ( quest.State != "active")
+            return false;
+
+        foreach (var trigger in quest.CompletionTriggers)
         {
             if (trigger.Type == "move_item" && trigger.Room != null && trigger.Item != null)
             {
                 var room = World.RoomManager.GetRoom(trigger.Room[0], trigger.Room[1]);
                 if (room != null && room.Items.Contains(trigger.Item))
                 {
-                    Quests[questName].State = "completed";
+                    quest.State = "completed";
                     ApplyQuestCompletionActions(Quests[questName]);
-                    return;
+                    UpdateQuestVisibility();
+                    World.Player.ActiveQuestName = null;
+                    return true;
                 }
             }
             else if (trigger.Type == "talk_to_npc" && interactingNpc != null && interactingNpc == trigger.Npc)
             {
-                Quests[questName].State = "completed";
+                quest.State = "completed";
                 ApplyQuestCompletionActions(Quests[questName]);
-                return;
-            } // else
-            // {
-            //     // Console.WriteLine("Error finishing the quest");
-            //     return;
-            // }
+                UpdateQuestVisibility();
+                World.Player.ActiveQuestName = null;
+                return true;
+            } 
         }
+
+        return false;
     }
 
     private void ApplyQuestCompletionActions(Quest quest)
@@ -90,5 +98,22 @@ public class QuestManager
                     break;
             }
         }
+    }
+
+    public Quest? FindAvailableQuest(NPC npc)
+    {
+        foreach (string questName in npc.QuestsGiven)
+        {
+            if (Quests[questName].State == "available")
+            {
+                return Quests[questName];
+            }
+        }
+        return null;
+    }
+
+    public Quest GetQuest(string questName)
+    {
+        return Quests[questName];
     }
 }

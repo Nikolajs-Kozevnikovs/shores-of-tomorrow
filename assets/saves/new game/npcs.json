@@ -1,13 +1,13 @@
 {
-  "old_man": {
+  "Nikkolas": {
     "name": "Nikkolas",
     "profession": "Old man",
     "x": 3,
     "y": 5,
-    "questsGiven": [],
+    "questsGiven": ["Welcome"],
     "questsFinishable": []
   },
-  "local_fisherman": {
+  "Jorge": {
     "name": "Jorge",
     "profession": "Local fisherman",
     "x": 6,
@@ -15,7 +15,7 @@
     "questsGiven": [],
     "questsFinishable": []
   },
-  "boat_fisherman": {
+  "Nikolja": {
     "name": "Nikolja",
     "profession": "Fisherman",
     "x": 1,
@@ -23,7 +23,7 @@
     "questsGiven": [],
     "questsFinishable": []
   },
-  "poacher": {
+  "Santino": {
     "name": "Santino",
     "profession": "Poacher",
     "x": 7,
@@ -31,7 +31,7 @@
     "questsGiven": [],
     "questsFinishable": []
   },
-  "little_girl": {
+  "Mariha": {
     "name": "Mariha",
     "profession": "Little girl",
     "x": 2,
@@ -39,7 +39,7 @@
     "questsGiven": [],
     "questsFinishable": []
   },
-  "fish_shop_manager": {
+  "Artyom": {
     "name": "Artyom",
     "profession": "Local fish shop manager",
     "x": 3,
@@ -47,7 +47,7 @@
     "questsGiven": [],
     "questsFinishable": []
   },
-  "charity_manager": {
+  "Phil": {
     "name": "Phil",
     "profession": "Charity center manager",
     "x": 3,
@@ -55,7 +55,7 @@
     "questsGiven": [],
     "questsFinishable": []
   },
-  "recycling_centre_manager": {
+  "Matias": {
     "name": "Matias",
     "profession": "Recycling center manager",
     "x": 5,
@@ -63,7 +63,7 @@
     "questsGiven": [],
     "questsFinishable": []
   },
-  "factory_owner": {
+  "Alexandr": {
     "name": "Alexandr",
     "profession": "Factory owner",
     "x": 5,
@@ -71,7 +71,7 @@
     "questsGiven": [],
     "questsFinishable": []
   },
-  "marine_biologist": {
+  "Lila": {
     "name": "Lila",
     "profession": "Marine biologist",
     "x": 6,

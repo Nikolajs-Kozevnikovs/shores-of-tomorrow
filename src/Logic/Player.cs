@@ -7,6 +7,7 @@ public class Player
     public int Y { get; set; } = 0;
     public int[]? PreviousCoords { get; set; }
     public Room CurrentRoom { get; set; }
+    public string? ActiveQuestName { get; set; }
 
     public Player(int x, int y, GameState world)
     {
