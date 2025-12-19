@@ -4,79 +4,69 @@
     "profession": "Old man",
     "x": 3,
     "y": 5,
-    "questsGiven": ["Welcome"],
-    "questsFinishable": []
+    "questsGiven": ["Welcome"]
   },
   "Jorge": {
     "name": "Jorge",
     "profession": "Local fisherman",
     "x": 6,
     "y": 2,
-    "questsGiven": ["Fishing"],
-    "questsFinishable": []
+    "questsGiven": ["Fishing"]
   },
   "Nikolja": {
     "name": "Nikolja",
     "profession": "Fisherman",
     "x": 1,
     "y": 2,
-    "questsGiven": ["Fishing on the boat"],
-    "questsFinishable": []
+    "questsGiven": ["Fishing on the boat"]
   },
   "Santino": {
     "name": "Santino",
     "profession": "Poacher",
     "x": 7,
     "y": 3,
-    "questsGiven": ["Poacher"],
-    "questsFinishable": []
+    "questsGiven": ["Poacher"]
   },
   "Mariha": {
     "name": "Mariha",
     "profession": "Little girl",
     "x": 2,
     "y": 2,
-    "questsGiven": ["Help or sell"],
-    "questsFinishable": []
+    "questsGiven": ["Help or sell"]
   },
   "Artyom": {
     "name": "Artyom",
     "profession": "Local fish shop manager",
     "x": 3,
     "y": 4,
-    "questsGiven": ["Sell fish"],
-    "questsFinishable": []
+    "questsGiven": ["Sell fish"]
   },
   "Phil": {
     "name": "Phil",
     "profession": "Charity center manager",
     "x": 3,
     "y": 3,
-    "questsGiven": [],
-    "questsFinishable": ["Charity"]
+    "questsGiven": ["Charity"]
   },
   "Matias": {
     "name": "Matias",
     "profession": "Recycling center manager",
     "x": 5,
     "y": 8,
-    "questsGiven": ["Recycling"],
-    "questsFinishable": []
+    "questsGiven": ["Recycling"]
   },
   "Alexandr": {
     "name": "Alexandr",
     "profession": "Factory owner",
     "x": 5,
     "y": 5,
-    "questsGiven": ["Factory"],
-    "questsFinishable": []
+    "questsGiven": ["Factory"]
   },
   "Lila": {
     "name": "Lila",
     "profession": "Marine biologist",
     "x": 6,
     "y": 7,
-    "questsGiven": ["Marine biologist"],
-    "questsFinishable": []
+    "questsGiven": ["Marine biologist"]
   }
 }
