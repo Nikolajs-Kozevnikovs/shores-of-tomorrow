@@ -2,14 +2,14 @@ namespace WorldOfZuul.Logic;
 
 public class Player : IItemContainer
 {
-    private readonly GameState World; 
+    private readonly GameState World;
     public int X { get; set; } = 0;
     public int Y { get; set; } = 0;
     public int[]? PreviousCoords { get; set; }
     public Room CurrentRoom { get; set; }
     public string ActiveQuestName { get; set; } = "";
     // item management
-    public List<Item> Inventory { get; set; } 
+    public List<Item> Inventory { get; set; }
     List<Item> IItemContainer.Items => Inventory;
 
     public Player(int x, int y, string activeQuestName, List<Item> inventory, GameState world)
@@ -26,7 +26,7 @@ public class Player : IItemContainer
     public void AddItem(Item item) => ((IItemContainer)this).AddItem(item);
     public bool RemoveItem(Item item) => ((IItemContainer)this).RemoveItem(item);
     public bool IsInside(string itemId) => ((IItemContainer)this).IsInside(itemId);
-    
+
     public string? Move(string direction)
     {
         int newX = X;
@@ -34,17 +34,17 @@ public class Player : IItemContainer
 
         switch (direction)
         {
-            case "south":
-                newX++;
-                break;
             case "north":
-                newX--;
-                break;
-            case "west":
                 newY--;
                 break;
             case "east":
+                newX++;
+                break;
+            case "south":
                 newY++;
+                break;
+            case "west":
+                newX--;
                 break;
         }
 
@@ -57,7 +57,7 @@ public class Player : IItemContainer
         PreviousCoords = [X, Y];
         X = newX;
         Y = newY;
-        
+
         CurrentRoom = World.RoomManager.GetCurrentRoom();
         return null;
     }
@@ -67,7 +67,7 @@ public class Player : IItemContainer
         if (PreviousCoords == null)
         {
             return "You can't go back from here!";
-            
+
         }
 
         X = PreviousCoords[0];
@@ -79,5 +79,5 @@ public class Player : IItemContainer
         return null;
     }
 
-    
+
 }

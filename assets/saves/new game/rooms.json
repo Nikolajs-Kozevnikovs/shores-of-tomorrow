@@ -104,6 +104,19 @@
     }
   },
   {
+    "x": 5,
+    "y": 7,
+    "room": {
+      "tileIdentifier": "S",
+      "name": "Seashore",
+      "description": "A quiet stretch of coast where small waves break against the sand.",
+      "background": "seashore.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
     "x": 3,
     "y": 3,
     "room": {
@@ -796,7 +809,33 @@
     "x": 0,
     "y": 0,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "ocean2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 1,
+    "y": 0,
+    "room": {
+      "tileIdentifier": "Q",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "ocean2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 2,
+    "y": 0,
+    "room": {
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -809,7 +848,7 @@
     "x": 0,
     "y": 1,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -822,7 +861,7 @@
     "x": 7,
     "y": 0,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -835,7 +874,7 @@
     "x": 8,
     "y": 0,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -848,7 +887,7 @@
     "x": 8,
     "y": 1,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -861,7 +900,7 @@
     "x": 8,
     "y": 2,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -874,7 +913,7 @@
     "x": 8,
     "y": 3,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -887,7 +926,7 @@
     "x": 8,
     "y": 4,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -900,7 +939,7 @@
     "x": 8,
     "y": 5,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -913,7 +952,7 @@
     "x": 8,
     "y": 6,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -926,7 +965,7 @@
     "x": 8,
     "y": 7,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -939,7 +978,7 @@
     "x": 8,
     "y": 8,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -952,7 +991,7 @@
     "x": 8,
     "y": 9,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -965,7 +1004,7 @@
     "x": 7,
     "y": 9,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -978,7 +1017,7 @@
     "x": 6,
     "y": 9,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -991,7 +1030,7 @@
     "x": 5,
     "y": 9,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -1004,7 +1043,7 @@
     "x": 4,
     "y": 9,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -1017,7 +1056,7 @@
     "x": 3,
     "y": 9,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -1030,7 +1069,7 @@
     "x": 2,
     "y": 9,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -1043,7 +1082,7 @@
     "x": 1,
     "y": 9,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -1056,7 +1095,7 @@
     "x": 0,
     "y": 9,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -1069,7 +1108,7 @@
     "x": 0,
     "y": 8,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -1082,7 +1121,7 @@
     "x": 0,
     "y": 7,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -1095,7 +1134,7 @@
     "x": 0,
     "y": 6,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -1108,7 +1147,7 @@
     "x": 0,
     "y": 5,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -1121,7 +1160,7 @@
     "x": 0,
     "y": 4,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -1134,7 +1173,7 @@
     "x": 0,
     "y": 3,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -1147,7 +1186,7 @@
     "x": 0,
     "y": 2,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -1160,7 +1199,7 @@
     "x": 0,
     "y": 1,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
@@ -1170,10 +1209,127 @@
     }
   },
   {
-    "x": 1,
+    "x": 9,
+    "y": 0,
+    "room": {
+      "tileIdentifier": "Q",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "ocean2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 9,
+    "y": 1,
+    "room": {
+      "tileIdentifier": "Q",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "ocean2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 9,
+    "y": 2,
+    "room": {
+      "tileIdentifier": "Q",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "ocean2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 9,
     "y": 3,
     "room": {
-      "tileIdentifier": "O",
+      "tileIdentifier": "Q",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "ocean2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 9,
+    "y": 4,
+    "room": {
+      "tileIdentifier": "Q",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "ocean2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 9,
+    "y": 5,
+    "room": {
+      "tileIdentifier": "Q",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "ocean2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 9,
+    "y": 6,
+    "room": {
+      "tileIdentifier": "Q",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "ocean2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 9,
+    "y": 7,
+    "room": {
+      "tileIdentifier": "Q",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "ocean2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 9,
+    "y": 8,
+    "room": {
+      "tileIdentifier": "Q",
+      "name": "Remote Ocean",
+      "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
+      "background": "ocean2.csv",
+      "npcs": [],
+      "items": [],
+      "allowedItems": []
+    }
+  },
+  {
+    "x": 9,
+    "y": 9,
+    "room": {
+      "tileIdentifier": "Q",
       "name": "Remote Ocean",
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",

@@ -8,15 +8,19 @@
         private readonly GameState World = new(10, 10);
         private readonly RandomEvents randomEvents = new();
         private bool isInDialogue = false;
-        
-        
+
+
         public void Play()
         {
+            tui.CurrentWorld = World; // give TUI access to the GameState
+
             Parser parser = new();
 
             tui.WaitForCorrectTerminalSize();
 
             LoadSave.ChooseSave(tui, World);
+
+            tui.UpdateBackground(World.Player.CurrentRoom);
 
             tui.WriteLine(World.Player.CurrentRoom.Description ?? "None");
             PrintWelcome();
@@ -65,7 +69,7 @@
             {
                 case "look":
                     tui.WriteLine(World.Player.CurrentRoom.Description ?? "Nothing to look at (devs forgot a description)");
-                    if (World.Player.CurrentRoom.NPCs.Count != 0) 
+                    if (World.Player.CurrentRoom.NPCs.Count != 0)
                     {
                         foreach (NPC npc in World.Player.CurrentRoom.NPCs)
                         {
@@ -161,7 +165,7 @@
                     tui.WriteLine($"{npc.Name}: Hi! How's your day goin'?");
                     return;
                 }
-                // if available quest is found -> preQuestDialogue + add 
+                // if available quest is found -> preQuestDialogue + add
                 for (int i = 0; i < q.PreQuestDialogue.Count; i++)
                 {
                     tui.WriteLine($"{npc.Name}: {q.PreQuestDialogue[i]}");
@@ -211,7 +215,7 @@
 
                 tui.WriteLine(World.Player.CurrentRoom.Description ?? "None");
 
-                if (World.Player.CurrentRoom.NPCs.Count != 0) 
+                if (World.Player.CurrentRoom.NPCs.Count != 0)
                     {
                         foreach (NPC npc in World.Player.CurrentRoom.NPCs)
                         {
@@ -223,7 +227,7 @@
             }
 
             tui.WriteLine(errorText);
-        }       
+        }
 
         public static void MoveItem(Item item, IItemContainer from, IItemContainer to)
         {
