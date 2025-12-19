@@ -85,7 +85,7 @@
       "name": "Nikkolas's house",
       "description": "A small and cluttered home that smells faintly of wood and old books.",
       "background": "house1.csv",
-      "npcs": [],
+      "npcs": ["Nikkolas"],
       "items": [],
       "allowedItems": []
     }

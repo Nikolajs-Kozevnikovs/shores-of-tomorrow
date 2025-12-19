@@ -67,9 +67,8 @@
                     tui.WriteLine(World.Player.CurrentRoom.Description ?? "Nothing to look at (devs forgot a description)");
                     if (World.Player.CurrentRoom.NPCs.Count != 0) 
                     {
-                        foreach (string npcName in World.Player.CurrentRoom.NPCs)
+                        foreach (NPC npc in World.Player.CurrentRoom.NPCs)
                         {
-                            NPC npc = World.NPCManager.GetNPC(npcName);
                             tui.WriteLine($"You see {npc.Name}, {npc.Profession}");
                         }
                     }
@@ -109,7 +108,7 @@
 
         private void TalkToNPC(string? secondCommandWord)
         {
-            List<string> npcs = World.Player.CurrentRoom.NPCs;
+            List<NPC> npcs = World.Player.CurrentRoom.NPCs;
             // if there are no NPCs
             if (npcs.Count == 0)
             {
@@ -123,7 +122,7 @@
             if (npcs.Count == 1)
             {
                 isInDialogue = true;
-                npc = World.NPCManager.GetNPC(npcs[0]);
+                npc = npcs[0];
             }
             // if there are multiple NPCs
             else
@@ -135,8 +134,7 @@
                     tui.WriteLine("Available NPCs:");
                     for (int i = 0; i < npcs.Count; i++)
                     {
-                        npc = World.NPCManager.GetNPC(npcs[i]);
-                        tui.WriteLine($"{i+1}. {npc.Name}");
+                        tui.WriteLine($"{i+1}. {npcs[i].Name}");
                     }
                     return;
                 }
@@ -148,7 +146,7 @@
                     tui.WriteLine("Number is out of range of available NPCs");
                     tui.WriteLine("To check available NPCs in this Room, type 'talk'");
                 }
-                npc = World.NPCManager.GetNPC(npcs[npcNumber]);
+                npc = World.Player.CurrentRoom.NPCs[npcNumber];
             }
 
             // finally, talk to the NPC
@@ -215,9 +213,8 @@
 
                 if (World.Player.CurrentRoom.NPCs.Count != 0) 
                     {
-                        foreach (string npcName in World.Player.CurrentRoom.NPCs)
+                        foreach (NPC npc in World.Player.CurrentRoom.NPCs)
                         {
-                            NPC npc = World.NPCManager.GetNPC(npcName);
                             tui.WriteLine($"You see {npc.Name}, {npc.Profession}");
                         }
                     }

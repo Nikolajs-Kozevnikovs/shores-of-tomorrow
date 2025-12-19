@@ -21,7 +21,6 @@ public static class GameStateSaver
         {
             Directory.CreateDirectory(directory_path);
             File.Create(Path.Combine(directory_path, "rooms.json")).Dispose();
-            File.Create(Path.Combine(directory_path, "npcs.json")).Dispose();
             File.Create(Path.Combine(directory_path, "quests.json")).Dispose();
             File.Create(Path.Combine(directory_path, "player.json")).Dispose();
         } else
@@ -46,9 +45,9 @@ public static class GameStateSaver
 
         }
         SaveRooms(world, directory);
-        SaveNpcs(world, directory);
         SaveQuests(world, directory);
         SavePlayer(world, directory);
+
         tui.WriteLine("");
         tui.WriteLine("Saved successfully!");
     }
@@ -72,11 +71,6 @@ public static class GameStateSaver
         File.WriteAllText($"{SAVE_PATH}/{fileName}/rooms.json", jsonString);
     }
 
-    public static void SaveNpcs(GameState world, string fileName)
-    {
-        string jsonString = JsonSerializer.Serialize(world.NPCManager.NPCs, options);
-        File.WriteAllText($"{SAVE_PATH}/{fileName}/npcs.json", jsonString);
-    }
 
     public static void SaveQuests(GameState world, string fileName)
     {
@@ -87,8 +81,13 @@ public static class GameStateSaver
 
     public static void SavePlayer(GameState world, string fileName)
     {
-        int[] coords = [world.Player.X, world.Player.Y];
-        string jsonString = JsonSerializer.Serialize(coords, options);
+        PlayerEntry playerEntry = new(
+            x: world.Player.X,
+            y: world.Player.Y, 
+            activeQuestName: world.Player.ActiveQuestName,
+            itemIds: world.Player.Inventory.Select(item => item.Id).ToList()
+        );
+        string jsonString = JsonSerializer.Serialize(playerEntry, options);
         File.WriteAllText($"{SAVE_PATH}/{fileName}/player.json", jsonString);
     }
 }

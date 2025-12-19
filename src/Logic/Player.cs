@@ -1,5 +1,3 @@
-using Spectre.Console;
-
 namespace WorldOfZuul.Logic;
 
 public class Player : IItemContainer

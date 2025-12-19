@@ -6,7 +6,6 @@ using WorldOfZuul.Presentation;
 public class GameState
 {
     public RoomManager RoomManager { get; set; }
-    public NPCManager NPCManager { get; set; }
     public QuestManager QuestManager { get; set; }
     public Player Player { get; set; }
 
@@ -16,7 +15,6 @@ public class GameState
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     {
         RoomManager = new RoomManager(width, height, this);
-        NPCManager = new NPCManager(this);
         QuestManager = new QuestManager(this);
         // load things from json
         GameStateLoader.Load(this, "/new game");

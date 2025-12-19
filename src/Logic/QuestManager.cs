@@ -72,13 +72,6 @@ public class QuestManager
         {
             switch (action.Type)
             {
-                case "move_npc":
-                    if (action.Npc == null)
-                    {
-                        throw new Exception("Wrong action while trying to complete the quest "+quest.Title);
-                    }
-                    World.NPCManager.MoveNPC(action.Npc, action.ToX, action.ToY);
-                    break;
                 case "get_item":
                     if (action.ItemId == null)
                     {

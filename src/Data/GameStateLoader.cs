@@ -1,22 +1,8 @@
 namespace WorldOfZuul.Data;
 
-using System.Runtime.ExceptionServices;
 using System.Text.Json;
-using NJsonSchema.Annotations;
 using WorldOfZuul.Logic;
 
-public class RoomEntry
-{
-    public int X {get; set; }
-    public int Y {get; set; }
-    public Room Room { get; set; }
-    public RoomEntry(int x, int y, Room room)
-    {
-        X = x;
-        Y = y;
-        Room = room;
-    }
-}
 
 public static class GameStateLoader
 {
@@ -38,8 +24,8 @@ public static class GameStateLoader
     public static void Load(GameState world, string directory)
     {
         LoadItems();
+        LoadNpcs();
         LoadRooms(world, Path.Combine(directory, "rooms.json"));
-        LoadNpcs(world, Path.Combine(directory, "npcs.json"));
         LoadQuests(world, Path.Combine(directory, "quests.json"));
     }
 
@@ -80,14 +66,16 @@ public static class GameStateLoader
 }
 
 
-
-    private static void LoadNpcs(GameState world, string fileName)
+    private static void LoadNpcs()
     {
-        string json = File.ReadAllText($"{SAVE_PATH}{fileName}");
-        var npcs = JsonSerializer.Deserialize<Dictionary<string, NPC>>(json, options);
+        string json = File.ReadAllText($"./assets/npcs.json");
+        var npcs = JsonSerializer.Deserialize<List<NPC>>(json, options);
         if (npcs != null)
         {
-            world.NPCManager.NPCs = npcs;
+            foreach (NPC npc in npcs)
+            {  
+                NPCRegistry.Register(npc);
+            }
         }
     }
 
@@ -117,20 +105,7 @@ public static class GameStateLoader
         }
     }
     
-    private class PlayerEntry
-    {
-        public int X {get; set;}
-        public int Y {get; set;}
-        public string ActiveQuestName { get; set; } = "";
-        public List<string> ItemIds { get; set; } = new(); 
-
-        // public PlayerEntry(int x, int y, string activeQuestName, List<string> itemIds) {
-        //     X = x;
-        //     Y = y;
-        //     ActiveQuestName = activeQuestName;
-        //     ItemIds = itemIds;
-        // }
-    }
+    
 
     public static void LoadPlayer(GameState world, string directoryName)
     {

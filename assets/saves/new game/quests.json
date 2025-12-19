@@ -24,11 +24,6 @@
       "Hi, nice to meet you! Talk to me again if you want to try something new."
     ],
     "onCompleteActions": [
-      {
-        "type": "move_npc",
-        "npc": "Nikkolas",
-        "to": { "x": 5, "y": 2 }
-      }
     ],
     "state": "available"
   },

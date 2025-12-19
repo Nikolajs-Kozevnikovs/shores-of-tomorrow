@@ -32,23 +32,28 @@ public class RoomManager
         return Rooms[World.Player.X, World.Player.Y];
     }
 
-    public void AddNpcToRoom(string npcId, int x, int y)
-    {
-        var room = GetRoom(x, y);
-        if (room != null && !room.NPCs.Contains(npcId))
-        {
-            room.NPCs.Add(npcId);
-        } else
-        {
-            Console.WriteLine("No Room found while trying to add an NPC!");
-        }
-    }
+    // ! We don't move NPCs between rooms, we just have the same one in multiple rooms (e.g. old guy in townhall and his house)
 
-    public void RemoveNpcFromRoom(string npcId, int x, int y)
-    {
-        var room = GetRoom(x, y);
-        room?.NPCs.Remove(npcId);
-    }
+    // public void MoveNpcToRoom(string npcId, int x, int y)
+    // {
+    //     var newRoom = GetRoom(x, y);
+
+    //     if (newRoom != null && !newRoom.NPCs.Any(npc => npc.Id == npcId))
+    //     {
+    //         newRoom.NPCs.Add(NPCRegistry.CreateNPC(npcId));
+            
+    //         for (int roomX = 0; roomX < Rooms.GetLength(0); roomX++)
+    //         {
+    //             for (int roomY = 0; roomY < Rooms.GetLength(1); roomY++)
+    //             {
+    //                 if (Room)
+    //             }
+    //         }
+    //     } else
+    //     {
+    //         Console.WriteLine("No Room found while trying to add an NPC!");
+    //     }
+    // }
 }
 
 
