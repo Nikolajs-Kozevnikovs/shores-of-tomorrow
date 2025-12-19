@@ -13,4 +13,9 @@ public static class ItemRegistry
     {
         return new Item { Id = id, Name = _items[id] };
     }
+
+    public static Dictionary<string, string> GetItems()
+    {
+        return _items;
+    }
 }

@@ -154,7 +154,7 @@
             // finally, talk to the NPC
             isInDialogue = true;
             // if there is no quest active
-            if (World.Player.ActiveQuestName == null)
+            if (World.Player.ActiveQuestName == "")
             {
                 Quest? q = World.QuestManager.FindAvailableQuest(npc);
                 // no availabe quests -> default dialogue
@@ -202,11 +202,6 @@
                 }
             } else
             {
-                for (int i = 0; i < quest.CompletionDialogue.Count; i++)
-                {
-                    tui.WriteLine($"{npc.Name}: {quest.CompletionDialogue[i]}");
-                    Console.ReadKey();
-                }
                 tui.WriteLine("You haven't met the criteria to finish this quest!");
             }
         }

@@ -2,6 +2,7 @@ namespace WorldOfZuul.Data;
 
 using System.Runtime.ExceptionServices;
 using System.Text.Json;
+using NJsonSchema.Annotations;
 using WorldOfZuul.Logic;
 
 public class RoomEntry
@@ -36,7 +37,7 @@ public static class GameStateLoader
 
     public static void Load(GameState world, string directory)
     {
-        LoadItems(Path.Combine(directory, "items.json"));
+        LoadItems();
         LoadRooms(world, Path.Combine(directory, "rooms.json"));
         LoadNpcs(world, Path.Combine(directory, "npcs.json"));
         LoadQuests(world, Path.Combine(directory, "quests.json"));
@@ -102,9 +103,9 @@ public static class GameStateLoader
     }
 
 
-    private static void LoadItems(string fileName)
+    private static void LoadItems()
     {
-        string json = File.ReadAllText($"{SAVE_PATH}{fileName}");
+        string json = File.ReadAllText($"./assets/items.json");
         var items = JsonSerializer.Deserialize<List<Item>>(json, options);
         
         if (items != null)
@@ -116,14 +117,35 @@ public static class GameStateLoader
         }
     }
     
+    private class PlayerEntry
+    {
+        public int X {get; set;}
+        public int Y {get; set;}
+        public string ActiveQuestName { get; set; } = "";
+        public List<string> ItemIds { get; set; } = new(); 
+
+        // public PlayerEntry(int x, int y, string activeQuestName, List<string> itemIds) {
+        //     X = x;
+        //     Y = y;
+        //     ActiveQuestName = activeQuestName;
+        //     ItemIds = itemIds;
+        // }
+    }
+
     public static void LoadPlayer(GameState world, string directoryName)
     {
         string json = File.ReadAllText($"{SAVE_PATH}{Path.Combine(directoryName, "player.json")}");
-        var player = JsonSerializer.Deserialize<int[]>(json, options);
+        var player = JsonSerializer.Deserialize<PlayerEntry>(json, options);
 
         if (player != null)
         {
-            world.Player = new Player(player[0], player[1], world);
+            world.Player = new Player(
+                x: player.X,
+                y: player.Y,
+                activeQuestName: player.ActiveQuestName,
+                inventory: player.ItemIds.Select(itemId => ItemRegistry.CreateItem(itemId)).ToList() ?? [],
+                world: world
+            );
         }
 
     }

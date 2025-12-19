@@ -9,22 +9,25 @@ public class Player : IItemContainer
     public int Y { get; set; } = 0;
     public int[]? PreviousCoords { get; set; }
     public Room CurrentRoom { get; set; }
-    public string? ActiveQuestName { get; set; }
+    public string ActiveQuestName { get; set; } = "";
     // item management
-    public List<Item> Inventory { get; set; } = new();
+    public List<Item> Inventory { get; set; } 
     List<Item> IItemContainer.Items => Inventory;
-    public void AddItem(Item item) => ((IItemContainer)this).AddItem(item);
-    public bool RemoveItem(Item item) => ((IItemContainer)this).RemoveItem(item);
-    public bool IsInside(string itemId) => ((IItemContainer)this).IsInside(itemId);
 
-    public Player(int x, int y, GameState world)
+    public Player(int x, int y, string activeQuestName, List<Item> inventory, GameState world)
     {
         X = x;
         Y = y;
         World = world;
         Room? room = World.RoomManager.GetRoom(x, y) ?? throw new Exception("No room at starting coordinates! Breaking.");
         CurrentRoom = room;
+        Inventory = inventory;
+        ActiveQuestName = activeQuestName;
     }
+
+    public void AddItem(Item item) => ((IItemContainer)this).AddItem(item);
+    public bool RemoveItem(Item item) => ((IItemContainer)this).RemoveItem(item);
+    public bool IsInside(string itemId) => ((IItemContainer)this).IsInside(itemId);
     
     public string? Move(string direction)
     {

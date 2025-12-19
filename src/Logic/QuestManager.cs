@@ -49,7 +49,7 @@ public class QuestManager
                     quest.State = "completed";
                     ApplyQuestCompletionActions(Quests[questName]);
                     UpdateQuestVisibility(quest);
-                    World.Player.ActiveQuestName = null;
+                    World.Player.ActiveQuestName = "";
                     return true;
                 }
             }
@@ -58,7 +58,7 @@ public class QuestManager
                 quest.State = "completed";
                 ApplyQuestCompletionActions(Quests[questName]);
                 UpdateQuestVisibility(quest);
-                World.Player.ActiveQuestName = null;
+                World.Player.ActiveQuestName = "";
                 return true;
             } 
         }
