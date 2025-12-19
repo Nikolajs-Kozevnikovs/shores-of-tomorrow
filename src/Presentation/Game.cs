@@ -1,7 +1,6 @@
 ﻿namespace WorldOfZuul.Presentation
 {
     using WorldOfZuul.Logic;
-    using System.Text.RegularExpressions;
 
     public class Game
     {
@@ -17,7 +16,7 @@
 
             tui.WaitForCorrectTerminalSize();
 
-            ChooseSave();
+            LoadSave.ChooseSave(tui, World);
 
             tui.WriteLine(World.Player.CurrentRoom.Description ?? "None");
             PrintWelcome();
@@ -93,11 +92,11 @@
                     PrintHelp();
                     break;
                 case "save":
-                    SaveProgress();
+                    LoadSave.SaveProgress(tui, World);
                     break;
                 case "quit":
                     tui.WriteLine("Thank you for playing World of Zuul!");
-                    SaveProgress();
+                    LoadSave.SaveProgress(tui, World);
                     return false;
 
                 default:
@@ -108,7 +107,6 @@
             return true;
         }
 
-        // TBD
         private void TalkToNPC(string? secondCommandWord)
         {
             List<string> npcs = World.Player.CurrentRoom.NPCs;
@@ -233,47 +231,7 @@
             }
 
             tui.WriteLine(errorText);
-        }
-
-        private void SaveProgress()
-        {
-            tui.WriteLine("Choose a name for your save: \n(English alphabet letters, numbers, underscores and dashes allowed)");
-            Console.Write("> ");
-            string? save_name = Console.ReadLine();
-            while (save_name == null || save_name == "" || !IsValidSaveName(save_name))
-            {
-                tui.WriteLine("Invalid name!");
-                Console.Write("> ");
-                save_name = Console.ReadLine();
-            }
-            World.Save(save_name, tui);
-            tui.WriteLine();
-        }
-        bool IsValidSaveName(string input)
-        {
-            return Regex.IsMatch(input, @"^[A-Za-z0-9_-]+$");
-        }
-        
-        private void ChooseSave()
-        {
-            string[] existing_saves = World.GetSaves();
-            tui.WriteLine("Choose a save:");
-            foreach (string save in existing_saves)
-            {
-                tui.WriteLine(save);
-            }
-
-            Console.Write("> ");
-            string? save_name = Console.ReadLine();
-            while (save_name == null || !existing_saves.Contains(save_name))
-            {
-                tui.WriteLine("Can't find a save with the specified save name!");
-                Console.Write("> ");
-                save_name = Console.ReadLine();
-            }
-
-            World.LoadData(save_name);
-        }
+        }       
 
         public static void MoveItem(Item item, IItemContainer from, IItemContainer to)
         {

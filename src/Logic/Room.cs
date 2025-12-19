@@ -43,7 +43,5 @@ public class Room
         NPCs = npcs;
         Items = items;
     }
-
-    // public List<Zone> Zones { get; set; } = new List<Zone>();
 }
 
