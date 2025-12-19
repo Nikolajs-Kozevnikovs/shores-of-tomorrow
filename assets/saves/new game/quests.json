@@ -2,9 +2,6 @@
   "Welcome": {
     "title": "Welcome",
     "description": "Speak with Nikkolas, he should be in the townhall",
-    "giverNPC": "Nikkolas",
-    "finishNPC": "Jorge",
-    "visibilityConditions": [],
     "completionTriggers": [
       {
         "type": "talk_to_npc",
@@ -23,15 +20,12 @@
     "completionDialogue": [
       "Hi, nice to meet you! Talk to me again if you want to try something new."
     ],
-    "onCompleteActions": [
-    ],
-    "state": "available"
+    "onCompleteActions": []
   },
   "Fishing": {
     "title": "Fishing",
     "description": "Meet Jeorge next to Nikkolas's house",
     "giverNPC": "Nikkolas",
-    "visibilityConditions": ["Welcome"],
     "completionTriggers": [
       {
         "type": "talk_to_npc",
@@ -45,7 +39,6 @@
       ""
     ],
     "onCompleteActions": [
-    ],
-    "state": "locked"
+    ]
   }
 }
