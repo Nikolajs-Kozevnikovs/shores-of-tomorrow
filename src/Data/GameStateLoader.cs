@@ -1,5 +1,6 @@
 namespace WorldOfZuul.Data;
 
+using System.Runtime.ExceptionServices;
 using System.Text.Json;
 using WorldOfZuul.Logic;
 
@@ -7,7 +8,7 @@ public class RoomEntry
 {
     public int X {get; set; }
     public int Y {get; set; }
-    public Room Room {get; set; }
+    public Room Room { get; set; }
     public RoomEntry(int x, int y, Room room)
     {
         X = x;
@@ -35,11 +36,10 @@ public static class GameStateLoader
 
     public static void Load(GameState world, string directory)
     {
+        LoadItems(Path.Combine(directory, "items.json"));
         LoadRooms(world, Path.Combine(directory, "rooms.json"));
         LoadNpcs(world, Path.Combine(directory, "npcs.json"));
         LoadQuests(world, Path.Combine(directory, "quests.json"));
-        LoadItems(world, Path.Combine(directory, "items.json"));
-        // LoadPlayer(world, Path.Combine(directory, "player.json"));
     }
 
 
@@ -47,7 +47,7 @@ public static class GameStateLoader
     {
         string json = File.ReadAllText($"{SAVE_PATH}{fileName}");
         var rooms = JsonSerializer.Deserialize<List<RoomEntry>>(json, options);
-
+    
         if (rooms != null)
         {
             SetRooms(world, rooms);
@@ -58,15 +58,26 @@ public static class GameStateLoader
     }
 
     internal static void SetRooms(GameState world, List<RoomEntry> rooms)
+{
+    foreach (RoomEntry roomEntry in rooms)
     {
-        foreach (RoomEntry room in rooms) {
-            if (room.X >= 0 && room.Y >= 0 && 
-                room.X < world.RoomManager.Rooms.GetLength(0) && room.Y < world.RoomManager.Rooms.GetLength(1))
-            {
-                world.RoomManager.SetRoom(room.Room, room.X, room.Y);
-            }
+        // Convert item ID strings into actual Item objects
+        List<Item> items = roomEntry.Room.ItemIds
+            .Select(id => ItemRegistry.CreateItem(id))
+            .ToList();
+
+        roomEntry.Room.Items = items;
+
+        // Place the room in the world's 2D array
+        if (roomEntry.X >= 0 && roomEntry.Y >= 0 &&
+            roomEntry.X < world.RoomManager.Rooms.GetLength(0) &&
+            roomEntry.Y < world.RoomManager.Rooms.GetLength(1))
+        {
+            world.RoomManager.SetRoom(roomEntry.Room, roomEntry.X, roomEntry.Y);
         }
     }
+}
+
 
 
     private static void LoadNpcs(GameState world, string fileName)
@@ -91,17 +102,20 @@ public static class GameStateLoader
     }
 
 
-    private static void LoadItems(GameState world, string fileName)
+    private static void LoadItems(string fileName)
     {
         string json = File.ReadAllText($"{SAVE_PATH}{fileName}");
         var items = JsonSerializer.Deserialize<List<Item>>(json, options);
         
         if (items != null)
         {
-            world.ItemManager.Items = items;
+            foreach (Item item in items)
+            {
+                ItemRegistry.Register(item.Id, item.Name);
+            }
         }
     }
-    // special function
+    
     public static void LoadPlayer(GameState world, string directoryName)
     {
         string json = File.ReadAllText($"{SAVE_PATH}{Path.Combine(directoryName, "player.json")}");

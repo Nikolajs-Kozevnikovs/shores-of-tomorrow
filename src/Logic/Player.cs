@@ -1,6 +1,8 @@
+using Spectre.Console;
+
 namespace WorldOfZuul.Logic;
 
-public class Player
+public class Player : IItemContainer
 {
     private readonly GameState World; 
     public int X { get; set; } = 0;
@@ -8,6 +10,12 @@ public class Player
     public int[]? PreviousCoords { get; set; }
     public Room CurrentRoom { get; set; }
     public string? ActiveQuestName { get; set; }
+    // item management
+    public List<Item> Inventory { get; set; } = new();
+    List<Item> IItemContainer.Items => Inventory;
+    public void AddItem(Item item) => ((IItemContainer)this).AddItem(item);
+    public bool RemoveItem(Item item) => ((IItemContainer)this).RemoveItem(item);
+    public bool IsInside(string itemId) => ((IItemContainer)this).IsInside(itemId);
 
     public Player(int x, int y, GameState world)
     {
@@ -69,4 +77,6 @@ public class Player
         CurrentRoom = World.RoomManager.GetCurrentRoom();
         return null;
     }
+
+    
 }

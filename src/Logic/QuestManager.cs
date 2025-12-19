@@ -41,10 +41,10 @@ public class QuestManager
 
         foreach (var trigger in quest.CompletionTriggers)
         {
-            if (trigger.Type == "move_item" && trigger.Room != null && trigger.Item != null)
+            if (trigger.Type == "move_item" && trigger.Room != null && trigger.ItemId != null)
             {
                 var room = World.RoomManager.GetRoom(trigger.Room[0], trigger.Room[1]);
-                if (room != null && room.Items.Contains(trigger.Item))
+                if (room != null && room.IsInside(trigger.ItemId))
                 {
                     quest.State = "completed";
                     ApplyQuestCompletionActions(Quests[questName]);
@@ -79,22 +79,13 @@ public class QuestManager
                     }
                     World.NPCManager.MoveNPC(action.Npc, action.ToX, action.ToY);
                     break;
-                // case "spawn_item":
-                //     SpawnItem(action.RoomX, action.RoomY, action.Item);
-                //     break;
-                case "give_item":
-                    if (action.Item == null)
+                case "get_item":
+                    if (action.ItemId == null)
                     {
                         throw new Exception("Wrong action while trying to complete the quest "+quest.Title);
                     }
-                    World.ItemManager.MoveToInventory(action.Item);
-                    break;
-                case "take_item":
-                    if (action.Item == null)
-                    {
-                        throw new Exception("Wrong action while trying to complete the quest "+quest.Title);
-                    }
-                    World.ItemManager.MoveOutOfInventory(action.Item);
+                    Item item = ItemRegistry.CreateItem(action.ItemId);
+                    World.Player.AddItem(item);
                     break;
             }
         }

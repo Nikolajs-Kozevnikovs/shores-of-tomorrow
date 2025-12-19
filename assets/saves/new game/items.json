@@ -1,11 +1,15 @@
 [
   {
-    "name": "Key",
-    "location": {
-      "roomX": 0,
-      "roomY": 0,
-      "isHeldByPlayer": false
-    }
+    "name": "Fish",
+    "id": "fish"
+  },
+  {
+    "name": "Fishing net",
+    "id": "fishing_net"
+  },
+  {
+    "name": "Fishing pole",
+    "id": "fishing_pole"
   }
 ]
 

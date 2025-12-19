@@ -49,15 +49,6 @@ public class RoomManager
         var room = GetRoom(x, y);
         room?.NPCs.Remove(npcId);
     }
-
-    public void PlaceItem(string itemName, int x, int y)
-    {
-        var room = GetRoom(x, y);
-        if (room != null)
-        {
-            room.Items.Add(itemName);
-        }
-    }
 }
 
 

@@ -275,7 +275,13 @@
             World.LoadData(save_name);
         }
 
-
+        public static void MoveItem(Item item, IItemContainer from, IItemContainer to)
+        {
+            if (from.RemoveItem(item))
+                to.AddItem(item);
+            else
+                Console.WriteLine("Item not found in source container.");
+        }
 
 
         private void PrintWelcome()

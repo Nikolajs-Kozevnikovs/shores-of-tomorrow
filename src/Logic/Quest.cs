@@ -28,7 +28,7 @@ public class Quest
         OnCompleteActions = onCompleteActions;
     }
 
-    public Quest(string title, string description, string giverNPC, string finishNPC, List<string> visibilityConditions, List<CompletionTrigger> completionTriggers, List<string> preQuestDialogue, List<string> completionDialogue, List<OnCompleteAction> onCompleteActions, string state)
+    public Quest(string title, string description, string giverNPC,List<string> visibilityConditions, List<CompletionTrigger> completionTriggers, List<string> preQuestDialogue, List<string> completionDialogue, List<OnCompleteAction> onCompleteActions, string state)
     : this(title, description, giverNPC, visibilityConditions, completionTriggers, preQuestDialogue, completionDialogue, onCompleteActions)
     {
         State = state;
@@ -38,7 +38,7 @@ public class Quest
 public class CompletionTrigger
 {
     public string Type { get; set; } = "talk_to_npc"; // "zone_item" or "talk_to_npc"
-    public string? Item { get; set; } // for "move_item"
+    public string? ItemId { get; set; } // for "move_item"
     public int[]? Room { get; set; } // [x, y] for "zone_item"
     public string? Zone { get; set; } // zone ID for "zone_item"
     public string? Npc { get; set; } // for "talk_to_npc"
@@ -50,5 +50,5 @@ public class OnCompleteAction
     public int ToX { get; set; }
     public int ToY { get; set; }
     public string? Npc { get; set; }
-    public string? Item {get; set; }
+    public string? ItemId {get; set; }
 }
