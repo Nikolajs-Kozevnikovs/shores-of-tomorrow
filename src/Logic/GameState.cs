@@ -28,6 +28,7 @@ public class GameState
     public void LoadData(string save_folder)
     {
         GameStateLoader.Load(this, save_folder);
+        GameStateLoader.LoadPlayer(this, save_folder);
     }
 
     public void Save(string save_folder, TUI tui)
