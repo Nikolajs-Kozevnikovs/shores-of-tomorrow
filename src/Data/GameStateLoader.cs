@@ -21,18 +21,23 @@ public static class GameStateLoader
         AllowTrailingCommas = true
     };
 
-    public static void Load(GameState world, string directory)
+    public static void LoadBase()
     {
         LoadItems();
         LoadNpcs();
-        LoadRooms(world, Path.Combine(directory, "rooms.json"));
-        LoadQuests(world, Path.Combine(directory, "quests.json"));
+        LoadQuests();
+    }
+
+    public static void LoadDynamic(GameState world, string save_dir)
+    {
+        LoadRooms(world, Path.Combine(SAVE_PATH, save_dir));
+        LoadPlayer(world, Path.Combine(SAVE_PATH, save_dir));
     }
 
 
-    private static void LoadRooms(GameState world, string fileName)
+    private static void LoadRooms(GameState world, string dirName)
     {
-        string json = File.ReadAllText($"{SAVE_PATH}{fileName}");
+        string json = File.ReadAllText($"{dirName}/rooms.json");
         var rooms = JsonSerializer.Deserialize<List<RoomEntry>>(json, options);
     
         if (rooms != null)
@@ -80,13 +85,16 @@ public static class GameStateLoader
     }
 
 
-    private static void LoadQuests(GameState world, string fileName)
+    private static void LoadQuests()
     {
-        string json = File.ReadAllText($"{SAVE_PATH}{fileName}");
-        var quests = JsonSerializer.Deserialize<Dictionary<string, Quest>>(json, options);
+        string json = File.ReadAllText($"./assets/quests.json");
+        var quests = JsonSerializer.Deserialize<List<Quest>>(json, options);
         if (quests != null)
         {
-            world.QuestManager.Quests = quests;
+            foreach (Quest quest in quests)
+            {
+                QuestList.Register(quest);
+            }
         }
     }
 
@@ -109,7 +117,7 @@ public static class GameStateLoader
 
     public static void LoadPlayer(GameState world, string directoryName)
     {
-        string json = File.ReadAllText($"{SAVE_PATH}{Path.Combine(directoryName, "player.json")}");
+        string json = File.ReadAllText($"{directoryName}/player.json");
         var player = JsonSerializer.Deserialize<PlayerEntry>(json, options);
 
         if (player != null)
@@ -117,7 +125,7 @@ public static class GameStateLoader
             world.Player = new Player(
                 x: player.X,
                 y: player.Y,
-                activeQuestName: player.ActiveQuestName,
+                questProgression: player.QuestProgression,
                 inventory: player.ItemIds.Select(itemId => ItemRegistry.CreateItem(itemId)).ToList() ?? [],
                 world: world
             );

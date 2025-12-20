@@ -152,57 +152,16 @@
             // finally, talk to the NPC
             isInDialogue = true;
             // if there is no quest active
-            if (World.Player.ActiveQuestName == "")
+            if (World.Player.QuestProgression.ActiveQuest == null)
             {
-                Quest? q = World.QuestManager.FindAvailableQuest(npc);
-                // no availabe quests -> default dialogue
-                if (q == null)
-                {
-                    tui.WriteLine($"{npc.Name}: Hi! How's your day goin'?");
-                    return;
-                }
-                // if available quest is found -> preQuestDialogue + add 
-                for (int i = 0; i < q.PreQuestDialogue.Count; i++)
-                {
-                    tui.WriteLine($"{npc.Name}: {q.PreQuestDialogue[i]}");
-                    Console.ReadKey();
-                }
-                tui.WriteLine("");
-                tui.WriteLine("Would you be down to do this?");
-                Console.Write("> ");
-                string? text = Console.ReadLine();
-
-                if (text != null && text == "yes")
-                {
-                    q.State = "active";
-                    World.Player.ActiveQuestName = q.Title;
-                    tui.WriteLine($"Quest Accepted: {q.Title}");
-                } else
-                {
-                    tui.WriteLine("Well, come back when you'll change your mind.");
-                }
+                World.Player.QuestProgression.TryAcceptQuest(npc, tui);
                 return;
             }
 
-            // if there is an active quest
-            Quest quest = World.QuestManager.GetQuest(World.Player.ActiveQuestName);
-            bool isCompleted = World.QuestManager.CheckCompletion(
-                questName: World.Player.ActiveQuestName,
-                interactingNpc: npc.Name
-            );
-
-            if (isCompleted)
-            {
-                for (int i = 0; i < quest.CompletionDialogue.Count; i++)
-                {
-                    tui.WriteLine($"{npc.Name}: {quest.CompletionDialogue[i]}");
-                    Console.ReadKey();
-                }
-            } else
-            {
-                tui.WriteLine("You haven't met the criteria to finish this quest!");
-            }
+            // // if there is an active quest
+            World.Player.QuestProgression.TryFinishQuest(npc, tui, World);
         }
+        
 
         private void CatchMoveError(string? errorText)
         {

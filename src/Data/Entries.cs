@@ -5,15 +5,15 @@ public class PlayerEntry
 {
     public int X {get; set;}
     public int Y {get; set;}
-    public string ActiveQuestName { get; set; } = "";
     public List<string> ItemIds { get; set; } = new(); 
+    public QuestProgression QuestProgression { get; set; } = new();
 
     public PlayerEntry() { }
-    public PlayerEntry(int x, int y, string activeQuestName, List<string> itemIds) {
+    public PlayerEntry(int x, int y, List<string> itemIds, QuestProgression questProgression) {
         X = x;
         Y = y;
-        ActiveQuestName = activeQuestName;
         ItemIds = itemIds;
+        QuestProgression = questProgression;
     }
 }
 

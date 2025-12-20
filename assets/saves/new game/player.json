@@ -2,5 +2,11 @@
     "x": 3,
     "y": 5,
     "inventory": [],
-    "activeQuestName": ""
+    "questProgression": {
+        "finishedQuests": [],
+        "activeQuest": null,
+        "availableQuest": "Welcome",
+        "decisions": {}
+
+    }
 }
