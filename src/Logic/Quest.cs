@@ -1,5 +1,5 @@
 namespace WorldOfZuul.Logic;
-internal class Quest
+public class Quest
 {
     public string Title { get; set; }
     public string Description { get; set; }

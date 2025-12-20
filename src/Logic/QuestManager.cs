@@ -2,7 +2,7 @@ namespace WorldOfZuul.Logic;
 public class QuestManager
 {
     private readonly GameState World;
-    internal Dictionary<string, Quest> Quests { get; set; } = [];
+    public Dictionary<string, Quest> Quests { get; set; } = [];
 
     public QuestManager(GameState _World)
     {
