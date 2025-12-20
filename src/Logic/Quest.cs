@@ -1,10 +1,10 @@
 namespace WorldOfZuul.Logic;
 public class Quest
 {
-    public string Title { get; set; }
-    public string Description { get; set; }
+    public string Title { get; set; } = "";
+    public string Description { get; set; } = "";
     public string State { get; set; } = "locked"; // "available", "in_progress", "completed"
-    public string GiverNPC { get; set; }
+    public string GiverNPC { get; set; } = "";
     public List<string> VisibilityConditions { get; set; } = [];
     public List<CompletionTrigger> CompletionTriggers { get; set; } = [];
     public List<string> PreQuestDialogue { get; set; } = [];
@@ -12,9 +12,7 @@ public class Quest
     public List<OnCompleteAction> OnCompleteActions { get; set; } = [];
     // public List<string> RewardItems { get; set; } = [];
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     public Quest() {}
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     public Quest(string title, string description, string giverNPC, List<string> visibilityConditions, List<CompletionTrigger> completionTriggers, List<string> preQuestDialogue, List<string> completionDialogue, List<OnCompleteAction> onCompleteActions)
     {

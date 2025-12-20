@@ -1,5 +1,6 @@
 ﻿namespace WorldOfZuul.Presentation
 {
+    using System.Security.Permissions;
     using WorldOfZuul.Logic;
 
     public class Game
@@ -85,7 +86,7 @@
                 case "south":
                 case "east":
                 case "west":
-                    CatchMoveError(World.Player.Move(command.Name));
+                    CatchMoveError(World.Player.Move(command.Name, command.SecondWord));
                     break;
                 case "talk":
                     TalkToNPC(command.SecondWord);

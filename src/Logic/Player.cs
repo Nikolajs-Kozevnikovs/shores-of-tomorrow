@@ -1,3 +1,5 @@
+using Spectre.Console;
+
 namespace WorldOfZuul.Logic;
 
 public class Player : IItemContainer
@@ -27,24 +29,32 @@ public class Player : IItemContainer
     public bool RemoveItem(Item item) => ((IItemContainer)this).RemoveItem(item);
     public bool IsInside(string itemId) => ((IItemContainer)this).IsInside(itemId);
 
-    public string? Move(string direction)
+    public string? Move(string direction, string? amount)
     {
+        int count = 1;
+        if (amount != null)
+        {
+            try
+            {
+                count = int.Parse(amount);
+            } catch (Exception) { }
+        }
         int newX = X;
         int newY = Y;
 
         switch (direction)
         {
             case "north":
-                newY--;
+                newY -= count;
                 break;
             case "east":
-                newX++;
+                newX += count;
                 break;
             case "south":
-                newY++;
+                newY += count;
                 break;
             case "west":
-                newX--;
+                newX -= count;
                 break;
         }
 
