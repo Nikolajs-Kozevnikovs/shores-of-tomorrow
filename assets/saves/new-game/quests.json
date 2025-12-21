@@ -171,4 +171,26 @@
     "onCompleteActions": [],
     "state": "locked"
   },
+  "Recycling": {
+    "title": "Recycling",
+    "description": "Help Matias transport and sort trash",
+    "giverNPC": "Matias",
+    "finishNPC": "Matias",
+    "visibilityConditions": ["Charity"],
+    "completionTriggers": [],
+    "preQuestDialogue": [
+      "Good afternoon and welcome to the recycling center! My name is Matias and I am responsible for sorting trash. The problem with ocean pollution is getting only worse and one way everyone could help is to sort the trash. Thank you for coming to help. Right now this center is being renovated, so I need to transport all the trash to the nearest bins, but they are quite far away - at the townhall. You can go now and on your way back visit the laboratory, my friend Lila needs your help! Otherwise she is not going to finish the research on time!",
+      "Type \"pick up\" to pick up all the trash.",
+      "Right now you have a choice: you can either follow the instructions or you can carry all the trash to the ocean and save some time - no one is gonna notice.",
+      "At the ocean: Type \"leave\" to throw trash into the ocean.",
+      "At the townhall: Type \"sort\" to recycle the trash."
+    ],
+    "completionDialogue": [
+      "Uh oh! The cliff slope was too steep. You fell and passed away...",
+      "Thank you! All done!",
+      "Remember to visit Nikkolas!"
+    ],
+    "onCompleteActions": [],
+    "state": "locked"
+  },
 }
