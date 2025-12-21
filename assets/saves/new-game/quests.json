@@ -215,4 +215,25 @@
     "onCompleteActions": [],
     "state": "locked"
   },
+  "Marine biologist": {
+    "title": "Marine biologist",
+    "description": "Help Lila collect coral samples",
+    "giverNPC": "Lila",
+    "finishNPC": "Lila",
+    "visibilityConditions": ["Recycling"],
+    "completionTriggers": [],
+    "preQuestDialogue": [
+      "Hey! I'm Lila - marine biologist at this laboratory. I am working on a research project about corals. I need help with collecting more samples. Could you help me please? Choice: yes/no.",
+      "Go to the ocean.",
+      "Type \"collect\" to collect coral samples.",
+      "You have three different coral types with you now! Go to Lila.",
+      "Type \"give\" to give them to Lila."
+    ],
+    "completionDialogue": [
+      "Lila: Thank you so much for helping me! I hope I will finish soon and it will raise awareness about the problems our ocean is facing. Now go and visit Nikkolas at his house, he will announce the decision about your stay here!",
+      "Lila: I won't be able to finish on time now! Unfortunately, my laboratory will be closed... It was my way of trying to overcome global problems we are facing and now I can't do it anymore. Now go and visit Nikkolas at his house, he will announce the decision about your stay here!"
+    ],
+    "onCompleteActions": [],
+    "state": "locked"
+  },
 }
