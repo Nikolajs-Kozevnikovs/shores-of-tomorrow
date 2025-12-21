@@ -1,0 +1,61 @@
+{
+  "Welcome": {
+    "title": "Welcome",
+    "description": "Speak with Nikkolas, he should be in the townhall",
+    "giverNPC": "Nikkolas",
+    "finishNPC": "Jorge",
+    "visibilityConditions": [],
+    "completionTriggers": [
+      {
+        "type": "talk_to_npc",
+        "npc": "Jorge"
+      }
+    ],
+    "preQuestDialogue": [
+      "Hello! We saw your application for the job. You are welcomed to the Abyssal Key island",
+      "From now on it's the start of your trial period.",
+      "The situation on the island is quite worrying - ",
+      "fish populations are collapsing, waters are polluted by factories, and the locals are divided between survival and sustainability. ",
+      "Your goal is to make choices that will determine the island's future.",
+      "Talk to me when you will be ready to start.",
+      "Right now you can go to the seashore next to my house, north-east of the island and meet my friend Jorge. He will introduce you to your first quest."
+    ],
+    "completionDialogue": [
+      "Hi, nice to meet you! Talk to me again if you want to try something new."
+    ],
+    "onCompleteActions": [
+    ],
+    "state": "available"
+  },
+  "Fishing": {
+    "title": "Fishing",
+    "description": "Meet Jorge next to Nikkolas's house",
+    "giverNPC": "Jorge",
+    "finishNPC": "Jorge",
+    "visibilityConditions": ["Welcome"],
+    "completionTriggers": [],
+    "preQuestDialogue": [
+      // intro
+      "Hello! I'm Jorge, a local fisherman. For fifty years I've watched this island changing, and I've seen how overfishing has made things tougher for everyone. I always try to fish in a sustainable way, but it means less food and money these days. Would you like to join me today? Choice: yes/no.",
+      "You have two choices:",
+      "Fish sustainably in approved areas. It's better for the ocean, but you'll catch fewer fish and earn less profit - go to the furthest ocean (1).",
+      "Fish in restricted zones. There are more fish here, but it harms the environment and breaks the rules - go to the nearest ocean (2).",
+      "Choose your approach. (say \"1\" or \"2\")",
+      // fishing loop (both paths)
+      "Type \"fish\" to start fishing.",
+      "You put a worm on your hook. Drop the line into the water. Wait for a fish to bite...",
+      "You've got a fish! Add to inventory? Choice: yes/no",
+      "Wow, you've got another fish! Choice: yes/no",
+      "Three in a row? Amazing! 3 good fish you got there. Choice: yes/no",
+      "No more luck today... Return to Jorge."
+    ],
+    "completionDialogue": [
+      // clean way (ocean 1)
+      "Jorge: Good job! Thank you for your help. One of my friends is also waiting for you, you can find him on the boat.",
+      // dirty way (ocean 2)
+      "Jorge: I would have chosen the other way, but thank you anyway! I know someone you might like; you can find him near the ocean with preserved corals and animals."
+    ],
+    "onCompleteActions": [],
+    "state": "locked"
+  },
+}
