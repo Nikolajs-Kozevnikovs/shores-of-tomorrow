@@ -89,4 +89,30 @@
     "onCompleteActions": [],
     "state": "locked"
   },
+  "Poacher": {
+    "title": "Poacher",
+    "description": "Hear Santino's offer to fish illegally",
+    "giverNPC": "Santino",
+    "finishNPC": "Santino",
+    "visibilityConditions": ["Fishing"],
+    "completionTriggers": [],
+    "preQuestDialogue": [
+      // branch choice intro
+      "Hello, my name is Santino and I want to offer you a way to earn a lot of money. It will include illegal fishing, but I have been doing it for so long, no one ever found me here. Are you in? Choice: yes/no.",
+      
+      // if accepted
+      "Type \"fish\" to start fishing.",
+      "Preparing rods...",
+      "Starting fishing...",
+      "You've got a fish! Add to the inventory? Choice: yes/no.",
+      "You've got a fish! Add to the inventory? Choice: yes/no.",
+      "You've got a fish! Add to the inventory? Choice: yes/no."
+    ],
+    "completionDialogue": [
+      "Santino: Thank you! You can have all of it and go further to the seashore. See you later!",
+      "Santino: You can go further to the seashore now, but you will regret it later!"
+    ],
+    "onCompleteActions": [],
+    "state": "locked"
+  },
 }
