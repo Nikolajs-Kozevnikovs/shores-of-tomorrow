@@ -193,4 +193,26 @@
     "onCompleteActions": [],
     "state": "locked"
   },
+  "Factory": {
+    "title": "Factory",
+    "description": "Help Alexandr manage factory leftovers",
+    "giverNPC": "Alexandr",
+    "finishNPC": "Alexandr",
+    "visibilityConditions": ["Sell fish"],
+    "completionTriggers": [],
+    "preQuestDialogue": [
+      "Hello, and welcome to my factory! We're having trouble managing all these leftovers. You can help by either dumping the waste into the ocean, like we sometimes do, or taking it to the recycling center instead. When you're finished, visit Nikkolas at his house—he will announce the decision about your stay here!",
+      "Type \"pick up\" to pick up all leftovers.",
+      "Now you can either go to the ocean or to the recycling center.",
+      "At the ocean: Type \"leave\" to throw trash into the ocean.",
+      "At the recycling center: Type \"sort\" to recycle the leftovers."
+    ],
+    "completionDialogue": [
+      "Successfully threw all the trash into water!",
+      "All leftovers are utilized, thank you!",
+      "Remember to visit Nikkolas!"
+    ],
+    "onCompleteActions": [],
+    "state": "locked"
+  },
 }
