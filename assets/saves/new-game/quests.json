@@ -115,4 +115,23 @@
     "onCompleteActions": [],
     "state": "locked"
   },
+  "Help or sell": {
+    "title": "Help or sell",
+    "description": "Decide whether to donate or sell your catch",
+    "giverNPC": "Mariha",
+    "finishNPC": "Mariha",
+    "visibilityConditions": ["Poacher"],
+    "completionTriggers": [],
+    "preQuestDialogue": [
+      // after fishing with rod on the fishing boat:
+      "Hey! I'm Mariha. I'm only a little girl, but I want to help you. You've caught lots of fish, and now you get to choose what happens next. You can sell your fish at the local shop, or you can donate them to our charity center to help families who need food. My family has a hard time making money, because big companies keep taking more fish than we can. If you help us, I'd be so grateful. If you want to sell, head to the shop. If you want to help out, take your fish to the charity center. Thank you and see you soon!",
+      // after accepting poacher offer:
+      "Hey! I'm Mariha. I'm only a little girl, but I want to help you. You shouldn't have accepted Santino's offer, he is a well-known poacher here, but it doesn't matter anymore. You've caught lots of fish, and now you get to choose what happens next. You can sell your fish at the local shop, or you can donate them to our charity center to help families who need food. My family has a hard time making money, because big companies keep taking more fish than we can. If you help us, I'd be so grateful. If you want to sell, head to the shop. If you want to help out, take your fish to the charity center. Thank you and see you soon!",
+      // after declining the poacher offer:
+      "Hey! I'm Mariha. I'm only a little girl, but I want to help you. Good thing you haven't accepted Santino's offer, he is a well-known poacher here. You've caught lots of fish, and now you get to choose what happens next. You can sell your fish at the local shop, or you can donate them to our charity center to help families who need food. My family has a hard time making money, because big companies keep taking more fish than we can. If you help us, I'd be so grateful. If you want to sell, head to the shop. If you want to help out, take your fish to the charity center. Thank you and see you soon!"
+    ],
+    "completionDialogue": [],
+    "onCompleteActions": [],
+    "state": "locked"
+  },
 }
