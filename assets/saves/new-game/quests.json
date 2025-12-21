@@ -134,4 +134,23 @@
     "onCompleteActions": [],
     "state": "locked"
   },
+  "Sell fish": {
+    "title": "Sell fish",
+    "description": "Sell your fish to the local shop",
+    "giverNPC": "Artyom",
+    "finishNPC": "Artyom",
+    "visibilityConditions": ["Help or sell"],
+    "completionTriggers": [],
+    "preQuestDialogue": [
+      "Hey! Welcome to the local shop \"Tuna Matata\". I see that you came to sell your fish. Good choice!",
+      "Type \"sell\" to complete the transaction."
+    ],
+    "completionDialogue": [
+      "All the fish was sold.",
+      "You got a great deal of money!",
+      "Artyom: Thank you! I will recommend you to my friend, who owns a factory here. Visit him at the Factory."
+    ],
+    "onCompleteActions": [],
+    "state": "locked"
+  },
 }
