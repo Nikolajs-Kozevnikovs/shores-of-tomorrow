@@ -58,4 +58,35 @@
     "onCompleteActions": [],
     "state": "locked"
   },
+  "Fishing on the boat": {
+    "title": "Fishing on the boat",
+    "description": "Decide with Nikolja whether to use nets or rods",
+    "giverNPC": "Nikolja",
+    "finishNPC": "Nikolja",
+    "visibilityConditions": ["Fishing"],
+    "completionTriggers": [],
+    "preQuestDialogue": [
+      // branch choice intro
+      "Hey there! I'm Nikolja, another fisherman here like Jorge. I'm about to head out and fish from my boat. We can use a net and catch lots of fish, but sometimes other animals get hurt too. Or, we can use fishing rods, catch fewer fish, and avoid harming other creatures. Which way should we go? Choice: net (1) / rods (2).",
+      
+      // net route (1)
+      "Type \"fish\" to start the process.",
+      "You prepared a net and threw it into water.",
+      "10 minutes have passed, the net is out.",
+      "You caught 50 fish! Add to the inventory? Choice: yes/no.",
+      
+      // rods route (2)
+      "You prepared rods and started fishing.",
+      "10 minutes passed.",
+      "You've got a fish! Add to the inventory? Choice: yes/no.",
+      "You've got a fish! Add to the inventory? Choice: yes/no.",
+      "No more luck today..."
+    ],
+    "completionDialogue": [
+      "Nikolja: Good job! However we also caught a turtle, it is going to die soon, but there is nothing we can do now. I know someone you might like though, you can find him near the ocean with preserved animals and corals!",
+      "Nikolja: Only a few fish, but it is still good! Now you can go to the seashore, someone wants to talk to you."
+    ],
+    "onCompleteActions": [],
+    "state": "locked"
+  },
 }
