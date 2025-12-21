@@ -153,4 +153,22 @@
     "onCompleteActions": [],
     "state": "locked"
   },
+  "Charity": {
+    "title": "Charity",
+    "description": "Donate your fish to the charity center",
+    "giverNPC": "Phil",
+    "finishNPC": "Phil",
+    "visibilityConditions": ["Help or sell"],
+    "completionTriggers": [],
+    "preQuestDialogue": [
+      "Hello, you are welcomed to the charity center! Thank you for helping the villagers.",
+      "Type \"donate\" to donate fish."
+    ],
+    "completionDialogue": [
+      "You have successfully donated your fish.",
+      "Phil: Thank you so much! We will remember your generosity. I heard that my friend Matias needs help at the recycling center, it would be so nice if you helped him out."
+    ],
+    "onCompleteActions": [],
+    "state": "locked"
+  },
 }
