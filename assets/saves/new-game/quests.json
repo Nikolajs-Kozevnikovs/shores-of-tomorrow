@@ -236,4 +236,24 @@
     "onCompleteActions": [],
     "state": "locked"
   },
+  "At Nikkolas house": {
+    "title": "At Nikkolas house",
+    "description": "Hear Nikkolas announce the decision about your stay",
+    "giverNPC": "Nikkolas",
+    "finishNPC": "Nikkolas",
+    "visibilityConditions": ["Factory", "Marine biologist"],
+    "completionTriggers": [],
+    "preQuestDialogue": [
+      "Return to Nikkolas to hear the results of your actions."
+    ],
+    "completionDialogue": [
+      "Greater good: Hey again! I see you've done a lot of great work. Thank you so much - we all really appreciate it. We're ready to share the results! You took good care of the environment and helped the villagers. You might not have much money now, but the island is thriving because of you. Congratulations - you're our new manager!",
+      "Balance to the good side: Hey again! I see you've done a lot of great work. Thank you so much - we all really appreciate it. We're ready to announce the results! You've done almost everything right for the environment and cared for the villagers. The island is thriving! We believe you will only get better. Congratulations - you're our new manager!",
+      "Balance: Hey again! I see you've done a lot of work. Thank you so much - we all truly appreciate it. We're ready to announce the results! You made choices that brought both good and bad for the environment, the villagers, and yourself. That's what we call balance. We believe you will only get better. Congratulations - you're our new manager!",
+      "Balance to the bad side: Hey again! I see you've put in a lot of effort. Thank you for that, even though not all your choices had good results. We're ready to announce the results! You mostly took unsustainable paths, which hurt the environment and the villagers. We don't believe you're the right person for this role. Better luck next time...",
+      "Selfish: Hey again! I see you've done a lot of work. We're ready to announce the results! You mostly chose unsustainable paths that led to the island's collapse. You may have become rich, but the island is now uninhabitable. We don't believe you're the one we were searching for. Better luck next time..."
+    ],
+    "onCompleteActions": [],
+    "state": "locked"
+  }
 }
