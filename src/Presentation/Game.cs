@@ -186,7 +186,7 @@
             try {
                 int n = int.Parse(secondCommandWord);
                 MoveItem(World.Player.Inventory[n-1], World.Player.Inventory, World.Player.CurrentRoom.Items);
-                tui.WriteLine($"You put {World.Player.Inventory[n-1]} to the ground.");
+                tui.WriteLine($"You put {World.Player.Inventory[n-1].Name} to the ground.");
                 return;
             } catch(Exception)
             {
