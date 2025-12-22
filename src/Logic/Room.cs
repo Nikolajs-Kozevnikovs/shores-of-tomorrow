@@ -35,8 +35,14 @@ public class Room : IItemContainer
     }
 
 
-    public void AddItem(Item item) => ((IItemContainer)this).AddItem(item);
-    public bool RemoveItem(Item item) => ((IItemContainer)this).RemoveItem(item);
+    public void AddItem(Item item)
+    {
+        Items.Add(item);
+    }
+    public bool RemoveItem(Item item)
+    {
+        return Items.Remove(item);
+    }
     public bool IsInside(string itemId, int quantity)
     {
         int itemsInRoom = Items.Where(i => i.Id == itemId).ToList().Count;

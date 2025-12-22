@@ -20,7 +20,7 @@
       "description": "A small wooden boat gently rocks on the water, ready for short trips offshore.",
       "background": "boat.csv",
       "npcs": ["Nikolja"],
-      "items": []
+      "items": ["fishing_net", "fishing_pole"]
     }
   },
   {

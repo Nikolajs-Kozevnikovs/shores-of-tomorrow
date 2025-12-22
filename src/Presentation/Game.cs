@@ -175,7 +175,7 @@
 
             if (secondCommandWord == null || secondCommandWord == "") 
             {
-                tui.WriteLine("There are multiple items in this room! To choose an itemm use 'take [number]'");
+                tui.WriteLine("There are multiple items in this room! To choose an item use 'take <number>'");
                 tui.WriteLine("Available items:");
                 for (int i = 0; i < World.Player.Inventory.Count; i++)
                 {
@@ -185,8 +185,8 @@
             }
             try {
                 int n = int.Parse(secondCommandWord);
-                MoveItem(World.Player.Inventory[n], World.Player, World.Player.CurrentRoom);
-                tui.WriteLine($"You put {World.Player.Inventory[n]} to the ground.");
+                MoveItem(World.Player.Inventory[n-1], World.Player.Inventory, World.Player.CurrentRoom.Items);
+                tui.WriteLine($"You put {World.Player.Inventory[n-1]} to the ground.");
                 return;
             } catch(Exception)
             {
@@ -207,10 +207,10 @@
             };
             switch(currentLocation.Name)
             {
-                case "Fishing boat":
+                case "Fishing Boat":
                     // prevent fishing with two tools
-                    tool = World.Player.Inventory.Find(i => i.Id == "fishing_net");
-                    Item? tool2 = World.Player.Inventory.Find(i => i.Id == "fishing_pole");
+                    tool = World.Player.Inventory.Find(i => i.Id == "fishing_pole");
+                    Item? tool2 = World.Player.Inventory.Find(i => i.Id == "fishing_net");
                     if (tool != null && tool2 != null)
                     {
                         tui.WriteLine("You have multiple tools to fish with: fishing rod (1) and fishing net (2). Choose one by typing a number.");
@@ -234,7 +234,7 @@
                                 return;
                             }
                         }
-                        return;
+                        // return;
                     }
                     break;
                 case "Coral Reef":
@@ -297,7 +297,6 @@
                     Item fish = ItemRegistry.CreateItem(fish_id);
                     World.Player.AddItem(fish);
                     tui.WriteLine($"Gotcha! You caught {fish.Name}");
-
                     if (tool.Id == "fishing_net")
                     {
                         for (int i = 0; i < 4; i++)
@@ -355,7 +354,7 @@
 
             if (items.Count == 1)
             {
-                MoveItem(items[0], World.Player.CurrentRoom, World.Player);
+                MoveItem(items[0], World.Player.CurrentRoom.Items, World.Player.Inventory);
                 tui.WriteLine($"You took {items[0]} to your inventory.");
                 return;
             }
@@ -373,15 +372,19 @@
             }
             try {
                 int n = int.Parse(secondCommandWord);
-                MoveItem(items[n], World.Player.CurrentRoom, World.Player);
-                tui.WriteLine($"You took {items[n]} to your inventory.");
-                return;
+                if (n > 2)
+                {
+                    throw new Exception("Wrong input");
+                }
+                tui.WriteLine("Got here");
+                tui.WriteLine($"You took {items[n-1].Name} to your inventory.");
+                MoveItem(items[n-1], World.Player.CurrentRoom.Items, World.Player.Inventory);
+                // return;
             } catch(Exception)
             {
                 tui.WriteLine("Wrong input");
                 return;
             }
-
         }
 
         private void TalkToNPC(string? secondCommandWord)
@@ -462,10 +465,10 @@
             tui.WriteLine(errorText);
         }
 
-        public static void MoveItem(Item item, IItemContainer from, IItemContainer to)
+        public static void MoveItem(Item item, List<Item> from, List<Item> to)
         {
-            if (from.RemoveItem(item))
-                to.AddItem(item);
+            if (from.Remove(item))
+                to.Add(item);
             else
                 Console.WriteLine("Item not found in source container.");
         }
