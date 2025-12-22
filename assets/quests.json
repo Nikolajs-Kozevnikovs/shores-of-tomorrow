@@ -100,7 +100,9 @@
         "Anyway, talk to me again, I think I have an offer you might like."
       ],
       "catch_with_pole": [
-        "It took a while, but it is still good! Now you can go to the seashore, someone wants to talk to you."
+        "It took a while, but it is still good!",
+        "In the distance, you hear a girl. She seems to be calling you.",
+        "Find her on the road next to the charity post."
       ]
     },
     "completionTriggers": [
