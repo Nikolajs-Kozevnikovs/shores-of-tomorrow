@@ -46,6 +46,14 @@
   {
     "id": "coral",
     "name": "Nice and colorful corals"
+  },
+  {
+    "id": "cash",
+    "name": "A hefty bag of cash"
+  },
+  {
+    "id": "letter",
+    "name": "Thank-you letter"
   }
 ]
 

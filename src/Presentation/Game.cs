@@ -111,6 +111,32 @@
                         tui.WriteLine("No active quests!");
                     }
                     break;
+                case "sell":
+                    if (World.Player.CurrentRoom.Name != "Fish shop")
+                    {
+                        tui.WriteLine("You can't sell anything here!");
+                    } else
+                    {
+                        tui.WriteLine("You got a hefty bag of cash for your efforts.");
+                        Item cash = ItemRegistry.CreateItem("cash");
+                        World.Player.AddItem(cash);
+                        World.Player.RemoveItem("rare_fish", 999);
+                        World.Player.RemoveItem("remote_waters_fish", 999);
+                        World.Player.RemoveItem("close_waters_fish", 999);
+                        World.Player.RemoveItem("fish_caught_with_net", 999);
+                        World.Player.RemoveItem("fish_caught_with_pole", 999);
+                    }
+                    break;
+                    case "donate":
+                        tui.WriteLine("You got a Thank-you letter.");
+                        Item letter = ItemRegistry.CreateItem("letter");
+                        World.Player.AddItem(letter);
+                        World.Player.RemoveItem("rare_fish", 999);
+                        World.Player.RemoveItem("remote_waters_fish", 999);
+                        World.Player.RemoveItem("close_waters_fish", 999);
+                        World.Player.RemoveItem("fish_caught_with_net", 999);
+                        World.Player.RemoveItem("fish_caught_with_pole", 999);
+                    break;
                 case "help":
                     PrintHelp();
                     break;

@@ -1,7 +1,7 @@
 [
   {
     "title": "Welcome",
-    "description": "Meet Jorge next to Nikkolas's house",
+    "description": "Meet Jorge next to Nikkolas's house, north-east side of the island",
     "giverNPC": "Nikkolas",
     "preQuestDialogue": [
       "Hello! We saw your application for the job. You are welcomed to the Abyssal Key island",
@@ -262,8 +262,8 @@
     },
     "completionTriggers": [
       {
-        "type": "talk_to_npc",
-        "nPCName": "Artyom"
+        "type": "own_item",
+        "itemId": "cash"
       }
     ],
     "onFinishActions": [
@@ -298,8 +298,8 @@
     },
     "completionTriggers": [
       {
-        "type": "talk_to_npc",
-        "nPCName": "Phil",
+        "type": "own_item",
+        "itemId": "letter",
         "isGood": true
       }
     ],
