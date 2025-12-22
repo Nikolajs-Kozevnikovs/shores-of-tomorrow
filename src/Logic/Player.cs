@@ -1,5 +1,3 @@
-using Spectre.Console;
-
 namespace WorldOfZuul.Logic;
 
 public class Player : IItemContainer
@@ -39,8 +37,12 @@ public class Player : IItemContainer
         return true;
     }
 
-    public void AddItem(Item item) => ((IItemContainer)this).AddItem(item);
-    public bool RemoveItem(Item item) => ((IItemContainer)this).RemoveItem(item);
+    // inside Player.cs
+    public void AddItem(Item item)
+    {
+        Inventory.Add(item);
+    }
+
     public bool IsInside(string itemId) => ((IItemContainer)this).IsInside(itemId);
 
     public string? Move(string direction, string? amount)

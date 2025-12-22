@@ -8,8 +8,7 @@
       "description": "A cozy place where your adventure begins.",
       "background": "townhall.csv",
       "npcs": ["Nikkolas"],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -21,8 +20,7 @@
       "description": "A small wooden boat gently rocks on the water, ready for short trips offshore.",
       "background": "boat.csv",
       "npcs": ["Nikolja"],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -30,12 +28,11 @@
     "y": 3,
     "room": {
       "tileIdentifier": "C",
-      "name": "Coral reef",
+      "name": "Coral Reef",
       "description": "A colorful underwater area filled with fish and sharp coral formations.",
       "background": "coralReef.csv",
       "npcs": ["Santino"],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -47,8 +44,7 @@
       "description": "A cramped shop where freshly caught fish are cleaned and sold.",
       "background": "fishShop.csv",
       "npcs": ["Artyom"],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -60,8 +56,7 @@
       "description": "A busy facility where old materials are sorted, processed, and reused.",
       "background": "recyclingCentre.csv",
       "npcs": ["Matias"],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -73,8 +68,7 @@
       "description": "A loud industrial building filled with machinery and crates.",
       "background": "factory.csv",
       "npcs": ["Alexandr"],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -86,8 +80,7 @@
       "description": "A small and cluttered home that smells faintly of wood and old books.",
       "background": "house1.csv",
       "npcs": ["Nikkolas"],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -99,8 +92,7 @@
       "description": "A tidy room filled with tools, samples, and half-finished research.",
       "background": "laboratory.csv",
       "npcs": ["Lila"],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -112,8 +104,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -125,8 +116,7 @@
       "description": "A modest shelter where volunteers hand out simple meals to those in need.",
       "background": "foodCharity.csv",
       "npcs": ["Phil"],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -138,8 +128,7 @@
       "description": "A road connecting all every building in this town",
       "background": "road.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -151,8 +140,7 @@
       "description": "A road connecting all every building in this town",
       "background": "road.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -164,8 +152,7 @@
       "description": "A road connecting all every building in this town",
       "background": "road.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -177,8 +164,7 @@
       "description": "A road connecting all every building in this town",
       "background": "road.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -190,8 +176,7 @@
       "description": "A road connecting all every building in this town",
       "background": "road.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -203,8 +188,7 @@
       "description": "A road connecting all every building in this town",
       "background": "road.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -216,8 +200,7 @@
       "description": "A road connecting all every building in this town",
       "background": "road.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -229,8 +212,7 @@
       "description": "A road connecting all every building in this town",
       "background": "road.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -242,8 +224,7 @@
       "description": "A road connecting all every building in this town",
       "background": "road.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -255,8 +236,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -268,8 +248,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -281,8 +260,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -294,8 +272,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": ["Jorge"],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -307,8 +284,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -320,8 +296,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -333,8 +308,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -346,8 +320,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -359,8 +332,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -372,8 +344,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -385,8 +356,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -398,8 +368,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -411,8 +380,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -424,8 +392,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -437,8 +404,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -450,8 +416,7 @@
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
       "npcs": ["Mariha"],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -463,8 +428,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -476,8 +440,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -489,8 +452,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -502,8 +464,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -515,8 +476,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -528,8 +488,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -541,8 +500,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -554,8 +512,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -567,8 +524,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -580,8 +536,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -593,8 +548,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -606,8 +560,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -619,8 +572,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -632,8 +584,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -645,8 +596,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -658,8 +608,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -671,8 +620,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -684,8 +632,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -697,8 +644,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -710,8 +656,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -723,8 +668,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -736,8 +680,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -749,8 +692,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -762,8 +704,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -775,8 +716,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -788,8 +728,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -801,8 +740,7 @@
       "description": "Open water stretches in all directions, with steady waves and the distant sound of seabirds.",
       "background": "ocean.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -814,8 +752,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -827,8 +764,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -840,8 +776,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -853,8 +788,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -866,8 +800,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -879,8 +812,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -892,8 +824,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -905,8 +836,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -918,8 +848,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -931,8 +860,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -944,8 +872,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -957,8 +884,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -970,8 +896,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -983,8 +908,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -996,8 +920,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1009,8 +932,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1022,8 +944,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1035,8 +956,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1048,8 +968,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1061,8 +980,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1074,8 +992,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1087,8 +1004,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1100,8 +1016,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1113,8 +1028,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1126,8 +1040,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1139,8 +1052,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1152,8 +1064,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1165,8 +1076,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1178,8 +1088,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1191,8 +1100,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1204,8 +1112,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1217,8 +1124,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1230,8 +1136,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1243,8 +1148,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1256,8 +1160,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1269,8 +1172,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1282,8 +1184,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1295,8 +1196,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1308,8 +1208,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1321,8 +1220,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   },
   {
@@ -1334,8 +1232,7 @@
       "description": "Far from land, the ocean grows deeper and quieter, and the island is barely visible.",
       "background": "ocean2.csv",
       "npcs": [],
-      "items": [],
-      "allowedItems": []
+      "items": []
     }
   }
 ]

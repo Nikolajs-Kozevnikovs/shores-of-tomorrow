@@ -12,6 +12,10 @@
     "name": "Fishing pole"
   },
   {
+    "id": "fishing_bomb",
+    "name": "Fishing bomb"
+  },
+  {
     "id": "remote_waters_fish",
     "name": "Deepwater Red Drum"
   },
@@ -24,7 +28,7 @@
     "name": "Black Drum"
   },
   {
-    "id": "fish_caught_with_fishing_pole",
+    "id": "fish_caught_with_pole",
     "name": "Cubera Snapper"
   },
   {

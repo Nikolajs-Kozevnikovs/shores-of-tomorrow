@@ -1,3 +1,5 @@
+using WorldOfZuul.Presentation;
+
 namespace WorldOfZuul.Logic;
 public class Quest
 {
@@ -13,35 +15,6 @@ public class Quest
     {
     }
 
-    // public bool IsCompleted(GameState world)
-    // {
-    //     foreach (var trigger in CompletionTriggers)
-    //     {
-    //         switch (trigger.Type)
-    //         {
-    //             case "talk_to_npc":
-    //                 return true;
-    //             case "zone_item":
-    //                 if (trigger.ItemId != null && trigger.Room != null)
-    //                 {
-    //                     var room = world.RoomManager.GetRoom(trigger.Room[0], trigger.Room[1]);
-    //                     if (room != null && room.IsInside(trigger.ItemId, trigger.Quantity))
-    //                         return true;
-    //                 }
-    //                 break;
-    //             case "inventory_item":
-    //                 if (trigger.ItemId != null)
-    //                 {
-    //                     int count = world.Player.Inventory.Count(i => i.Id == trigger.ItemId);
-    //                     if (count >= trigger.Quantity)
-    //                         return true;
-    //                 }
-    //                 break;
-    //         }
-    //     }
-    //     return false;
-    // }
-    // this thing doesn't work completely correctly. If you have multiple completion triggers, it's gonna fail
     public CompletionTrigger? FindCompletionTrigger(GameState world, NPC npc)
     {
         foreach (var trigger in CompletionTriggers)
@@ -75,12 +48,12 @@ public class Quest
         return null;
     }
 
-    public void ExecuteOnFinishActions(GameState world, string? decision)
+    public void ExecuteOnFinishActions(GameState world, string decision, TUI tui)
     {
         Item item;
         foreach (OnFinishAction action in OnFinishActions)
         {
-            if (decision != null && decision != action.Decision)
+            if (action.Decision != null)
             {
                 continue;
             }
@@ -143,6 +116,9 @@ public class Quest
                         }
                     }
                     break;
+                case "final_rating":
+                    world.Player.QuestProgression.EvaluateChoices(tui);
+                    break;
             }
         }
     }
@@ -156,6 +132,7 @@ public class CompletionTrigger
     public int[]? Room { get; set; }           // [x, y] for "zone_item"
     public string? Decision { get; set; }
     public string? NPCName { get; set; }
+    public bool? IsGood {get; set; } = false;
 }
 
 

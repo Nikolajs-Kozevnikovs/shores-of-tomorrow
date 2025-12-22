@@ -6,6 +6,6 @@
         "finishedQuests": [],
         "activeQuests": [],
         "availableQuests": ["Welcome"],
-        "decisions": {}
+        "goodDesicisionCount": 0
     }
 }

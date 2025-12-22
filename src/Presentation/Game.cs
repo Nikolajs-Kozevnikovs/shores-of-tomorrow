@@ -100,9 +100,15 @@
                     CheckInventory();
                     break;
                 case "quest":
-                    foreach (string qId in World.Player.QuestProgression.ActiveQuests)
+                    if (World.Player.QuestProgression.ActiveQuests.Count != 0)
                     {
-                        tui.WriteLine($" - {QuestList.Get(qId).Description}");
+                        foreach (string qId in World.Player.QuestProgression.ActiveQuests)
+                        {
+                            tui.WriteLine($" - {QuestList.Get(qId).Description}");
+                        }
+                    } else
+                    {
+                        tui.WriteLine("No active quests!");
                     }
                     break;
                 case "help":
@@ -123,34 +129,131 @@
 
             return true;
         }
-
+        // complicated, but it works
         private void Fishing()
         {
-            // Room currentLocation = World.Player.CurrentRoom;
-            // switch(currentLocation.Name)
-            // {
-            //     case "Fishing boat":
-            //         break;
-            //     case "Coral reef":
-            //         break;
-            //     case "Ocean":
-            //         break;
-            //     case "Remote Ocean":
-            //         if (World.Player.Inventory.Find(i => i.Id == "fishing_rod") != null)
-            //         {
-            //             tui.WriteLine("Fishing...");
-            //             // fishing minigame
-            //             tui.WriteLine("Gotcha!");
-            //             CatchFish(currentLocation.Name);
-            //         } else
-            //         {
-            //             tui.WriteLine("You don't have anything to fish with!");
-            //         }
-            //         break;
-            //     default:
-            //         tui.WriteLine("You can't fish here!");
-            //         break;
-            // }
+            Room currentLocation = World.Player.CurrentRoom;
+            Item? tool = null;
+            
+            Dictionary<string, double> odds = new(){
+                { "fishing_pole", 0.6 },
+                { "fishing_net", 0.8 },
+                { "fishing_bomb", 0.8 }
+            };
+            switch(currentLocation.Name)
+            {
+                case "Fishing boat":
+                    // prevent fishing with two tools
+                    tool = World.Player.Inventory.Find(i => i.Id == "fishing_net");
+                    Item? tool2 = World.Player.Inventory.Find(i => i.Id == "fishing_pole");
+                    if (tool != null && tool2 != null)
+                    {
+                        tui.WriteLine("You have multiple tools to fish with: fishing rod (1) and fishing net (2). Choose one by typing a number.");
+                        string? number = Console.ReadLine();
+                        if (number != null && number != "")
+                        {
+                            try
+                            {
+                                int num = int.Parse(number);
+                                if (num == 2)
+                                {
+                                    tool = tool2;
+                                } else if (num != 1)
+                                {
+                                    tui.WriteLine("Wrong input!");
+                                    return;
+                                }
+                            } catch (Exception)
+                            {
+                                tui.WriteLine("Wrong input!");
+                                return;
+                            }
+                        }
+                        return;
+                    }
+                    break;
+                case "Coral reef":
+                    tool = World.Player.Inventory.Find(i => i.Id == "fishing_bomb");
+                    break;
+                case "Ocean":
+                case "Remote Ocean":
+                    tool = World.Player.Inventory.Find(i => i.Id == "fishing_pole");
+                    break;
+                default:
+                    tui.WriteLine("You can't fish here!");
+                    break;
+            }
+            if (tool == null) {
+                tui.WriteLine("You don't have anything to fish with!");
+                return;
+            }
+
+            
+
+            tui.WriteLine("Fishing...");
+            // fishing minigame
+            tui.WriteLine($"Pick a number between 1 and 5");
+            string? picked = Console.ReadLine();
+            if (picked == null || picked == "")
+            {
+                tui.WriteLine("Wrong input");
+                return;
+            }
+            try
+            {
+                int pick = int.Parse(picked);
+                List<bool> tiles = new List<bool>();
+                Random rng = new Random();
+
+                for (int i = 0; i < 5; i++)
+                {
+                    tiles.Add(rng.NextDouble() < odds[tool.Id]);
+                }
+                // tui.WriteLine("We got to this point");
+                if (tiles[pick-1])
+                {
+                    Dictionary<string, string> fish_type = new(){
+                        { "Ocean", "close_waters_fish" },
+                        { "Remote Ocean", "remote_waters_fish" },
+                        { "Coral Reef", "rare_fish" },
+                        {"Fishing Boat", "fish_caught_with_" }
+                    };
+                    string fish_id = fish_type[currentLocation.Name];
+                    if (currentLocation.Name == "Fishing Boat")
+                    {
+                        if (tool.Id == "fishing_pole")
+                        {
+                            fish_id += "pole";
+                        } else
+                        {
+                            fish_id += "net";
+                        }
+                    }
+                    Item fish = ItemRegistry.CreateItem(fish_id);
+                    World.Player.AddItem(fish);
+                    tui.WriteLine($"Gotcha! You caught {fish.Name}");
+
+                    if (tool.Id == "fishing_net")
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            fish = ItemRegistry.CreateItem(fish_id);
+                            World.Player.AddItem(fish);
+                            tui.WriteLine($"Gotcha! You caught {fish.Name}");
+                        }
+                    }
+                } else
+                {
+                    tui.WriteLine("No luck this time, try again!");
+                }
+            } catch (Exception)
+            {
+                tui.WriteLine("Wrong input!");
+                tui.WriteLine("Or the code is wrong");
+                return;
+            }
+            
+            
             // // net route (1)
             // "You prepared a net and threw it into water.",
             // "10 minutes have passed, the net is out.",
@@ -164,7 +267,6 @@
             // "No more luck today..."
         }
 
-        // private void CatchFish(string locationName, string tool);
 
         private void CheckInventory()
         {

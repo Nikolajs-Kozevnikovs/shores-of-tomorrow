@@ -7,7 +7,7 @@ public class QuestProgression
     public List<string> FinishedQuests { get; set; } = [];
     public List<string> AvailableQuests { get; set; } = ["Welcome"];
     public List<string> ActiveQuests { get; set; } = [];
-    public Dictionary<string, string> Decisions { get; set; } = []; // <quest: decision>
+    public int GoodDesicisionCount {get; set; } = 0;
 
     public void AcceptQuest(string questId)
     {
@@ -15,7 +15,7 @@ public class QuestProgression
         AvailableQuests.Remove(questId);
     }
 
-    public void FinishQuest(GameState world, string questId, string? decision)
+    public void FinishQuest(GameState world, string questId, string? decision, TUI tui)
     {
         string? activeQuest = ActiveQuests.Find(i => i == questId);
         if (activeQuest == null)
@@ -26,9 +26,8 @@ public class QuestProgression
         FinishedQuests.Add(activeQuest);
 
         Quest quest = QuestList.Get(activeQuest);
-
-        
-        quest.ExecuteOnFinishActions(world, decision);
+        decision ??= "";
+        quest.ExecuteOnFinishActions(world, decision, tui);
 
         ActiveQuests.Remove(activeQuest);
     }
@@ -108,13 +107,38 @@ public class QuestProgression
                 Console.ReadKey();
             }
 
-            if (trigger.Decision != null)
+            if (trigger.IsGood != null && trigger.IsGood == true)
             {
-                Decisions[activeQuest.Title] = trigger.Decision;
+                GoodDesicisionCount++;
             }
 
-            FinishQuest(World, qId, trigger.Decision);
+            FinishQuest(World, qId, trigger.Decision, tui); // temp tui
             return;
+        }
+    }
+
+    public void EvaluateChoices(TUI tui)
+    {
+        switch (GoodDesicisionCount)
+        {
+            case 0:
+            case 1: 
+                tui.WriteLine("Hey again! I see you've done a lot of work. We're ready to announce the results! You mostly chose unsustainable paths that led to the island's collapse. You may have become rich, but the island is now uninhabitable. We don't believe you're the one we were searching for. Better luck next time...");
+                break;
+            case 2: 
+                tui.WriteLine("Hey again! I see you've put in a lot of effort. Thank you for that, even though not all your choices had good results. We're ready to announce the results! You mostly took unsustainable paths, which hurt the environment and the villagers. We don't believe you're the right person for this role. Better luck next time...");
+                break;
+            case 3: 
+                tui.WriteLine("Hey again! I see you've done a lot of work. Thank you so much - we all truly appreciate it. We're ready to announce the results! You made choices that brought both good and bad for the environment, the villagers, and yourself. That's what we call balance. We believe you will only get better. Congratulations - you're our new manager!");
+                break;
+            case 4: 
+                tui.WriteLine("Hey again! I see you've done a lot of great work. Thank you so much - we all really appreciate it. We're ready to announce the results! You've done almost everything right for the environment and cared for the villagers. The island is thriving! We believe you will only get better. Congratulations - you're our new manager!");
+                break;
+            case 5: 
+            case 6: 
+            default:
+                tui.WriteLine("Hey again! I see you've done a lot of great work. Thank you so much - we all really appreciate it. We're ready to share the results! You took good care of the environment and helped the villagers. You might not have much money now, but the island is thriving because of you. Congratulations - you're our new manager!");
+                break;
         }
     }
 }
