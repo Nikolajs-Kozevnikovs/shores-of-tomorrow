@@ -117,14 +117,16 @@
                         tui.WriteLine("You can't sell anything here!");
                     } else
                     {
-                        tui.WriteLine("You got a hefty bag of cash for your efforts.");
-                        Item cash = ItemRegistry.CreateItem("cash");
-                        World.Player.AddItem(cash);
-                        World.Player.RemoveItem("rare_fish", 999);
-                        World.Player.RemoveItem("remote_waters_fish", 999);
-                        World.Player.RemoveItem("close_waters_fish", 999);
-                        World.Player.RemoveItem("fish_caught_with_net", 999);
-                        World.Player.RemoveItem("fish_caught_with_pole", 999);
+                        if (RemoveFish())
+                        {
+                            tui.WriteLine("You got a hefty bag of cash for your efforts.");
+                            Item cash = ItemRegistry.CreateItem("cash");
+                            World.Player.AddItem(cash);
+                        } else
+                        {
+                            
+                        }
+                        
                     }
                     break;
                 case "drop":
@@ -135,14 +137,13 @@
                     {
                         tui.WriteLine("You can't donate anything here!");
                     } else {
-                        tui.WriteLine("You got a Thank-you letter.");
-                        Item letter = ItemRegistry.CreateItem("letter");
-                        World.Player.AddItem(letter);
-                        World.Player.RemoveItem("rare_fish", 999);
-                        World.Player.RemoveItem("remote_waters_fish", 999);
-                        World.Player.RemoveItem("close_waters_fish", 999);
-                        World.Player.RemoveItem("fish_caught_with_net", 999);
-                        World.Player.RemoveItem("fish_caught_with_pole", 999);
+                        if (RemoveFish())
+                        {
+                            Item letter = ItemRegistry.CreateItem("letter");
+                            World.Player.AddItem(letter);     
+                            tui.WriteLine("You got a Thank-you letter.");
+                        }
+                        
                     }
                     break;
                 case "help":
@@ -472,6 +473,23 @@
                 Console.WriteLine("Item not found in source container.");
 
             return item;
+        }
+
+        private bool RemoveFish()
+        {
+            if (World.Player.Inventory.Where(item => item.Id == "rare_fish" || item.Id == "remote_waters_fish"|| item.Id == "close_waters_fish"|| item.Id == "fish_caught_with_net" || item.Id == "fish_caught_with_pole").ToList().Count != 0)
+            {
+                World.Player.RemoveItem("rare_fish", 999);
+                World.Player.RemoveItem("remote_waters_fish", 999);
+                World.Player.RemoveItem("close_waters_fish", 999);
+                World.Player.RemoveItem("fish_caught_with_net", 999);
+                World.Player.RemoveItem("fish_caught_with_pole", 999);
+                return true;
+            } else
+            {
+                tui.WriteLine("You don't have any fish!");
+                return false;
+            }
         }
 
 

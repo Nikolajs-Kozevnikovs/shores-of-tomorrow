@@ -28,11 +28,11 @@ public class Player : IItemContainer
     public bool RemoveItem(string itemId, int count)
     {
         var items = Inventory.Where(i => i.Id == itemId).Take(count).ToList();
-        if (items.Count < count)
+        if (items.Count < count) {
+            foreach (var item in items)
+                Inventory.Remove(item);
             return false;
-
-        foreach (var item in items)
-            Inventory.Remove(item);
+        }
 
         return true;
     }
