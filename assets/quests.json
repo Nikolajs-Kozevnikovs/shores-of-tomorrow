@@ -138,7 +138,7 @@
       "He is someone people call when they need a rare fish for their collection.",
       "But I know that he is a shady guy. If you want to work with him, go to the coral reef, he's always around there.",
       "Don't decline the offer immediately.",
-      "But ff that is not for you, come back and tell me."
+      "But if that is not for you, come back and tell me."
     ],
     "completionDialogue": {
       "poarcher": [
@@ -167,18 +167,16 @@
     ],
     "onFinishActions": [
       {
-        "type": "unlock_quest",
-        "unlockQuest": {
-          "no_poarcher": "Find Mariha",
-          "poarcher": "Big risk - big reward"
-        }
+        "type": "give_item",
+        "decision": "poarcher",
+        "itemId": "fishing_bomb"
       },
       {
-        "type": "spawn_item",
-        "decision": "poarcher",
-        "itemId": "fishing_bomb",
-        "toX": 7,
-        "toY": 3
+        "type": "unlock_quest",
+        "unlockQuest": {
+          "no_poarcher": "Help or sell",
+          "poarcher": "Big risk - big reward"
+        }
       }
     ]
   },
@@ -214,13 +212,27 @@
   {
     "title": "Help or sell",
     "description": "Decide whether to donate or sell your catch. Find someone who might help  you with your choice.",
-    "giverNPC": "Find Mariha",
+    "giverNPC": "Mariha",
     "preQuestDialogue": [
-      "Hey! I'm Mariha. I'm only a little girl, but I want to help you. You shouldn't have accepted Santino's offer, he is a well-known poacher here, but what is done, is done. You've caught lots of fish, and now you get to choose what happens next. You can sell your fish at the local shop, or you can donate them to our charity center to help families who need food. My family has a hard time making money, because big companies keep taking more fish than we can. If you help us, I'd be so grateful. If you want to sell, head to the shop. If you want to help out, take your fish to the charity center. Thank you and see you soon!"
+      "Hey! I'm Mariha. I'm only a little girl, but I think I might to help you.",
+      "You've caught lots of fish, and now you get to choose what happens next.",
+      "You can sell your fish at the local shop, or",
+      "you can donate them to our charity center to help families who need food.",
+      "My family has a hard time making money, because big companies keep taking more fish than we can.",
+      "If you help us, I'd be so grateful.",
+      "If you want to sell, head to the shop.",
+      "If you want to help out, take your fish to the charity center.",
+      "Thank you and see ya!"
     ],
     "completionDialogue": {
-      "sell": ["Hey there! What are you up to? 'Got something to sell?"],
-      "help": ["Welcome to our charity center! You won't regret your choice."]
+      "sell": [
+        "Hey there! What are you up to? 'Got something to sell?",
+        "Talk to me again, I'll teach you how it's done."
+      ],
+      "help": [
+        "Welcome to our charity center! You won't regret your choice.",
+        "Talk to me again, I'll teach you how it's done."
+      ]
     },
     "completionTriggers": [
       {
@@ -257,7 +269,8 @@
     "completionDialogue": {
       "": [
         "You got a great deal of money!",
-        "Thank you! I will recommend you to my friend, who owns a factory here. Visit him at the Factory."
+        "Thank you! I will recommend you to my friend, who owns a factory here. Visit him at the Factory.",
+        "When you're done, talk to me again."
       ]
     },
     "completionTriggers": [
@@ -288,8 +301,9 @@
     "description": "Donate your fish to the charity center",
     "giverNPC": "Phil",
     "preQuestDialogue": [
-      "Hello, you are welcomed to the charity center! Thank you for helping the villagers.",
-      "Type \"donate\" to donate fish."
+      "You are welcomed to the charity center! Thank you for helping the villagers.",
+      "Type \"donate\" to donate fish.",
+      "When you're done, talk to me again."
     ],
     "completionDialogue": {
       "": [

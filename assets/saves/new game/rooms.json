@@ -48,8 +48,8 @@
     }
   },
   {
-    "x": 5,
-    "y": 8,
+    "x": 3,
+    "y": 7,
     "room": {
       "tileIdentifier": "R",
       "name": "Recycling centre",
@@ -127,7 +127,7 @@
       "name": "Road",
       "description": "A road connecting all every building in this town",
       "background": "road.csv",
-      "npcs": [],
+      "npcs": ["Mariha"],
       "items": []
     }
   },
@@ -348,18 +348,6 @@
     }
   },
   {
-    "x": 3,
-    "y": 7,
-    "room": {
-      "tileIdentifier": "S",
-      "name": "Seashore",
-      "description": "A quiet stretch of coast where small waves break against the sand.",
-      "background": "seashore.csv",
-      "npcs": [],
-      "items": []
-    }
-  },
-  {
     "x": 0,
     "y": 1,
     "room": {
@@ -415,7 +403,7 @@
       "name": "Seashore",
       "description": "A quiet stretch of coast where small waves break against the sand.",
       "background": "seashore.csv",
-      "npcs": ["Mariha"],
+      "npcs": [],
       "items": []
     }
   },

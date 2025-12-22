@@ -127,6 +127,9 @@
                         World.Player.RemoveItem("fish_caught_with_pole", 999);
                     }
                     break;
+                case "drop":
+                    DropItem(command.SecondWord);
+                    break;
                 case "donate":
                     if (World.Player.CurrentRoom.Name != "Food charity")
                     {
@@ -159,6 +162,37 @@
             }
 
             return true;
+        }
+
+        private void DropItem(string? secondCommandWord)
+        
+        {
+            if (World.Player.Inventory.Count == 0)
+            {
+                tui.WriteLine("Nothing to drop!");
+                return;
+            }
+
+            if (secondCommandWord == null || secondCommandWord == "") 
+            {
+                tui.WriteLine("There are multiple items in this room! To choose an itemm use 'take [number]'");
+                tui.WriteLine("Available items:");
+                for (int i = 0; i < World.Player.Inventory.Count; i++)
+                {
+                    tui.WriteLine($"{i+1}. {World.Player.Inventory[i].Name}");
+                }
+                return;
+            }
+            try {
+                int n = int.Parse(secondCommandWord);
+                MoveItem(World.Player.Inventory[n], World.Player, World.Player.CurrentRoom);
+                tui.WriteLine($"You put {World.Player.Inventory[n]} to the ground.");
+                return;
+            } catch(Exception)
+            {
+                tui.WriteLine("Wrong input");
+                return;
+            }
         }
         // complicated, but it works
         private void Fishing()
@@ -203,7 +237,7 @@
                         return;
                     }
                     break;
-                case "Coral reef":
+                case "Coral Reef":
                     tool = World.Player.Inventory.Find(i => i.Id == "fishing_bomb");
                     break;
                 case "Ocean":

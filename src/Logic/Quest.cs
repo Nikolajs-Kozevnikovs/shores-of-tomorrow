@@ -53,7 +53,7 @@ public class Quest
         Item item;
         foreach (OnFinishAction action in OnFinishActions)
         {
-            if (action.Decision != null)
+            if (decision != "" && action.Decision!= null && action.Decision != decision)
             {
                 continue;
             }
