@@ -48,7 +48,7 @@ public class Quest
         return null;
     }
 
-    public void ExecuteOnFinishActions(GameState world, string decision, TUI tui)
+    public void ExecuteOnFinishActions(GameState world, string decision)
     {
         Item item;
         foreach (OnFinishAction action in OnFinishActions)
@@ -117,7 +117,7 @@ public class Quest
                     }
                     break;
                 case "final_rating":
-                    world.Player.QuestProgression.EvaluateChoices(tui);
+                    world.Player.QuestProgression.EvaluateChoices();
                     break;
             }
         }

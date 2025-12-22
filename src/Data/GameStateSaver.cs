@@ -12,7 +12,7 @@ public static class GameStateSaver
         WriteIndented = true
     };
 
-    public static void Save(GameState world, string directory, TUI tui)
+    public static void Save(GameState world, string directory)
     {
         string directory_path = $"{SAVE_PATH}/{directory}";
 
@@ -24,21 +24,21 @@ public static class GameStateSaver
             File.Create(Path.Combine(directory_path, "player.json")).Dispose();
         } else
         {
-            tui.WriteLine("");
-            tui.WriteLine("Directory already exists! Are you sure you want to override the save (yes, no)?");
+            TUI.WriteLine("");
+            TUI.WriteLine("Directory already exists! Are you sure you want to override the save (yes, no)?");
             Console.Write("> ");
 
             string? ans = Console.ReadLine();
             while (ans == null || (ans != "yes" && ans != "no"))
             {
-                tui.WriteLine("Wrong input");
+                TUI.WriteLine("Wrong input");
                 Console.Write("> ");
                 ans = Console.ReadLine();
             }
 
             if (ans == "no")
             {
-                tui.WriteLine("Cancelling the save.");
+                TUI.WriteLine("Cancelling the save.");
                 return;
             }
 
@@ -46,8 +46,8 @@ public static class GameStateSaver
         SaveRooms(world, directory);
         SavePlayer(world, directory);
 
-        tui.WriteLine("");
-        tui.WriteLine("Saved successfully!");
+        TUI.WriteLine("");
+        TUI.WriteLine("Saved successfully!");
     }
     public static void SaveRooms(GameState world, string fileName)
     {

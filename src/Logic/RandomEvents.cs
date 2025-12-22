@@ -78,7 +78,7 @@ public class RandomEvents
     }
 
     // TryTrigger: check if a random event can be triggered and execute it if so.
-    public bool TryTrigger(TUI tui, Room? currentRoom, bool isInDialogue)
+    public bool TryTrigger(Room? currentRoom, bool isInDialogue)
     {
         if (isInDialogue || events.Count == 0) // Exit if there is a dialogue active
         {
@@ -104,7 +104,7 @@ public class RandomEvents
         }
 
         var chosen = eligible[random.Next(eligible.Count)]; // Pick a random elegible event to be executed
-        ExecuteEvent(chosen.EventId, tui, currentRoom); // Execute the chosen random event to be executed
+        ExecuteEvent(chosen.EventId, currentRoom); // Execute the chosen random event to be executed
 
         return true;
     }
@@ -133,85 +133,85 @@ public class RandomEvents
     }
 
     // world.RoomManager.GetCurrentRoom().tileIdentifier
-    // randomEvents.TryTrigger(tui, world.RoomManager.GetCurrentRoom().tileIdentifier, false);
+    // randomEvents.TryTrigger(TUI, world.RoomManager.GetCurrentRoom().tileIdentifier, false);
 
     
     // ExecuteEvent: execute event by its ID
-    private void ExecuteEvent(string EventId, TUI tui, Room? room)
+    private void ExecuteEvent(string EventId, Room? room)
     {
         switch (EventId)
         {
             case "weatherShift":
                 // random weather shift line to be sent
                 int wsm = random.Next(WeatherEvents.Length);
-                tui.WriteLine(" ");
-                tui.WriteLine("------- Weather Shift -------");
-                tui.WriteLine(WeatherEvents[wsm]);
-                tui.WriteLine("------------------------------");
+                TUI.WriteLine(" ");
+                TUI.WriteLine("------- Weather Shift -------");
+                TUI.WriteLine(WeatherEvents[wsm]);
+                TUI.WriteLine("------------------------------");
                 break;
 
             case "cleanShores":
-                CleanShores(tui);
+                CleanShores();
                 break;
 
             default:
                 // default for non existing events called
-                tui.WriteLine("------------------------------");
-                tui.WriteLine("The day feels calm. Nothing unexpected happens.");
-                tui.WriteLine("------------------------------");
+                TUI.WriteLine("------------------------------");
+                TUI.WriteLine("The day feels calm. Nothing unexpected happens.");
+                TUI.WriteLine("------------------------------");
                 break;
         }
     }
 
     // Interactive events functions/methods
-    private static void CleanShores(TUI tui) // Event Id: cleanShores
+    private static void CleanShores() // Event Id: cleanShores
     {
-        tui.WriteLine(" ");
-        tui.WriteLine("----- Stranger Encounter -----");
-        tui.WriteLine("A passerby notices you and asks if you've been keeping the sea shores clean.");
-        tui.WriteLine("How do you respond? (type 'yes' or 'no')");
-        tui.DrawCanvas();
+        TUI.WriteLine(" ");
+        TUI.WriteLine("----- Stranger Encounter -----");
+        TUI.WriteLine("A passerby notices you and asks if you've been keeping the sea shores clean.");
+        TUI.WriteLine("How do you respond? (type 'yes' or 'no')");
+        TUI.DrawCanvas();
 
         Console.Write("Response: ");
         string? response = Console.ReadLine()?.Trim().ToLowerInvariant();
 
         if(response == "yes")
         {
-            tui.WriteLine("The stranger smiles, hands you a reusable water bottle, and thanks you for caring.");
+            TUI.WriteLine("The stranger smiles, hands you a reusable water bottle, and thanks you for caring.");
             PositiveCleanShoresCounter++;
             CleanShoresCounter++;
         }
         else if(response == "no")
         {
-            tui.WriteLine("They gently remind you that every small action helps protect the coast.");
+            TUI.WriteLine("They gently remind you that every small action helps protect the coast.");
             NegativeCleanShoresCounter++;
             CleanShoresCounter++;
         }
         else
         {
-            tui.WriteLine("The stranger tilts their head, unsure of your mumble, and walks away.");
+            TUI.WriteLine("The stranger tilts their head, unsure of your mumble, and walks away.");
             CleanShoresCounter++;
         }
 
         // Extra based on accumulated responses
         if(NegativeCleanShoresCounter/3 >= PositiveCleanShoresCounter && CleanShoresCounter >= 10)
         {
-            tui.WriteLine("The stranger sighs, disappointed by the lack of care for the environment.");
-            tui.WriteLine("\"I hate you!\", they exclaim before walking away.");
+            TUI.WriteLine("The stranger sighs, disappointed by the lack of care for the environment.");
+            TUI.WriteLine("\"I hate you!\", they exclaim before walking away.");
             CleanShoresCounter = 1;
             PositiveCleanShoresCounter = 0;
             NegativeCleanShoresCounter = 1;
         }
         else if(CleanShoresCounter >= 5 && PositiveCleanShoresCounter > NegativeCleanShoresCounter)
         {
-            tui.WriteLine("Over time, your positive interactions have inspired others to keep the shores clean. Keep it up!");
+            TUI.WriteLine("Over time, your positive interactions have inspired others to keep the shores clean. Keep it up!");
         }
         else if(CleanShoresCounter >= 5 && NegativeCleanShoresCounter >= PositiveCleanShoresCounter)
         {
-            tui.WriteLine("Your repeated negative responses have discouraged the stranger.");
+            TUI.WriteLine("Your repeated negative responses have discouraged the stranger.");
         }
         
-        tui.WriteLine("------------------------------");
+        TUI.WriteLine("------------------------------");
     }
 
     // Random events variables

@@ -12,14 +12,14 @@ public readonly struct Color
     public Color(byte r, byte g, byte b) { R = r; G = g; B = b; }
 }
 
-public class TUI
+public static class TUI
 {
     // layout constants
     private const int RequiredWidth = 132;
     private const int RequiredHeight = 43;
 
     // pixel buffer
-    private readonly Color[,] pixelBuffer = new Color[RequiredWidth, RequiredHeight];
+    private static readonly Color[,] pixelBuffer = new Color[RequiredWidth, RequiredHeight];
 
     // colour map for minimap tiles
     private static readonly Dictionary<char, Color> MiniMapTileColors = new()
@@ -43,29 +43,29 @@ public class TUI
     };
 
     // reference to the current game state
-    public GameState? CurrentWorld { get; set; }
+    public static GameState? CurrentWorld { get; set; }
 
     // dialog handling
-    private readonly List<string> lines = new List<string>();
+    private static readonly List<string> lines = new List<string>();
     private const int DialogWidth = 70;
     private const int DialogHeight = 12;
     private const int DialogPadding = 1;
 
-    public TUI()
+    public static void StartGame()
     {
         Clear();
         LoadStartScreen();
         DrawCanvas();
     }
 
-    public void DrawCanvas()
+    public static void DrawCanvas()
     {
         Console.Clear();
         RenderBufferToConsole();
         PrintDialogBox(lines);
     }
 
-    public void WaitForCorrectTerminalSize()
+    public static void WaitForCorrectTerminalSize()
     {
         while (true)
         {
@@ -81,7 +81,7 @@ public class TUI
         }
     }
 
-    public void Clear()
+    public static void Clear()
     {
         lines.Clear();
         for (int y = 0; y < RequiredHeight; y++)
@@ -89,7 +89,7 @@ public class TUI
                 pixelBuffer[x, y] = new Color(0, 0, 0);
     }
 
-    public void WriteLine(string line = "\n")
+    public static void WriteLine(string line = "\n")
     {
         foreach (var part in line.Split('\n'))
         {
@@ -101,13 +101,13 @@ public class TUI
         DrawCanvas();
     }
 
-    public void ClearDialogBoxLines()
+    public static void ClearDialogBoxLines()
     {
         lines.Clear();
         DrawCanvas();
     }
 
-    public void UpdateBackground(Room currentRoom)
+    public static void UpdateBackground(Room currentRoom)
     {
         if (currentRoom == null) { Console.WriteLine("null room"); return; }
 
@@ -128,7 +128,7 @@ public class TUI
         DrawCanvas();
     }
 
-    public void LoadStartScreen()
+    public static void LoadStartScreen()
     {
         string path = "./assets/graphics/startScreen.csv";
         if (!File.Exists(path)) throw new FileNotFoundException(path);
@@ -137,14 +137,14 @@ public class TUI
     }
 
     // background helpers
-    private void DrawColorsToBuffer(List<List<Color>> src, int ox, int oy)
+    private static void DrawColorsToBuffer(List<List<Color>> src, int ox, int oy)
     {
         for (int y = 0; y < src.Count && y + oy < RequiredHeight; y++)
             for (int x = 0; x < src[y].Count && x + ox < RequiredWidth; x++)
                 pixelBuffer[x + ox, y + oy] = src[y][x];
     }
 
-    private void RenderBufferToConsole()
+    private static void RenderBufferToConsole()
     {
         var sb = new StringBuilder(RequiredWidth * RequiredHeight * 8);
         for (int y = 0; y < RequiredHeight; y++)
@@ -198,7 +198,7 @@ public class TUI
         }
     }
 
-    private void PrintDialogBox(IEnumerable<string> src)
+    private static void PrintDialogBox(IEnumerable<string> src)
     {
         var wrapped = new List<string>();
         foreach (var l in src)
@@ -230,7 +230,7 @@ public class TUI
 
 
     // build colour matrix for the whole world
-    private Color[,] BuildMiniMapBuffer(GameState world)
+    private static Color[,] BuildMiniMapBuffer(GameState world)
     {
         int width  = world.RoomManager.Rooms.GetLength(0); // east‑west
         int height = world.RoomManager.Rooms.GetLength(1); // north‑south
@@ -265,7 +265,7 @@ public class TUI
     }
 
     // copy minimap onto pixel buffer, 2x1 cells, margin 1 top, 2 right
-    private void DrawMiniMapOverlay()
+    private static void DrawMiniMapOverlay()
     {
         if (CurrentWorld == null) return;
 

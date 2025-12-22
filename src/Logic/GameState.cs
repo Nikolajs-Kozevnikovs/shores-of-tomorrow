@@ -23,9 +23,9 @@ public class GameState
         GameStateLoader.LoadDynamic(this, save_folder);
     }
 
-    public void Save(string save_folder, TUI tui)
+    public void Save(string save_folder)
     {
-        GameStateSaver.Save(this, save_folder, tui);
+        GameStateSaver.Save(this, save_folder);
     }
 
     public string[] GetSaves()
