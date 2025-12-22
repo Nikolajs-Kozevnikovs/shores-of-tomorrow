@@ -1,23 +1,27 @@
 ﻿namespace WorldOfZuul.Presentation
 {
+    using System.Security.Permissions;
     using WorldOfZuul.Logic;
-    using System.Text.RegularExpressions;
 
     public class Game
     {
         private readonly TUI tui = new();
-        private readonly GameState World = new(7, 7);
+        private readonly GameState World = new(10, 10);
         private readonly RandomEvents randomEvents = new();
         private bool isInDialogue = false;
-        
-        
+
+
         public void Play()
         {
+            tui.CurrentWorld = World; // give TUI access to the GameState
+
             Parser parser = new();
 
             tui.WaitForCorrectTerminalSize();
 
-            ChooseSave();
+            LoadSave.ChooseSave(tui, World);
+
+            tui.UpdateBackground(World.Player.CurrentRoom);
 
             tui.WriteLine(World.Player.CurrentRoom.Description ?? "None");
             PrintWelcome();
@@ -61,41 +65,42 @@
 
         private bool HandleCommand(Command command)
         {
+            tui.ClearDialogBoxLines();
             switch (command.Name)
             {
                 case "look":
-                    tui.ClearDialogBoxLines();
                     tui.WriteLine(World.Player.CurrentRoom.Description ?? "Nothing to look at (devs forgot a description)");
+                    if (World.Player.CurrentRoom.NPCs.Count != 0)
+                    {
+                        foreach (NPC npc in World.Player.CurrentRoom.NPCs)
+                        {
+                            tui.WriteLine($"You see {npc.Name}, {npc.Profession}");
+                        }
+                    }
                     break;
 
                 case "back":
-                    tui.ClearDialogBoxLines();
                     CatchMoveError(World.Player.Back());
                     break;
                 case "north":
                 case "south":
                 case "east":
                 case "west":
-                    tui.ClearDialogBoxLines();
-                    CatchMoveError(World.Player.Move(command.Name));
+                    CatchMoveError(World.Player.Move(command.Name, command.SecondWord));
                     break;
                 case "talk":
-                    tui.ClearDialogBoxLines();
-                    TalkToNPC();
+                    TalkToNPC(command.SecondWord);
                     break;
 
                 case "help":
-                    tui.ClearDialogBoxLines();
                     PrintHelp();
                     break;
                 case "save":
-                    tui.ClearDialogBoxLines();
-                    SaveProgress();
+                    LoadSave.SaveProgress(tui, World);
                     break;
                 case "quit":
-                    tui.ClearDialogBoxLines();
                     tui.WriteLine("Thank you for playing World of Zuul!");
-                    SaveProgress();
+                    LoadSave.SaveProgress(tui, World);
                     return false;
 
                 default:
@@ -106,33 +111,102 @@
             return true;
         }
 
-        // TBD
-        private void TalkToNPC()
+        private void TalkToNPC(string? secondCommandWord)
         {
-            if (World.Player.CurrentRoom.NPCs.Count == 0)
+            List<NPC> npcs = World.Player.CurrentRoom.NPCs;
+            // if there are no NPCs
+            if (npcs.Count == 0)
             {
                 isInDialogue = false;
                 tui.WriteLine("No one is here!");
                 return;
             }
-            
-            else if(World.Player.CurrentRoom.NPCs.Count > 0)
+
+            NPC? npc;
+            // if there is one NPC
+            if (npcs.Count == 1)
             {
                 isInDialogue = true;
+                npc = npcs[0];
             }
-                    
-            tui.WriteLine("Dialogues are not implemented yet for multiple NPCs in one room");
+            // if there are multiple NPCs
+            else
+            {
+                // if user doesn't specify which NPC to talk to
+                if (secondCommandWord == null)
+                {
+                    tui.WriteLine("There are multiple NPCs in this room! To choose NPC to talk to, use 'talk [number]'");
+                    tui.WriteLine("Available NPCs:");
+                    for (int i = 0; i < npcs.Count; i++)
+                    {
+                        tui.WriteLine($"{i+1}. {npcs[i].Name}");
+                    }
+                    return;
+                }
+                // if user specifies which NPC to talk to, check if the number is in range
+                int npcNumber = int.Parse(secondCommandWord) - 1;
 
-            // // fix for multiple NPCs
-            // if (r.RoomNPC.quest != null && r.RoomNPC.quest.State == QuestState.Pending)
-            // {
-            //     r.RoomNPC.Talk(tui);
-            // }
-            // else
-            // {
-            //     tui.WriteLine("no quest sorry");
-            //     //World.Player.CurrentRoom.RoomNPC.Dialogue1();
-            // }
+                if (npcNumber > npcs.Count)
+                {
+                    tui.WriteLine("Number is out of range of available NPCs");
+                    tui.WriteLine("To check available NPCs in this Room, type 'talk'");
+                }
+                npc = World.Player.CurrentRoom.NPCs[npcNumber];
+            }
+
+            // finally, talk to the NPC
+            isInDialogue = true;
+            // if there is no quest active
+            if (World.Player.ActiveQuestName == "")
+            {
+                Quest? q = World.QuestManager.FindAvailableQuest(npc);
+                // no availabe quests -> default dialogue
+                if (q == null)
+                {
+                    tui.WriteLine($"{npc.Name}: Hi! How's your day goin'?");
+                    return;
+                }
+                // if available quest is found -> preQuestDialogue + add
+                for (int i = 0; i < q.PreQuestDialogue.Count; i++)
+                {
+                    tui.WriteLine($"{npc.Name}: {q.PreQuestDialogue[i]}");
+                    Console.ReadKey();
+                }
+                tui.WriteLine("");
+                tui.WriteLine("Would you be down to do this?");
+                Console.Write("> ");
+                string? text = Console.ReadLine();
+
+                if (text != null && text == "yes")
+                {
+                    q.State = "active";
+                    World.Player.ActiveQuestName = q.Title;
+                    tui.WriteLine($"Quest Accepted: {q.Title}");
+                } else
+                {
+                    tui.WriteLine("Well, come back when you'll change your mind.");
+                }
+                return;
+            }
+
+            // if there is an active quest
+            Quest quest = World.QuestManager.GetQuest(World.Player.ActiveQuestName);
+            bool isCompleted = World.QuestManager.CheckCompletion(
+                questName: World.Player.ActiveQuestName,
+                interactingNpc: npc.Name
+            );
+
+            if (isCompleted)
+            {
+                for (int i = 0; i < quest.CompletionDialogue.Count; i++)
+                {
+                    tui.WriteLine($"{npc.Name}: {quest.CompletionDialogue[i]}");
+                    Console.ReadKey();
+                }
+            } else
+            {
+                tui.WriteLine("You haven't met the criteria to finish this quest!");
+            }
         }
 
         private void CatchMoveError(string? errorText)
@@ -141,6 +215,14 @@
             {
 
                 tui.WriteLine(World.Player.CurrentRoom.Description ?? "None");
+
+                if (World.Player.CurrentRoom.NPCs.Count != 0)
+                    {
+                        foreach (NPC npc in World.Player.CurrentRoom.NPCs)
+                        {
+                            tui.WriteLine($"You see {npc.Name}, {npc.Profession}");
+                        }
+                    }
                 tui.UpdateBackground(World.Player.CurrentRoom);
                 return;
             }
@@ -148,47 +230,13 @@
             tui.WriteLine(errorText);
         }
 
-        private void SaveProgress()
+        public static void MoveItem(Item item, IItemContainer from, IItemContainer to)
         {
-            tui.WriteLine("Choose a name for your save: \n(English alphabet letters, numbers, underscores and dashes allowed)");
-            Console.Write("> ");
-            string? save_name = Console.ReadLine();
-            while (save_name == null || save_name == "" || !IsValidSaveName(save_name))
-            {
-                tui.WriteLine("Invalid name!");
-                Console.Write("> ");
-                save_name = Console.ReadLine();
-            }
-            World.Save(save_name);
-            tui.WriteLine();
+            if (from.RemoveItem(item))
+                to.AddItem(item);
+            else
+                Console.WriteLine("Item not found in source container.");
         }
-        bool IsValidSaveName(string input)
-        {
-            return Regex.IsMatch(input, @"^[A-Za-z0-9_-]+$");
-        }
-        
-        private void ChooseSave()
-        {
-            string[] existing_saves = World.GetSaves();
-            tui.WriteLine("Choose a save:");
-            foreach (string save in existing_saves)
-            {
-                tui.WriteLine(save);
-            }
-
-            Console.Write("> ");
-            string? save_name = Console.ReadLine();
-            while (save_name == null || !existing_saves.Contains(save_name))
-            {
-                tui.WriteLine("Can't find a save with the specified save name!");
-                Console.Write("> ");
-                save_name = Console.ReadLine();
-            }
-
-            World.LoadData(save_name);
-        }
-
-
 
 
         private void PrintWelcome()

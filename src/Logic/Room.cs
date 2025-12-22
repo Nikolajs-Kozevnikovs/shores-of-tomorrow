@@ -1,25 +1,52 @@
 ﻿namespace WorldOfZuul.Logic;
+
+using System.Text.Json.Serialization;
+
 public class Room
 {
     public char TileIdentifier {get; set; } = '-';
-    public string Name { get; set; }
-    public string Description { get; set; }
+    public string Name { get; set; } = "";
+    public string Description { get; set; } = "";
     public string Background {get; set; } = "assets/graphics/startScreen.csv"; // in case someone forgets to set up background there is a fallback image
-    public List<string> NPCs { get; set; } = [];
-    public List<string> Items { get; set; } = [];
-    public List<string> AllowedItems { get; set; } = [];
 
-    public Room(char tileIdentifier, string name, string description, string background, List<string> npcs, List<string> items, List<string> allowedItems)
+
+    [JsonIgnore]
+    public List<NPC> NPCs { get; set; } = new();
+
+    [JsonPropertyName("npcs")]
+    public List<string> NPCIds
     {
-        TileIdentifier = tileIdentifier;
-        Name = name;
-        Description = description;
-        Background = background;
-        NPCs = npcs;
-        Items = items;
-        AllowedItems = allowedItems;
+        get => NPCs.Select(npc => npc.Id).ToList();
+        set => NPCs = (value ?? new List<string>())
+            .Select(id => NPCRegistry.CreateNPC(id))
+            .ToList();
     }
 
-    // public List<Zone> Zones { get; set; } = new List<Zone>();
+
+    [JsonIgnore] // ignore this when serializing
+    public List<Item> Items { get; set; } = new();
+
+    // temporary property for JSON load
+    [JsonPropertyName("items")]
+    public List<string> ItemIds
+    {
+        get => Items.Select(i => i.Id).ToList();
+        set => Items = value.Select(id => ItemRegistry.CreateItem(id)).ToList();
+    }
+
+
+    public void AddItem(Item item) => ((IItemContainer)this).AddItem(item);
+    public bool RemoveItem(Item item) => ((IItemContainer)this).RemoveItem(item);
+    public bool IsInside(string itemId) => ((IItemContainer)this).IsInside(itemId);
+
+
+    public Room() 
+    {
+        // initialize lists
+        Items = new List<Item>();
+        NPCs = new List<NPC>();
+        TileIdentifier = '-';
+        Background = "assets/graphics/startScreen.csv";
+    }
 }
 

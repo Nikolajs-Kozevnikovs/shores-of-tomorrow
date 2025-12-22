@@ -1,0 +1,62 @@
+[
+  {
+    "id": "Nikkolas",
+    "name": "Nikkolas",
+    "profession": "Old man",
+    "questsGiven": ["Welcome"]
+  },
+  {
+    "id": "Jorge",
+    "name": "Jorge",
+    "profession": "Local fisherman",
+    "questsGiven": ["Fishing"]
+  },
+  {
+    "id": "Nikolja",
+    "name": "Nikolja",
+    "profession": "Fisherman",
+    "questsGiven": ["Fishing on the boat"]
+  },
+  {
+    "id": "Santino",
+    "name": "Santino",
+    "profession": "Poacher",
+    "questsGiven": ["Poacher"]
+  },
+  {
+    "id": "Mariha",
+    "name": "Mariha",
+    "profession": "Little girl",
+    "questsGiven": ["Help or sell"]
+  },
+  {
+    "id": "Artyom",
+    "name": "Artyom",
+    "profession": "Local fish shop manager",
+    "questsGiven": ["Sell fish"]
+  },
+  {
+    "id": "Phil",
+    "name": "Phil",
+    "profession": "Charity center manager",
+    "questsGiven": ["Charity"]
+  },
+  {
+    "id": "Matias",
+    "name": "Matias",
+    "profession": "Recycling center manager",
+    "questsGiven": ["Recycling"]
+  },
+  {
+    "id": "Alexandr",
+    "name": "Alexandr",
+    "profession": "Factory owner",
+    "questsGiven": ["Factory"]
+  },
+  {
+    "id": "Lila",
+    "name": "Lila",
+    "profession": "Marine biologist",
+    "questsGiven": ["Marine biologist"]
+  }
+]

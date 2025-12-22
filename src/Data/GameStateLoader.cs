@@ -1,22 +1,8 @@
-// Does not support saving and loading player data
-
 namespace WorldOfZuul.Data;
 
 using System.Text.Json;
 using WorldOfZuul.Logic;
 
-public class RoomEntry
-    {
-        public int X {get; set; }
-        public int Y {get; set; }
-        public Room Room {get; set; }
-        public RoomEntry(int x, int y, Room room)
-        {
-            X = x;
-            Y = y;
-            Room = room;
-        }
-    }
 
 public static class GameStateLoader
 {
@@ -37,10 +23,10 @@ public static class GameStateLoader
 
     public static void Load(GameState world, string directory)
     {
+        LoadItems();
+        LoadNpcs();
         LoadRooms(world, Path.Combine(directory, "rooms.json"));
-        LoadNpcs(world, Path.Combine(directory, "npcs.json"));
         LoadQuests(world, Path.Combine(directory, "quests.json"));
-        LoadItems(world, Path.Combine(directory, "items.json"));
     }
 
 
@@ -48,7 +34,7 @@ public static class GameStateLoader
     {
         string json = File.ReadAllText($"{SAVE_PATH}{fileName}");
         var rooms = JsonSerializer.Deserialize<List<RoomEntry>>(json, options);
-
+    
         if (rooms != null)
         {
             SetRooms(world, rooms);
@@ -59,24 +45,37 @@ public static class GameStateLoader
     }
 
     internal static void SetRooms(GameState world, List<RoomEntry> rooms)
+{
+    foreach (RoomEntry roomEntry in rooms)
     {
-        foreach (RoomEntry room in rooms) {
-            if (room.X >= 0 && room.Y >= 0 && 
-                room.X < world.RoomManager.Rooms.GetLength(0) && room.Y < world.RoomManager.Rooms.GetLength(1))
-            {
-                world.RoomManager.SetRoom(room.Room, room.X, room.Y);
-            }
+        // Convert item ID strings into actual Item objects
+        List<Item> items = roomEntry.Room.ItemIds
+            .Select(id => ItemRegistry.CreateItem(id))
+            .ToList();
+
+        roomEntry.Room.Items = items;
+
+        // Place the room in the world's 2D array
+        if (roomEntry.X >= 0 && roomEntry.Y >= 0 &&
+            roomEntry.X < world.RoomManager.Rooms.GetLength(0) &&
+            roomEntry.Y < world.RoomManager.Rooms.GetLength(1))
+        {
+            world.RoomManager.SetRoom(roomEntry.Room, roomEntry.X, roomEntry.Y);
         }
     }
+}
 
 
-    private static void LoadNpcs(GameState world, string fileName)
+    private static void LoadNpcs()
     {
-        string json = File.ReadAllText($"{SAVE_PATH}{fileName}");
-        var npcs = JsonSerializer.Deserialize<Dictionary<string, NPC>>(json, options);
+        string json = File.ReadAllText($"./assets/npcs.json");
+        var npcs = JsonSerializer.Deserialize<List<NPC>>(json, options);
         if (npcs != null)
         {
-            world.NPCManager.NPCs = npcs;
+            foreach (NPC npc in npcs)
+            {  
+                NPCRegistry.Register(npc);
+            }
         }
     }
 
@@ -92,14 +91,37 @@ public static class GameStateLoader
     }
 
 
-    private static void LoadItems(GameState world, string fileName)
+    private static void LoadItems()
     {
-        string json = File.ReadAllText($"{SAVE_PATH}{fileName}");
+        string json = File.ReadAllText($"./assets/items.json");
         var items = JsonSerializer.Deserialize<List<Item>>(json, options);
         
         if (items != null)
         {
-            world.ItemManager.Items = items;
+            foreach (Item item in items)
+            {
+                ItemRegistry.Register(item.Id, item.Name);
+            }
         }
+    }
+    
+    
+
+    public static void LoadPlayer(GameState world, string directoryName)
+    {
+        string json = File.ReadAllText($"{SAVE_PATH}{Path.Combine(directoryName, "player.json")}");
+        var player = JsonSerializer.Deserialize<PlayerEntry>(json, options);
+
+        if (player != null)
+        {
+            world.Player = new Player(
+                x: player.X,
+                y: player.Y,
+                activeQuestName: player.ActiveQuestName,
+                inventory: player.ItemIds.Select(itemId => ItemRegistry.CreateItem(itemId)).ToList() ?? [],
+                world: world
+            );
+        }
+
     }
 }

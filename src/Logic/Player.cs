@@ -1,40 +1,60 @@
+using Spectre.Console;
+
 namespace WorldOfZuul.Logic;
 
-public class Player
+public class Player : IItemContainer
 {
-    private readonly GameState World; 
+    private readonly GameState World;
     public int X { get; set; } = 0;
     public int Y { get; set; } = 0;
     public int[]? PreviousCoords { get; set; }
     public Room CurrentRoom { get; set; }
+    public string ActiveQuestName { get; set; } = "";
+    // item management
+    public List<Item> Inventory { get; set; }
+    List<Item> IItemContainer.Items => Inventory;
 
-    public Player(int x, int y, GameState world)
+    public Player(int x, int y, string activeQuestName, List<Item> inventory, GameState world)
     {
         X = x;
         Y = y;
         World = world;
         Room? room = World.RoomManager.GetRoom(x, y) ?? throw new Exception("No room at starting coordinates! Breaking.");
         CurrentRoom = room;
+        Inventory = inventory;
+        ActiveQuestName = activeQuestName;
     }
-    
-    public string? Move(string direction)
+
+    public void AddItem(Item item) => ((IItemContainer)this).AddItem(item);
+    public bool RemoveItem(Item item) => ((IItemContainer)this).RemoveItem(item);
+    public bool IsInside(string itemId) => ((IItemContainer)this).IsInside(itemId);
+
+    public string? Move(string direction, string? amount)
     {
+        int count = 1;
+        if (amount != null)
+        {
+            try
+            {
+                count = int.Parse(amount);
+            } catch (Exception) { }
+        }
         int newX = X;
         int newY = Y;
 
         switch (direction)
         {
-            case "south":
-                newX++;
-                break;
             case "north":
-                newX--;
-                break;
-            case "west":
-                newY--;
+                newY -= count;
                 break;
             case "east":
-                newY++;
+                newX += count;
+                break;
+            case "south":
+                newY += count;
+                break;
+            case "west":
+                newX -= count;
                 break;
         }
 
@@ -47,7 +67,7 @@ public class Player
         PreviousCoords = [X, Y];
         X = newX;
         Y = newY;
-        
+
         CurrentRoom = World.RoomManager.GetCurrentRoom();
         return null;
     }
@@ -57,7 +77,7 @@ public class Player
         if (PreviousCoords == null)
         {
             return "You can't go back from here!";
-            
+
         }
 
         X = PreviousCoords[0];
@@ -68,4 +88,6 @@ public class Player
         CurrentRoom = World.RoomManager.GetCurrentRoom();
         return null;
     }
+
+
 }

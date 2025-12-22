@@ -1,29 +1,51 @@
 {
-    "intro": {
-      "title": "Introduction",
-      "description": "Speak with the guard near the entrance.",
-      "giverNPC": "guard",
-      "finishNPC": "guard",
-      "visibilityConditions": [],
-      "completionTriggers": [
-        {
-          "type": "talk_to_npc",
-          "npc": "guard"
-        }
-      ],
-      "preQuestDialogue": [
-        "Welcome to the dungeon.",
-        "Stay alert — danger lurks ahead."
-      ],
-      "completionDialogue": [
-        "Welcome to our lovely town!"
-      ],
-      "onCompleteActions": [
+  "Welcome": {
+    "title": "Welcome",
+    "description": "Speak with Nikkolas, he should be in the townhall",
+    "giverNPC": "Nikkolas",
+    "finishNPC": "Jorge",
+    "visibilityConditions": [],
+    "completionTriggers": [
       {
-        "type": "move_npc",
-        "npc": "guard",
-        "to": { "x": 1, "y": 1 }
+        "type": "talk_to_npc",
+        "npc": "Jorge"
       }
-    ]
+    ],
+    "preQuestDialogue": [
+      "Hello! We saw your application for the job. You are welcomed to the Abyssal Key island",
+      "From now on it's the start of your trial period.",
+      "The situation on the island is quite worrying - ",
+      "fish populations are collapsing, waters are polluted by factories, and the locals are divided between survival and sustainability. ",
+      "Your goal is to make choices that will determine the island’s future.",
+      "Talk to me when you will be ready to start.",
+      "Right now you can go to the seashore next to my house, north-east of the island and meet my friend Jorge. He will introduce you to your first quest."
+    ],
+    "completionDialogue": [
+      "Hi, nice to meet you! Talk to me again if you want to try something new."
+    ],
+    "onCompleteActions": [
+    ],
+    "state": "available"
+  },
+  "Fishing": {
+    "title": "Fishing",
+    "description": "Meet Jeorge next to Nikkolas's house",
+    "giverNPC": "Nikkolas",
+    "visibilityConditions": ["Welcome"],
+    "completionTriggers": [
+      {
+        "type": "talk_to_npc",
+        "npc": "Nikkolas"
+      }
+    ],
+    "preQuestDialogue": [
+      ""
+    ],
+    "completionDialogue": [
+      ""
+    ],
+    "onCompleteActions": [
+    ],
+    "state": "locked"
   }
 }

@@ -14,16 +14,41 @@ public readonly struct Color
 
 public class TUI
 {
+    // layout constants
     private const int RequiredWidth = 132;
     private const int RequiredHeight = 43;
 
-    // two-dimensional array, stores Color values for each pixel on the screen.
+    // pixel buffer
     private readonly Color[,] pixelBuffer = new Color[RequiredWidth, RequiredHeight];
 
-    private readonly List<string> lines = new List<string>();
+    // colour map for minimap tiles
+    private static readonly Dictionary<char, Color> MiniMapTileColors = new()
+    {
+        { 'B', new Color(160,  60,  60) }, // boat
+        { 'C', new Color(230,  50, 160) }, // coralReef
+        { 'D', new Color(170, 140, 160) }, // road
+        { 'F', new Color( 80,  90,  80) }, // factory
+        { 'H', new Color(140, 120, 140) }, // highway
+        { 'L', new Color(220, 230, 250) }, // laboratory
+        { 'N', new Color(120,  90, 100) }, // house1
+        { 'O', new Color( 30, 120, 190) }, // ocean
+        { 'P', new Color(210,  30,  40) }, // foodCharity
+        { 'Q', new Color( 50,  20, 170) }, // ocean2
+        { 'R', new Color( 40, 140, 110) }, // recyclingCentre
+        { 'S', new Color(250, 200, 130) }, // seashore
+        { 'T', new Color(220, 100,  90) }, // townhall
+        { 'X', new Color(150, 200, 240) }, // lake1
+        { 'Y', new Color(140, 210, 230) }, // lake2
+        { '-', new Color(  0,   0,   0) }   // void
+    };
 
-    private const int DialogWidth = 70; // fixed width for dialog box
-    private const int DialogHeight = 12; // fixed height for dialog box
+    // reference to the current game state
+    public GameState? CurrentWorld { get; set; }
+
+    // dialog handling
+    private readonly List<string> lines = new List<string>();
+    private const int DialogWidth = 70;
+    private const int DialogHeight = 12;
     private const int DialogPadding = 1;
 
     public TUI()
@@ -44,20 +69,14 @@ public class TUI
     {
         while (true)
         {
-            int width = Console.WindowWidth;
-            int height = Console.WindowHeight;
-
-            if (width < RequiredWidth || height < RequiredHeight)
+            int w = Console.WindowWidth;
+            int h = Console.WindowHeight;
+            if (w < RequiredWidth || h < RequiredHeight)
             {
                 Console.Clear();
-                Console.WriteLine($"Terminal is too small. Need at least {RequiredWidth}x{RequiredHeight}.");
+                Console.WriteLine($"terminal too small – need {RequiredWidth}x{RequiredHeight}");
             }
-            else
-            {
-                Console.Clear();
-                break;
-            }
-
+            else { Console.Clear(); break; }
             Thread.Sleep(1000);
         }
     }
@@ -72,75 +91,14 @@ public class TUI
 
     public void WriteLine(string line = "\n")
     {
-        string[] newLines = line.Split('\n');
-        foreach (string newLine in newLines)
+        foreach (var part in line.Split('\n'))
         {
-            var wrappedLines = WrapLine(newLine, DialogWidth - DialogPadding * 2).ToList();
-            lines.AddRange(wrappedLines);
-
+            var wrapped = WrapLine(part, DialogWidth - DialogPadding * 2);
+            lines.AddRange(wrapped);
             while (lines.Count > DialogHeight - DialogPadding * 2)
-            {
                 lines.RemoveAt(0);
-            }
         }
         DrawCanvas();
-    }
-
-    // Wrap helper
-    private static IEnumerable<string> WrapLine(string text, int maxWidth)
-    {
-        if (string.IsNullOrEmpty(text)) { yield return ""; yield break; }
-        int pos = 0;
-        while (pos < text.Length)
-        {
-            int len = Math.Min(maxWidth, text.Length - pos);
-            if (len == maxWidth)
-            {
-                int lastSpace = text.LastIndexOf(' ', pos + len - 1, len);
-                if (lastSpace > pos)
-                {
-                    len = lastSpace - pos;
-                }
-            }
-            yield return text.Substring(pos, len).Trim();
-            pos += len;
-            while (pos < text.Length && text[pos] == ' ') pos++;
-        }
-    }
-
-    private void PrintDialogBox(IEnumerable<string> inputLines)
-    {
-        var wrapped = new List<string>();
-        foreach (var l in inputLines)
-        {
-            foreach (var w in WrapLine(l ?? "", DialogWidth - DialogPadding * 2))
-                wrapped.Add(w);
-        }
-
-        // clear dialog box area
-        int dialogBoxRow = RequiredHeight - 2 - DialogHeight; // 2 rows above bottom of canvas
-        int dialogBoxColumn = (RequiredWidth - DialogWidth) / 2;
-
-        for (int y = 0; y < DialogHeight; y++)
-        {
-            string emptyLine = new string(' ', DialogWidth);
-            Console.Write($"\x1B[{dialogBoxRow + y + 1};{dialogBoxColumn + 1}H{emptyLine}");
-        }
-
-        // print content lines
-        for (int i = 0; i < DialogHeight - DialogPadding * 2; i++)
-        {
-            string content = i < wrapped.Count ? wrapped[i] : "";
-            string sidePadding = new string(' ', DialogPadding);
-            string line = sidePadding + content.PadRight(DialogWidth - DialogPadding * 2) + sidePadding;
-            Console.Write($"\x1B[{dialogBoxRow + DialogPadding + i + 1};{dialogBoxColumn + 1}H{line}");
-        }
-
-        // put input prompt fully below the canvas
-        int inputRow = RequiredHeight + 1;
-        if (inputRow > Console.WindowHeight) inputRow = Console.WindowHeight;
-        if (inputRow < 1) inputRow = 1;
-        Console.Write($"\x1B[{inputRow};0H");
     }
 
     public void ClearDialogBoxLines()
@@ -151,40 +109,41 @@ public class TUI
 
     public void UpdateBackground(Room currentRoom)
     {
-        string bgPath = "./assets/graphics/";
-        bgPath += string.IsNullOrEmpty(currentRoom?.Background) ? "startScreen.csv" : currentRoom.Background;
+        if (currentRoom == null) { Console.WriteLine("null room"); return; }
 
-        if (!File.Exists(bgPath))
-            throw new FileNotFoundException($"background file not found: {bgPath}");
+        string path = "./assets/graphics/" +
+                      (string.IsNullOrEmpty(currentRoom.Background)
+                       ? "startScreen.csv"
+                       : currentRoom.Background);
 
-        var bgColors = ParseTextImage(bgPath);
-        DrawColorsToBuffer(bgColors, 0, 0);
+        if (!File.Exists(path))
+        {
+            Console.WriteLine($"missing bg {path}");
+            path = "./assets/graphics/startScreen.csv";
+        }
+
+        var bg = ParseTextImage(path);
+        DrawColorsToBuffer(bg, 0, 0);
+        DrawMiniMapOverlay(); // draw map after background
         DrawCanvas();
     }
 
     public void LoadStartScreen()
     {
-        string bgPath = "./assets/graphics/startScreen.csv";
-        if (!File.Exists(bgPath))
-            throw new FileNotFoundException($"background file not found: {bgPath}");
-
-        var bgColors = ParseTextImage(bgPath);
-        DrawColorsToBuffer(bgColors, 0, 0);
+        string path = "./assets/graphics/startScreen.csv";
+        if (!File.Exists(path)) throw new FileNotFoundException(path);
+        var bg = ParseTextImage(path);
+        DrawColorsToBuffer(bg, 0, 0);
     }
 
-    private void DrawColorsToBuffer(List<List<Color>> colorsList, int offsetX, int offsetY)
+    // background helpers
+    private void DrawColorsToBuffer(List<List<Color>> src, int ox, int oy)
     {
-        for (int y = 0; y < colorsList.Count && y + offsetY < RequiredHeight; y++)
-        {
-            var row = colorsList[y];
-            for (int x = 0; x < row.Count && x + offsetX < RequiredWidth; x++)
-            {
-                pixelBuffer[x + offsetX, y + offsetY] = row[x];
-            }
-        }
+        for (int y = 0; y < src.Count && y + oy < RequiredHeight; y++)
+            for (int x = 0; x < src[y].Count && x + ox < RequiredWidth; x++)
+                pixelBuffer[x + ox, y + oy] = src[y][x];
     }
 
-    // Render pixelBuffer to console using background-colored spaces for squarish pixels
     private void RenderBufferToConsole()
     {
         var sb = new StringBuilder(RequiredWidth * RequiredHeight * 8);
@@ -198,37 +157,139 @@ public class TUI
             sb.Append("\x1B[0m");
             if (y < RequiredHeight - 1) sb.AppendLine();
         }
-
         Console.SetCursorPosition(0, 0);
         Console.Write(sb.ToString());
     }
 
-    private static List<List<Color>> ParseTextImage(string fpath)
+    private static List<List<Color>> ParseTextImage(string file)
     {
-        var result = File.ReadAllLines(fpath)
-          .Select(line => line.Trim())
-          .Where(line => !string.IsNullOrWhiteSpace(line))
-          .Select(line =>
-            line.Split(';', StringSplitOptions.RemoveEmptyEntries)
-              .Select(item => item.Split(' ', StringSplitOptions.RemoveEmptyEntries))
-              .Where(parts => parts.Length >= 3)
-              .Select(parts =>
-              {
-                  bool rOk = byte.TryParse(parts[0], out var r);
-                  bool gOk = byte.TryParse(parts[1], out var g);
-                  bool bOk = byte.TryParse(parts[2], out var b);
+        return File.ReadAllLines(file)
+            .Select(l => l.Trim())
+            .Where(l => !string.IsNullOrWhiteSpace(l))
+            .Select(l => l.Split(';', StringSplitOptions.RemoveEmptyEntries)
+                         .Select(s => s.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+                         .Where(p => p.Length >= 3)
+                         .Select(p =>
+                         {
+                             byte.TryParse(p[0], out var r);
+                             byte.TryParse(p[1], out var g);
+                             byte.TryParse(p[2], out var b);
+                             return new Color(r, g, b);
+                         }).ToList())
+            .ToList();
+    }
 
-                  if (!rOk || !gOk || !bOk)
-                  {
-                      Console.WriteLine($"Invalid color entry: [{string.Join(';', parts)}]");
-                      return new Color(0, 0, 0);
-                  }
+    // dialog helpers
+    private static IEnumerable<string> WrapLine(string txt, int max)
+    {
+        if (string.IsNullOrEmpty(txt)) yield return "";
+        int pos = 0;
+        while (pos < txt.Length)
+        {
+            int len = Math.Min(max, txt.Length - pos);
+            if (len == max)
+            {
+                int sp = txt.LastIndexOf(' ', pos + len - 1, len);
+                if (sp > pos) len = sp - pos;
+            }
+            yield return txt.Substring(pos, len).Trim();
+            pos += len;
+            while (pos < txt.Length && txt[pos] == ' ') pos++;
+        }
+    }
 
-                  return new Color(r, g, b);
-              })
-              .ToList()
-        )
-        .ToList();
-        return result;
+    private void PrintDialogBox(IEnumerable<string> src)
+    {
+        var wrapped = new List<string>();
+        foreach (var l in src)
+            foreach (var w in WrapLine(l ?? "", DialogWidth - DialogPadding * 2))
+                wrapped.Add(w);
+
+        int top = RequiredHeight - 2 - DialogHeight;
+        int left = (RequiredWidth - DialogWidth) / 2;
+
+        for (int y = 0; y < DialogHeight; y++)
+        {
+            string empty = new string(' ', DialogWidth);
+            Console.Write($"\x1B[{top + y + 1};{left + 1}H{empty}");
+        }
+
+        for (int i = 0; i < DialogHeight - DialogPadding * 2; i++)
+        {
+            string txt = i < wrapped.Count ? wrapped[i] : "";
+            string pad = new string(' ', DialogPadding);
+            string line = pad + txt.PadRight(DialogWidth - DialogPadding * 2) + pad;
+            Console.Write($"\x1B[{top + DialogPadding + i + 1};{left + 1}H{line}");
+        }
+
+        int inputRow = RequiredHeight + 1;
+        if (inputRow > Console.WindowHeight) inputRow = Console.WindowHeight;
+        if (inputRow < 1) inputRow = 1;
+        Console.Write($"\x1B[{inputRow};0H");
+    }
+
+
+    // build colour matrix for the whole world
+    private Color[,] BuildMiniMapBuffer(GameState world)
+    {
+        int width  = world.RoomManager.Rooms.GetLength(0); // east‑west
+        int height = world.RoomManager.Rooms.GetLength(1); // north‑south
+
+        // buffer indexed as [horizontal, vertical]
+        var buf = new Color[width, height];
+
+        for (int x = 0; x < width; x++) // horizontal (east‑west)
+        {
+            for (int y = 0; y < height; y++) // vertical (north‑south)
+            {
+                var room = world.RoomManager.GetRoom(x, y);
+                if (room == null || room.TileIdentifier == '-')
+                {
+                    buf[x, y] = new Color(0, 0, 0);
+                    continue;
+                }
+
+                // base colour for the tile type
+                if (!MiniMapTileColors.TryGetValue(room.TileIdentifier, out var col))
+                    col = new Color(100, 100, 100);
+
+                // highlight player position
+                if (world.Player.X == x && world.Player.Y == y)
+                    col = new Color(255, 255, 0); // bright yellow
+
+                buf[x, y] = col;
+            }
+        }
+
+        return buf;
+    }
+
+    // copy minimap onto pixel buffer, 2x1 cells, margin 1 top, 2 right
+    private void DrawMiniMapOverlay()
+    {
+        if (CurrentWorld == null) return;
+
+        var mini = BuildMiniMapBuffer(CurrentWorld);
+        int cellW = 2; // each map cell occupies two horizontal characters
+        int mapW = mini.GetLength(0) * cellW;
+        int mapH = mini.GetLength(1);
+
+        // 2 columns from the right edge, 1 row from the top edge
+        int startX = RequiredWidth - mapW - 2;
+        int startY = 1;
+
+        for (int cx = 0; cx < mini.GetLength(0); cx++) // columns (west‑east)
+            for (int cy = 0; cy < mini.GetLength(1); cy++) // rows (north‑south)
+            {
+                int dstX = startX + cx * cellW;
+                int dstY = startY + cy;
+
+                if (dstX < 0 || dstY < 0 ||
+                    dstX + 1 >= RequiredWidth || dstY >= RequiredHeight)
+                    continue;
+
+                pixelBuffer[dstX,     dstY] = mini[cx, cy];
+                pixelBuffer[dstX + 1, dstY] = mini[cx, cy];
+            }
     }
 }
