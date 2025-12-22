@@ -2,61 +2,51 @@
   {
     "id": "Nikkolas",
     "name": "Nikkolas",
-    "profession": "Old man",
-    "questsGiven": ["Welcome"]
+    "profession": "Old man"
   },
   {
     "id": "Jorge",
     "name": "Jorge",
-    "profession": "Local fisherman",
-    "questsGiven": ["Fishing"]
+    "profession": "Local fisherman"
   },
   {
     "id": "Nikolja",
     "name": "Nikolja",
-    "profession": "Fisherman",
-    "questsGiven": ["Fishing on the boat"]
+    "profession": "Fisherman"
   },
   {
     "id": "Santino",
     "name": "Santino",
-    "profession": "Poacher",
-    "questsGiven": ["Poacher"]
+    "profession": "Poacher"
   },
   {
     "id": "Mariha",
     "name": "Mariha",
-    "profession": "Little girl",
-    "questsGiven": ["Help or sell"]
+    "profession": "Little girl"
   },
   {
     "id": "Artyom",
     "name": "Artyom",
-    "profession": "Local fish shop manager",
-    "questsGiven": ["Sell fish"]
+    "profession": "Local fish shop manager"
   },
   {
     "id": "Phil",
     "name": "Phil",
-    "profession": "Charity center manager",
-    "questsGiven": ["Charity"]
+    "profession": "Charity center manager"
   },
   {
     "id": "Matias",
     "name": "Matias",
-    "profession": "Recycling center manager",
-    "questsGiven": ["Recycling"]
+    "profession": "Recycling center manager"
   },
   {
     "id": "Alexandr",
     "name": "Alexandr",
-    "profession": "Factory owner",
-    "questsGiven": ["Factory"]
+    "profession": "Factory owner"
   },
   {
     "id": "Lila",
     "name": "Lila",
-    "profession": "Marine biologist",
-    "questsGiven": ["Marine biologist"]
+    "profession": "Marine biologist"
   }
 ]

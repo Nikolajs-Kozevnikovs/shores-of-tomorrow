@@ -4,25 +4,39 @@ namespace WorldOfZuul.Logic;
 
 public class Player : IItemContainer
 {
-    private readonly GameState World;
+    private readonly GameState World; 
+    // movement
     public int X { get; set; } = 0;
     public int Y { get; set; } = 0;
     public int[]? PreviousCoords { get; set; }
     public Room CurrentRoom { get; set; }
-    public string ActiveQuestName { get; set; } = "";
-    // item management
-    public List<Item> Inventory { get; set; }
+    // items
+    public List<Item> Inventory { get; set; } 
     List<Item> IItemContainer.Items => Inventory;
+    // quest progression
+    public QuestProgression QuestProgression {get; set; } = new();
 
-    public Player(int x, int y, string activeQuestName, List<Item> inventory, GameState world)
+    public Player(int x, int y, QuestProgression questProgression, List<Item> inventory, GameState world)
     {
         X = x;
         Y = y;
         World = world;
         Room? room = World.RoomManager.GetRoom(x, y) ?? throw new Exception("No room at starting coordinates! Breaking.");
         CurrentRoom = room;
+        QuestProgression = questProgression;
         Inventory = inventory;
-        ActiveQuestName = activeQuestName;
+    }
+
+    public bool RemoveItem(string itemId, int count)
+    {
+        var items = Inventory.Where(i => i.Id == itemId).Take(count).ToList();
+        if (items.Count < count)
+            return false;
+
+        foreach (var item in items)
+            Inventory.Remove(item);
+
+        return true;
     }
 
     public void AddItem(Item item) => ((IItemContainer)this).AddItem(item);
@@ -88,6 +102,4 @@ public class Player : IItemContainer
         CurrentRoom = World.RoomManager.GetCurrentRoom();
         return null;
     }
-
-
 }
