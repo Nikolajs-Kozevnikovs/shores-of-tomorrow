@@ -62,7 +62,6 @@ public class Room : IItemContainer
         // initialize lists
         Items = new List<Item>();
         NPCs = new List<NPC>();
-        TileIdentifier = '-';
         Background = "assets/graphics/startScreen.csv";
     }
 }
