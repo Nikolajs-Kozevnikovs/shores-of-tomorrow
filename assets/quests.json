@@ -2,12 +2,7 @@
   {
     "title": "Welcome",
     "description": "Meet Jorge next to Nikkolas's house",
-    "completionTriggers": [
-      {
-        "type": "talk_to_npc",
-        "NPCName": "Jorge"
-      }
-    ],
+    "giverNPC": "Nikkolas",
     "preQuestDialogue": [
       "Hello! We saw your application for the job. You are welcomed to the Abyssal Key island",
       "From now on it's the start of your trial period.",
@@ -16,28 +11,453 @@
       "Your goal is to make choices that will determine the island’s future.",
       "Right now you can go to the seashore next to my house, north-east of the island and meet my friend Jorge. He will introduce you to your first quest."
     ],
-    "completionDialogue": [
-      "Hi, nice to meet you! Talk to me again if you want to try something new."
+    "completionDialogue": {
+      "": [
+        "Hi, nice to meet you! Talk to me again if you want to try something new.",
+        "Reward: Fishing pole"
+      ]
+    },
+    "completionTriggers": [
+      {
+        "type": "talk_to_npc",
+        "npc": "Jorge"
+      }
     ],
-    "onFinishActions": [],
-    "finishNPC": "Jorge"
+    "onFinishActions": [
+      {
+        "type": "unlock_quest",
+        "unlockQuest": {
+          "": "Fishing"
+        }
+      },
+      {
+        "type": "give_item",
+        "itemId": "fishing_pole"
+      }
+    ]
   },
   {
     "title": "Fishing",
-    "description": "Meet Jorge next to Nikkolas's house",
-    "giverNPC": "Nikkolas",
+    "description": "Fish out 3 fish of the same type out in the ocean. Choose whether to fish in restricted areas - regular ocean, or in allowed areas - remote ocean tiles.",
+    "giverNPC": "Jorge",
+    "preQuestDialogue": [
+      "Hello! I'm Jorge, a local fisherman. For fifty years I've watched this island changing, and I've seen how overfishing has made things tougher for everyone.",
+      "I always try to fish in a sustainable way, but it means less food and money these days. Would you like to join me today?",
+      "You have two choices:",
+      "Fish sustainably in approved areas. It's better for the ocean, but you'll catch fewer fish and earn less profit - go to the furthest ocean (1).",
+      "Fish in restricted zones. There are more fish here, but it harms the environment and breaks the rules - go to the nearest ocean (2).",
+      "Choose your approach.",
+      "First, go to the ocean tile of your choice.",
+      "Then, type \"fish\" to start fishing."
+    ],
+    "completionDialogue": {
+      "fish_in_allowed_areas": ["Good job! Thank you for your help. One of my friends is also waiting for you, you can find him on the boat, west from the island"],
+      "fish_in_restricted_areas": ["I would have chosen the other way, but thank you anyway! I know someone you might like; you can find him near the ocean with preserved corals and animals."]
+    },
     "completionTriggers": [
       {
-        "type": "talk_to_npc"
+        "type": "own_item",
+        "itemId": "close_waters_fish",
+        "quantity": 3,
+        "decision": "fish_in_restricted_areas"
+      },
+      {
+        "type": "own_item",
+        "itemId": "remote_waters_fish",
+        "quantity": 3,
+        "decision": "fish_in_allowed_areas"
       }
     ],
+    "onFinishActions": [
+      {
+        "type": "unlock_quest",
+        "unlockQuest": {
+          "fish_in_restricted_areas": "Poacher",
+          "fish_in_allowed_areas": "Fishing on the boat"
+        }
+      }
+    ]
+  },
+  {
+    "title": "Fishing on the boat",
+    "description": "Catch 5 fish from the boat",
+    "giverNPC": "Nikolja",
     "preQuestDialogue": [
-      ""
+      "Hey there! I'm Nikolja, another fisherman here like Jorge.",
+      "I'm about to head out and fish from my boat.",
+      "We can use a net and catch lots of fish, but sometimes other animals get hurt too.",
+      "Or, we can use fishing rods, catch fewer fish, and avoid harming other creatures.",
+      "Which way should we choose? Pick up the corresponding tool (\"take\")",
+      
+      "Then, type \"fish\" to start the process."
     ],
-    "completionDialogue": [
-      ""
+    "completionDialogue": {
+      "catch_with_net": [
+        "Good job! Unfortunately, we also caught a turtle.",
+        "It got injured by the net, I am not sure if it will survive this.",
+        "Anyway, talk to me again, I think I have an offer you might like."
+      ],
+      "catch_with_pole": [
+        "It took a while, but it is still good! Now you can go to the seashore, someone wants to talk to you."
+      ]
+    },
+    "completionTriggers": [
+      {
+        "type": "own_item",
+        "itemId": "fish_caught_with_net",
+        "quantity": 5,
+        "decision": "catch_with_net"
+      },
+      {
+        "type": "own_item",
+        "itemId": "fish_caught_with_fishing_pole",
+        "quantity": 5,
+        "decision": "catch_with_pole"
+      }
     ],
     "onFinishActions": [
+      {
+        "type": "unlock_quest",
+        "unlockQuest": {
+          "catch_with_net": "Poacher",
+          "catch_with_pole": "Help or sell"
+        }
+      }
+  ]
+  },
+  {
+    "title": "Poacher",
+    "description": "Fish some rare fish with Santino",
+    "giverNPC": "Nikolja",
+    "preQuestDialogue": [
+      "Hi again. I know someone who calls himself Santino.",
+      "He is someone people call when they need a rare fish for their collection.",
+      "But I know that he is a shady guy. If you want to work with him, go to the coral reef, he's always around there.",
+      "If that is not for you, just let me know."
+    ],
+    "completionDialogue": {
+      "poarcher": [
+        "Hi, my name is Santino and I will teach you a way to earn a lot of money.",
+        "Talk to me whenever you are ready."
+      ],
+      "no_poarcher": [
+        "Good choice, I respect your boundaries.",
+        "In the distance, you hear a girl. She seems to be calling you.",
+        "Find her next to "
+      ]
+    },
+    "completionTriggers": [
+      {
+        "type": "talk_to_npc",
+        "NPCName": "Nikolja",
+        "decision": "no_poarcher"
+      },
+      {
+        "type": "talk_to_npc",
+        "NPCName": "Santino",
+        "decision": "poarcher"
+      }
+    ],
+    "onFinishActions": [
+      {
+        "type": "unlock_quest",
+        "unlockQuest": {
+          "no_poarcher": "Find Mariha",
+          "poarcher": "Big risk - big reward"
+        }
+      },
+      {
+        "type": "give_item",
+        "decision": "poarcher",
+        "itemId": "fishing_bomb",
+        "toX": 7,
+        "toY": 3
+      }
     ]
+  },
+  {
+    "title": "Big risk - big reward",
+    "description": "Fish some rare fish with Santino",
+    "giverNPC": "Santino",
+    "preQuestDialogue": [
+      "I already gave you a fishing bomb. Now, we're going to fish with it.",
+      "Nothing new, just type \"fish\" and wait."
+    ],
+    "completionDialogue": {
+        "": [
+        "Thank you! You can have all of it. See you later!",
+        "You see a girl sitting on the shore just east of you. You might want to talk to her."
+      ]
+    },
+    "completionTriggers": [
+      {
+        "type":"own_item",
+        "itemId": "rare_fish"
+      }
+    ],
+    "onFinishActions": [
+      {
+        "type": "unlock_quest",
+        "unlockQuest": {
+          "": "Help or sell"
+        }
+      }
+    ]
+  },
+  {
+    "title": "Help or sell",
+    "description": "Decide whether to donate or sell your catch. Find someone who might help  you with your choice.",
+    "giverNPC": "Mariha",
+    "preQuestDialogue": [
+      "Hey! I'm Mariha. I'm only a little girl, but I want to help you. You shouldn't have accepted Santino's offer, he is a well-known poacher here, but what is done, is done. You've caught lots of fish, and now you get to choose what happens next. You can sell your fish at the local shop, or you can donate them to our charity center to help families who need food. My family has a hard time making money, because big companies keep taking more fish than we can. If you help us, I'd be so grateful. If you want to sell, head to the shop. If you want to help out, take your fish to the charity center. Thank you and see you soon!"
+    ],
+    "completionDialogue": {
+      "sell": ["Hey there! What are you up to? 'Got something to sell?"],
+      "help": ["Welcome to our charity center! You won't regret your choice."]
+    },
+    "completionTriggers": [
+      {
+        "type": "talk_to_npc",
+        "NPCName": "Artyom",
+        "decision": "sell"
+      },
+      {
+        "type": "talk_to_npc",
+        "NPCName": "Phil",
+        "decision": "help"
+      }
+    ],
+    "onFinishActions": [
+      {
+        "type": "unlock_quest",
+        "unlockQuest": {
+          "sell": "Sell fish",
+          "help": "Charity"
+        }
+      }
+    ]
+  },
+  {
+    "title": "Sell fish",
+    "description": "Sell your fish to the local shop",
+    "giverNPC": "Artyom",
+    "preQuestDialogue": [
+      "Hey! Welcome to the local shop \"Tuna Matata\". I see that you came to sell your fish. Good choice!",
+      "Type \"sell\" to complete the transaction."
+    ],
+    "completionDialogue": {
+      "": [
+        "You got a great deal of money!",
+        "Thank you! I will recommend you to my friend, who owns a factory here. Visit him at the Factory."
+      ]
+    },
+    "completionTriggers": [
+      {
+        "type": "talk_to_npc",
+        "NPCName": "Artyom"
+      }
+    ],
+    "onFinishActions": [
+      {
+        "type": "unlock_quest",
+        "unlockQuest": {
+          "": "Factory"
+        }
+      },
+      {
+        "type": "spawn_item",
+        "toX": 5,
+        "toY": 5,
+        "itemId": "trash",
+        "quantity": 3
+      }
+    ]
+
+  },
+  {
+    "title": "Charity",
+    "description": "Donate your fish to the charity center",
+    "giverNPC": "Phil",
+    "preQuestDialogue": [
+      "Hello, you are welcomed to the charity center! Thank you for helping the villagers.",
+      "Type \"donate\" to donate fish."
+    ],
+    "completionDialogue": {
+      "": [
+        "Thank you so much! We will remember your generosity. I heard that my friend Matias needs help at the recycling center, it would be so nice if you helped him out."
+      ]
+    },
+    "completionTriggers": [
+      {
+        "type": "talk_to_npc",
+        "NPCName": "Phil"
+      }
+    ],
+    "onFinishActions": [
+      {
+        "type": "unlock_quest",
+        "unlockQuest": {
+          "": "Recycling"
+        }
+      },
+      {
+        "type": "unlock_quest",
+        "unlockQuest": {
+          "": "Marine biologist"
+        }
+      },
+      {
+        "type": "spawn_item",
+        "toX": 3,
+        "toY": 5,
+        "quantity": 3,
+        "itemId": "trash"
+      }
+    ]
+  },
+  {
+    "title": "Recycling",
+    "description": "Help Matias transport trash from the Townhall",
+    "giverNPC": "Matias",
+    "preQuestDialogue": [
+      "Good afternoon and welcome to the recycling center!",
+      "My name is Matias and I am responsible for sorting trash.",
+      "The problem with ocean pollution is getting only worse and one way everyone could help is to sort the trash.", 
+      "Unfortunately, our garbage collecting car broke, so I am forced to ask for your help.",
+      "In the townhall, all trash cans are full.",
+      "Could you bring them back here? Or at least move them out of the townhall?",
+      "You can go now and on your way back visit the laboratory, my friend Lila needs your help! Otherwise she is not going to finish the research on time!",
+      "You have a choice: you can either follow the instructions or carry all the trash somewhere to save some time - no one is gonna notice."
+    ],
+    "completionDialogue": {
+      "recycle": [
+        "Thank you! All done!",
+        "Remember to visit Nikkolas!"
+      ],
+      "no_recycle": [
+        "Done. ",
+        "Remember to visit Nikkolas!"
+      ]
+    },
+    "completionTriggers": [
+      {
+        "type": "zone_item",
+        "itemId": "trash",
+        "quantity": 3,
+        "room": [5, 8],
+        "decision": "recycle"
+      },
+      {
+        "type": "zone_item",
+        "itemId": "trash",
+        "quantity": 0,
+        "room": [3, 5],
+        "decision": "no_recycle"
+      }
+    ],
+    "onFinishActions": [
+      {
+        "type": "unlock_quest",
+        "unlockQuest": {
+          "recycle": "At Nikkolas house",
+          "no_recycle": "At Nikkolas house"
+        }
+      }
+    ]
+  },
+  {
+    "title": "Factory",
+    "description": "Help Alexandr manage factory leftovers",
+    "giverNPC": "Alexandr",
+    "preQuestDialogue": [
+      "Hello, and welcome to my factory! We're having trouble managing all these leftovers.",
+      "You can help by either dumping the waste somewhere, like we sometimes do,",
+      "or taking it to the recycling center instead.",
+      "When you're finished, visit Nikkolas at his house - he will announce the decision about your stay here!",
+      "Type \"take\" to pick up leftovers.",
+      "Now you can either go to the recycling center or anywhere else, I just need to get rid of them."
+    ],
+    "completionDialogue": {
+      "no_recycle": [
+        "Good job, you threw all the trash away!",
+        "Remember to visit Nikkolas!"
+      ],
+      "recycle": [
+        "All leftovers are utilized, thank you!",
+        "Remember to visit Nikkolas!"
+      ]
+    },
+    "completionTriggers": [
+      {
+        "type": "zone_item",
+        "itemId": "trash",
+        "quantity": 3,
+        "room": [5, 8],
+        "decision": "recycle"
+      },
+      {
+        "type": "zone_item",
+        "itemId": "trash",
+        "quantity": 0,
+        "room": [5, 5],
+        "decision": "no_recycle"
+      }
+    ], 
+    "onFinishActions": [
+      {
+        "type": "unlock_quest",
+        "unlockQuest": {
+          "recycle": "At Nikkolas house",
+          "no_recycle": "At Nikkolas house"
+        }
+      }
+    ]
+  },
+  {
+    "title": "Marine biologist",
+    "description": "Help Lila collect coral samples",
+    "giverNPC": "Lila",
+    "preQuestDialogue": [
+      "Hey! I'm Lila - marine biologist at this laboratory. I am working on a research project about corals and how they can help with global warming. I need help with collecting more samples. Could you help me please?",
+      "Go to the ocean.",
+      "Type \"take\" to collect coral samples.",
+      "I will need four corals for my research."
+    ],
+    "completionDialogue": {
+        "": ["Lila: Thank you so much for helping me! I hope I will finish soon and it will raise awareness about the problems our ocean is facing. Now go and visit Nikkolas at his house, he will announce the decision about your stay here!"]
+    },
+    "completionTriggers": [
+      {
+        "type": "own_item",
+        "itemId": "coral",
+        "quantity": 4
+      }
+    ],
+    "onFinishActions": [
+      {
+        "type": "remove_inventory_item",
+        "itemId": "coral",
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "title": "At Nikkolas house",
+    "description": "Hear Nikkolas announce the decision about your stay",
+    "giverNPC": "Nikkolas",
+    "preQuestDialogue": [
+      "Return to Nikkolas to hear the results of your actions."
+    ],
+    "completionDialogue":  {
+      "": [
+      "Greater good: Hey again! I see you've done a lot of great work. Thank you so much - we all really appreciate it. We're ready to share the results! You took good care of the environment and helped the villagers. You might not have much money now, but the island is thriving because of you. Congratulations - you're our new manager!",
+      "Balance to the good side: Hey again! I see you've done a lot of great work. Thank you so much - we all really appreciate it. We're ready to announce the results! You've done almost everything right for the environment and cared for the villagers. The island is thriving! We believe you will only get better. Congratulations - you're our new manager!",
+      "Balance: Hey again! I see you've done a lot of work. Thank you so much - we all truly appreciate it. We're ready to announce the results! You made choices that brought both good and bad for the environment, the villagers, and yourself. That's what we call balance. We believe you will only get better. Congratulations - you're our new manager!",
+      "Balance to the bad side: Hey again! I see you've put in a lot of effort. Thank you for that, even though not all your choices had good results. We're ready to announce the results! You mostly took unsustainable paths, which hurt the environment and the villagers. We don't believe you're the right person for this role. Better luck next time...",
+      "Selfish: Hey again! I see you've done a lot of work. We're ready to announce the results! You mostly chose unsustainable paths that led to the island's collapse. You may have become rich, but the island is now uninhabitable. We don't believe you're the one we were searching for. Better luck next time..."
+    ]
+  },
+    "completionTriggers": [],
+    "onFinishActions": []
   }
 ]

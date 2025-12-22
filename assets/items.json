@@ -1,15 +1,47 @@
 [
   {
-    "name": "Fish",
-    "id": "fish"
+    "id": "fish",
+    "name": "Fish"
   },
   {
-    "name": "Fishing net",
-    "id": "fishing_net"
+    "id": "fishing_net",
+    "name": "Fishing net"
   },
   {
-    "name": "Fishing pole",
-    "id": "fishing_pole"
+    "id": "fishing_pole",
+    "name": "Fishing pole"
+  },
+  {
+    "id": "remote_waters_fish",
+    "name": "Deepwater Red Drum"
+  },
+  {
+    "id": "close_waters_fish",
+    "name": "Coastal Striper"
+  },
+  {
+    "id": "fish_caught_with_net",
+    "name": "Black Drum"
+  },
+  {
+    "id": "fish_caught_with_fishing_pole",
+    "name": "Cubera Snapper"
+  },
+  {
+    "id": "injured_turtle",
+    "name": "Injured Turtle"
+  },
+  {
+    "id": "rare_fish",
+    "name": "Bi-color Clownfish"
+  },
+  {
+    "id": "trash",
+    "name": "A bag of trash"
+  },
+  {
+    "id": "coral",
+    "name": "Nice and colorful corals"
   }
 ]
 

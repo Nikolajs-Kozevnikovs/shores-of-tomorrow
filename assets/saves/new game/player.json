@@ -4,9 +4,8 @@
     "inventory": [],
     "questProgression": {
         "finishedQuests": [],
-        "activeQuest": null,
-        "availableQuest": "Welcome",
+        "activeQuests": [],
+        "availableQuests": ["Welcome"],
         "decisions": {}
-
     }
 }

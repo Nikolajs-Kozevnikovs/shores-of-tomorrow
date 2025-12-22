@@ -86,7 +86,15 @@
                 case "talk":
                     TalkToNPC(command.SecondWord);
                     break;
-
+                case "take":
+                    TakeItem(command.SecondWord);
+                    break;
+                case "fish":
+                    Fishing();
+                    break;
+                case "inventory":
+                    CheckInventory();
+                    break;
                 case "help":
                     PrintHelp();
                     break;
@@ -104,6 +112,72 @@
             }
 
             return true;
+        }
+
+        private void Fishing()
+        {
+            // // net route (1)
+            // "You prepared a net and threw it into water.",
+            // "10 minutes have passed, the net is out.",
+            // "You caught 25 fish! Add to the inventory? Choice: yes/no.",
+            
+            // // rods route (2)
+            // "You prepared rods and started fishing.",
+            // "10 minutes passed.",
+            // "You've got a fish! Add to the inventory? Choice: yes/no.",
+            // "You've got a fish! Add to the inventory? Choice: yes/no.",
+            // "No more luck today..."
+        }
+
+        private void CheckInventory()
+        {
+            tui.WriteLine("You look into your bags.");
+            tui.WriteLine("");
+            for (int i = 0; i < World.Player.Inventory.Count; i++)
+            {
+                tui.WriteLine($"{i+1}. {World.Player.Inventory[i].Name}");
+            }
+        }
+
+        private void TakeItem(string? secondCommandWord)
+        {
+            List<Item> items = World.Player.CurrentRoom.Items;
+
+            if (items.Count == 0)
+            {
+                tui.WriteLine("Nothing to take in this room!");
+                return;
+            }
+
+            if (items.Count == 1)
+            {
+                MoveItem(items[0], World.Player.CurrentRoom, World.Player);
+                tui.WriteLine($"You took {items[0]} to your inventory.");
+                return;
+            }
+
+
+            if (secondCommandWord == null) 
+            {
+                tui.WriteLine("There are multiple items in this room! To choose an itemm use 'take [number]'");
+                tui.WriteLine("Available items:");
+                for (int i = 0; i < items.Count; i++)
+                {
+                    tui.WriteLine($"{i+1}. {items[i].Name}");
+                }
+                return;
+            }
+            try {
+                int n = int.Parse(secondCommandWord);
+                MoveItem(items[n], World.Player.CurrentRoom, World.Player);
+                tui.WriteLine($"You took {items[n]} to your inventory.");
+                return;
+            } catch(Exception)
+            {
+                tui.WriteLine("Wrong input");
+                return;
+            }
+
         }
 
         private void TalkToNPC(string? secondCommandWord)
@@ -152,7 +226,7 @@
             // finally, talk to the NPC
             isInDialogue = true;
             // if there is no quest active
-            if (World.Player.QuestProgression.ActiveQuest == null)
+            if (World.Player.QuestProgression.ActiveQuests.Count == 0)
             {
                 World.Player.QuestProgression.TryAcceptQuest(npc, tui);
                 return;

@@ -2,7 +2,7 @@
 
 using System.Text.Json.Serialization;
 
-public class Room
+public class Room : IItemContainer
 {
     public char TileIdentifier {get; set; } = '-';
     public string Name { get; set; } = "";
@@ -37,7 +37,24 @@ public class Room
 
     public void AddItem(Item item) => ((IItemContainer)this).AddItem(item);
     public bool RemoveItem(Item item) => ((IItemContainer)this).RemoveItem(item);
-    public bool IsInside(string itemId) => ((IItemContainer)this).IsInside(itemId);
+    public bool IsInside(string itemId, int quantity)
+    {
+        int itemsInRoom = Items.Where(i => i.Id == itemId).ToList().Count;
+        if (quantity == 0) {
+            if (itemsInRoom == quantity)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
+        if (itemsInRoom > quantity)
+        {
+            return true;
+        }
+        return false;
+    }
 
 
     public Room() 

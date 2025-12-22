@@ -1,0 +1,43 @@
+[
+  {
+    "title": "Welcome",
+    "description": "Meet Jorge next to Nikkolas's house",
+    "completionTriggers": [
+      {
+        "type": "talk_to_npc",
+        "NPCName": "Jorge"
+      }
+    ],
+    "preQuestDialogue": [
+      "Hello! We saw your application for the job. You are welcomed to the Abyssal Key island",
+      "From now on it's the start of your trial period.",
+      "The situation on the island is quite worrying - ",
+      "fish populations are collapsing, waters are polluted by factories, and the locals are divided between survival and sustainability. ",
+      "Your goal is to make choices that will determine the island’s future.",
+      "Right now you can go to the seashore next to my house, north-east of the island and meet my friend Jorge. He will introduce you to your first quest."
+    ],
+    "completionDialogue": [
+      "Hi, nice to meet you! Talk to me again if you want to try something new."
+    ],
+    "onFinishActions": [],
+    "finishNPC": "Jorge"
+  },
+  {
+    "title": "Fishing",
+    "description": "Meet Jorge next to Nikkolas's house",
+    "giverNPC": "Nikkolas",
+    "completionTriggers": [
+      {
+        "type": "talk_to_npc"
+      }
+    ],
+    "preQuestDialogue": [
+      ""
+    ],
+    "completionDialogue": [
+      ""
+    ],
+    "onFinishActions": [
+    ]
+  }
+]

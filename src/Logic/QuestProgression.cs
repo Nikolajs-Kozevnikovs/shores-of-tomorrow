@@ -4,39 +4,43 @@ namespace WorldOfZuul.Logic;
 
 public class QuestProgression
 {
-    public List<string> FinishedQuests { get; set; } = new();
-    public string AvailableQuest { get; set; } = "Welcome";
-    public string? ActiveQuest { get; set; } = null;
-    public Dictionary<string, string> Decisions { get; set; } = new();
+    public List<string> FinishedQuests { get; set; } = [];
+    public List<string> AvailableQuests { get; set; } = ["Welcome"];
+    public List<string> ActiveQuests { get; set; } = [];
+    public Dictionary<string, string> Decisions { get; set; } = []; // <quest: decision>
 
     public void AcceptQuest(string questId)
     {
-        ActiveQuest = questId;
-        AvailableQuest = questId;
+        ActiveQuests.Add(questId);
+        AvailableQuests.Remove(questId);
     }
 
-    public void FinishQuest(GameState world, string? decision)
+    public void FinishQuest(GameState world, string questId, string? decision)
     {
-        if (ActiveQuest == null)
+        string? activeQuest = ActiveQuests.Find(i => i == questId);
+        if (activeQuest == null)
         {
             throw new Exception("Error: attempted to finish quest when there is no active quest!");
         }
+        
+        FinishedQuests.Add(activeQuest);
 
-        FinishedQuests.Add(ActiveQuest);
-
-        Quest quest = QuestList.Get(ActiveQuest);
+        Quest quest = QuestList.Get(activeQuest);
         
         quest.ExecuteOnFinishActions(world, decision);
 
-        ActiveQuest = null;
+        ActiveQuests.Remove(activeQuest);
     }
 
     public void TryAcceptQuest(NPC npc, TUI tui)
+    {
+    
+        // if npc player is talking to can offer the quest that is available
+        foreach (string availableQuest in AvailableQuests)
         {
-            // if npc player is talking to can offer the quest that is available
-            if (npc.QuestsGiven.Any(qName => qName == AvailableQuest))
+            Quest q = QuestList.Get(availableQuest);
+            if (npc.Name == q.GiverNPC)
             {
-                Quest q = QuestList.Get(AvailableQuest);
                 for (int i = 0; i < q.PreQuestDialogue.Count; i++)
                 {
                     tui.WriteLine($"{npc.Name}: {q.PreQuestDialogue[i]}");
@@ -48,7 +52,7 @@ public class QuestProgression
                 string? text = Console.ReadLine();
                 if (text != null && text == "yes")
                 {
-                    AcceptQuest(AvailableQuest);
+                    AcceptQuest(availableQuest);
                     tui.WriteLine($"Quest Accepted: {q.Title}");
                     return;
                 } else
@@ -57,21 +61,22 @@ public class QuestProgression
                     return;
                 }
             }
-            // available quest is from a different npc: default text
-            tui.WriteLine($"{npc.Name}: Hi! How's your day goin'?");
+        }
+        // available quest is from a different npc: default text
+        tui.WriteLine($"{npc.Name}: Hi! How's your day goin'?");
+        return;
+    }
+
+    public void TryFinishQuest(NPC npc, TUI tui, GameState World)
+    {
+        if (ActiveQuests.Count == 0)
+        {
+            tui.WriteLine("Finishing quest failed: no active quest!");
             return;
         }
-
-        public void TryFinishQuest(NPC npc, TUI tui, GameState World)
-        {
-            if (ActiveQuest == null)
-            {
-                tui.WriteLine("Finishing quest failed: no active quest!");
-                return;
-            }
-
-            Quest activeQuest = QuestList.Get(ActiveQuest);
-            CompletionTrigger? trigger = activeQuest.FindCompletionTrigger(World);
+        foreach (string qId in ActiveQuests) {
+            Quest activeQuest = QuestList.Get(qId);
+            CompletionTrigger? trigger = activeQuest.FindCompletionTrigger(World, npc);
             if (trigger == null)
             {
                 tui.WriteLine("You have not fulfilled the requirements to complete this quest!");
@@ -86,10 +91,19 @@ public class QuestProgression
                     return;
                 }
             }
-
-            for (int i = 0; i < activeQuest.CompletionDialogue.Count; i++)
+            // choose completion dialogue
+            List<string> CompletionDialogue;
+            if (trigger.Decision == null)
             {
-                tui.WriteLine($"{npc.Name}: {activeQuest.CompletionDialogue[i]}");
+                CompletionDialogue = activeQuest.CompletionDialogue[""];
+            } else
+            {
+                CompletionDialogue = activeQuest.CompletionDialogue[trigger.Decision]; 
+            }
+
+            for (int i = 0; i < CompletionDialogue.Count; i++)
+            {
+                tui.WriteLine(CompletionDialogue[i]);
                 Console.ReadKey();
             }
 
@@ -98,13 +112,7 @@ public class QuestProgression
                 Decisions[activeQuest.Title] = trigger.Decision;
             }
 
-            FinishQuest(World, trigger.Decision);
+            FinishQuest(World, qId, trigger.Decision);
         }
-
-    public bool CanFinishQuest(GameState world)
-    {
-        if (ActiveQuest == null) return false;
-        var quest = QuestList.Get(ActiveQuest);
-        return quest.IsCompleted(world);
     }
 }

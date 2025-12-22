@@ -25,6 +25,17 @@ public class Player : IItemContainer
         Inventory = inventory;
     }
 
+    public bool RemoveItem(string itemId, int count)
+    {
+        var items = Inventory.Where(i => i.Id == itemId).Take(count).ToList();
+        if (items.Count < count)
+            return false;
+
+        foreach (var item in items)
+            Inventory.Remove(item);
+
+        return true;
+    }
 
     public void AddItem(Item item) => ((IItemContainer)this).AddItem(item);
     public bool RemoveItem(Item item) => ((IItemContainer)this).RemoveItem(item);
