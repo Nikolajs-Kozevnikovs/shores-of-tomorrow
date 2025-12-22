@@ -127,7 +127,11 @@
                         World.Player.RemoveItem("fish_caught_with_pole", 999);
                     }
                     break;
-                    case "donate":
+                case "donate":
+                    if (World.Player.CurrentRoom.Name != "Food charity")
+                    {
+                        tui.WriteLine("You can't donate anything here!");
+                    } else {
                         tui.WriteLine("You got a Thank-you letter.");
                         Item letter = ItemRegistry.CreateItem("letter");
                         World.Player.AddItem(letter);
@@ -136,6 +140,7 @@
                         World.Player.RemoveItem("close_waters_fish", 999);
                         World.Player.RemoveItem("fish_caught_with_net", 999);
                         World.Player.RemoveItem("fish_caught_with_pole", 999);
+                    }
                     break;
                 case "help":
                     PrintHelp();
