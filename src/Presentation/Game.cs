@@ -408,11 +408,15 @@
 
         private void PrintWelcome()
         {
-            tui.WriteLine("Welcome to the World of Zuul!");
-            tui.WriteLine("World of Zuul is a new, incredibly boring adventure game.");
-            tui.WriteLine();
-
-            PrintHelp();
+            tui.WriteLine("Welcome to Shores of Tomorrow!");
+            tui.WriteLine("");
+            tui.WriteLine("");
+            tui.WriteLine("This is an open-world adventure game.");
+            tui.WriteLine("Feel free to roam around whenever you see something interesting or the main story gets boring.");
+            tui.WriteLine("If you don't know what to do at any point, type 'help' to get available commands.");
+            tui.WriteLine("");
+            tui.WriteLine("To get started, type 'talk' to start the storyline.");
+            
         }
 
         private void PrintHelp()
@@ -421,9 +425,13 @@
             tui.WriteLine("Navigate by typing 'north', 'south', 'east', or 'west'.");
             tui.WriteLine("Type 'look' for more details.");
             tui.WriteLine("Type 'back' to go to the previous room.");
+            tui.WriteLine("Type 'talk' to talk to an NPC");
+            tui.WriteLine("Type 'take' to pick up an item");
+            tui.WriteLine("Type 'fish' to try fishing.");
+            tui.WriteLine("Type 'quest' to get the active quest description");
             tui.WriteLine("Type 'help' to print this message again.");
             tui.WriteLine("Type 'quit' to exit the game.");
-            tui.WriteLine("------------------------------");
+
         }
     }
 }
