@@ -185,8 +185,8 @@
             }
             try {
                 int n = int.Parse(secondCommandWord);
-                MoveItem(World.Player.Inventory[n-1], World.Player.Inventory, World.Player.CurrentRoom.Items);
-                tui.WriteLine($"You put {World.Player.Inventory[n-1].Name} to the ground.");
+                Item item = MoveItem(World.Player.Inventory[n-1], World.Player.Inventory, World.Player.CurrentRoom.Items);
+                tui.WriteLine($"You put {item.Name} to the ground.");
                 return;
             } catch(Exception)
             {
@@ -354,15 +354,15 @@
 
             if (items.Count == 1)
             {
-                MoveItem(items[0], World.Player.CurrentRoom.Items, World.Player.Inventory);
-                tui.WriteLine($"You took {items[0]} to your inventory.");
+                Item item = MoveItem(items[0], World.Player.CurrentRoom.Items, World.Player.Inventory);
+                tui.WriteLine($"You took {item.Name} to your inventory.");
                 return;
             }
 
 
             if (secondCommandWord == null) 
             {
-                tui.WriteLine("There are multiple items in this room! To choose an itemm use 'take [number]'");
+                tui.WriteLine("There are multiple items in this room! To choose an item use 'take <number>'");
                 tui.WriteLine("Available items:");
                 for (int i = 0; i < items.Count; i++)
                 {
@@ -376,7 +376,6 @@
                 {
                     throw new Exception("Wrong input");
                 }
-                tui.WriteLine("Got here");
                 tui.WriteLine($"You took {items[n-1].Name} to your inventory.");
                 MoveItem(items[n-1], World.Player.CurrentRoom.Items, World.Player.Inventory);
                 // return;
@@ -465,12 +464,14 @@
             tui.WriteLine(errorText);
         }
 
-        public static void MoveItem(Item item, List<Item> from, List<Item> to)
+        public static Item MoveItem(Item item, List<Item> from, List<Item> to)
         {
             if (from.Remove(item))
                 to.Add(item);
             else
                 Console.WriteLine("Item not found in source container.");
+
+            return item;
         }
 
 

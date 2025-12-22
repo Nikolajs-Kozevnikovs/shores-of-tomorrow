@@ -484,7 +484,14 @@
       "": [
     ]
   },
-    "completionTriggers": [],
-    "onFinishActions": []
+    "completionTriggers": [ {
+      "type": "talk_to_npc",
+      "nPCName": "Nikkolas"
+    }],
+    "onFinishActions": [
+      {
+        "type": "final_rating"
+      }
+    ]
   }
 ]
