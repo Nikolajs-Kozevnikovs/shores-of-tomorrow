@@ -113,7 +113,7 @@
       },
       {
         "type": "own_item",
-        "itemId": "fish_caught_with_fishing_pole",
+        "itemId": "fish_caught_with_pole",
         "quantity": 5,
         "decision": "catch_with_pole",
         "isGood": true
