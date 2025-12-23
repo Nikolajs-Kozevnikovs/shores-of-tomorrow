@@ -403,7 +403,7 @@
       "or taking it to the recycling center instead.",
       "When you're finished, visit Nikkolas at his house - he will announce the decision about your stay here!",
       "Type \"take\" to pick up leftovers.",
-      "Type \"drop trash\" to drop it",
+      "Type \"drop\" to drop it",
       "Now you can either go to the recycling center or anywhere else, I just need to get rid of them."
     ],
     "completionDialogue": {
