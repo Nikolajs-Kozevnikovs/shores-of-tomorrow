@@ -5,7 +5,7 @@
     "questProgression": {
         "finishedQuests": [],
         "activeQuests": [],
-        "availableQuests": ["Welcome"],
+        "availableQuests": ["Welcome", "Marine biologist"],
         "goodDesicisionCount": 0
     }
 }
