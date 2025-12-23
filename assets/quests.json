@@ -216,7 +216,7 @@
     "description": "Decide whether to donate or sell your catch. Find someone who might help  you with your choice.",
     "giverNPC": "Mariha",
     "preQuestDialogue": [
-      "Hey! I'm Mariha. I'm only a little girl, but I think I might to help you.",
+      "Hey! I'm Mariha. I'm only a little girl, but I think I might help you.",
       "You've caught lots of fish, and now you get to choose what happens next.",
       "You can sell your fish at the local shop, or",
       "you can donate them to our charity center to help families who need food.",
