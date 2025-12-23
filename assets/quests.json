@@ -60,14 +60,16 @@
         "itemId": "close_waters_fish",
         "quantity": 3,
         "decision": "fish_in_restricted_areas",
-        "isGood": false
+        "isGood": false,
+        "nPCName": "Jorge"
       },
       {
         "type": "own_item",
         "itemId": "remote_waters_fish",
         "quantity": 3,
         "decision": "fish_in_allowed_areas",
-        "isGood": true
+        "isGood": true,
+        "nPCName": "Jorge"
       }
     ],
     "onFinishActions": [
@@ -111,14 +113,16 @@
         "itemId": "fish_caught_with_net",
         "quantity": 5,
         "decision": "catch_with_net",
-        "isGood": false
+        "isGood": false,
+        "nPCName": "Nikolja"
       },
       {
         "type": "own_item",
         "itemId": "fish_caught_with_pole",
         "quantity": 5,
         "decision": "catch_with_pole",
-        "isGood": true
+        "isGood": true,
+        "nPCName": "Nikolja"
       }
     ],
     "onFinishActions": [
@@ -199,7 +203,8 @@
     "completionTriggers": [
       {
         "type":"own_item",
-        "itemId": "rare_fish"
+        "itemId": "rare_fish",
+        "nPCName": "Santino"
       }
     ],
     "onFinishActions": [
@@ -278,7 +283,8 @@
     "completionTriggers": [
       {
         "type": "own_item",
-        "itemId": "cash"
+        "itemId": "cash",
+        "nPCName": "Artyom"
       }
     ],
     "onFinishActions": [
@@ -316,7 +322,8 @@
       {
         "type": "own_item",
         "itemId": "letter",
-        "isGood": true
+        "isGood": true,
+        "nPCName": "Phil"
       }
     ],
     "onFinishActions": [
@@ -372,7 +379,9 @@
         "quantity": 3,
         "room": [5, 8],
         "decision": "recycle",
-        "isGood": true
+        "isGood": true,
+        "nPCName": "Matias"
+        
       },
       {
         "type": "zone_item",
@@ -380,7 +389,8 @@
         "quantity": 0,
         "room": [3, 5],
         "decision": "no_recycle",
-        "isGood": false
+        "isGood": false,
+        "nPCName": "Matias"
       }
     ],
     "onFinishActions": [
@@ -423,7 +433,8 @@
         "quantity": 3,
         "room": [5, 8],
         "decision": "recycle",
-        "isGood": true
+        "isGood": true,
+        "nPCName": "Alexandr"
       },
       {
         "type": "zone_item",
@@ -431,7 +442,8 @@
         "quantity": 0,
         "room": [5, 5],
         "decision": "no_recycle",
-        "isGood": false
+        "isGood": false,
+        "nPCName": "Alexandr"
       }
     ], 
     "onFinishActions": [
@@ -462,7 +474,8 @@
         "type": "own_item",
         "itemId": "coral",
         "quantity": 4,
-        "isGood": true
+        "isGood": true,
+        "nPCName": "Lila"
       }
     ],
     "onFinishActions": [
@@ -484,10 +497,12 @@
       "": [
     ]
   },
-    "completionTriggers": [ {
+    "completionTriggers": [ 
+      {
       "type": "talk_to_npc",
       "nPCName": "Nikkolas"
-    }],
+    }
+  ],
     "onFinishActions": [
       {
         "type": "final_rating"

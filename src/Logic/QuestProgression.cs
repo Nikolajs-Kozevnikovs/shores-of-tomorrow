@@ -32,7 +32,7 @@ public class QuestProgression
         ActiveQuests.Remove(activeQuest);
     }
 
-    public void TryAcceptQuest(NPC npc)
+    public bool TryAcceptQuest(NPC npc)
     {
     
         // if npc player is talking to can offer the quest that is available
@@ -54,43 +54,32 @@ public class QuestProgression
                 {
                     AcceptQuest(availableQuest);
                     TUI.WriteLine($"Quest Accepted: {q.Title}");
-                    return;
+                    return true;
                 } else
                 {
                     TUI.WriteLine("Well, come back when you'll change your mind.");
-                    return;
+                    return true;
                 }
             }
         }
-        // available quest is from a different npc: default text
-        TUI.WriteLine($"{npc.Name}: Hi! How's your day goin'?");
-        return;
+        return false;
     }
 
-    public void TryFinishQuest(NPC npc, GameState World)
+    public bool TryFinishQuest(NPC npc, GameState World)
     {
         if (ActiveQuests.Count == 0)
         {
-            TUI.WriteLine("Finishing quest failed: no active quest!");
-            return;
+            return false;
         }
-        foreach (string qId in ActiveQuests) {
+        foreach (string qId in ActiveQuests) 
+        {
             Quest activeQuest = QuestList.Get(qId);
             CompletionTrigger? trigger = activeQuest.FindCompletionTrigger(World, npc);
             if (trigger == null)
             {
-                TUI.WriteLine("You have not fulfilled the requirements to complete this quest!");
                 continue;
             }
 
-            if (trigger.Type == "talk_to_npc")
-            {
-                if (trigger.NPCName == null || trigger.NPCName != npc.Name)
-                {
-                    TUI.WriteLine($"{npc.Name}: Hi! How's your day goin'?");
-                    continue;
-                }
-            }
             // choose completion dialogue
             List<string> CompletionDialogue;
             if (trigger.Decision == null)
@@ -112,9 +101,10 @@ public class QuestProgression
                 GoodDesicisionCount++;
             }
 
-            FinishQuest(World, qId, trigger.Decision); // temp TUI
-            return;
+            FinishQuest(World, qId, trigger.Decision);
+            return true;
         }
+        return false;
     }
 
     public void EvaluateChoices()

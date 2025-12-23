@@ -432,15 +432,12 @@
 
             // finally, talk to the NPC
             isInDialogue = true;
-            // if there is no quest active
-            if (World.Player.QuestProgression.ActiveQuests.Count == 0)
+            bool isFinished = World.Player.QuestProgression.TryFinishQuest(npc, World);
+            bool isAvailable = World.Player.QuestProgression.TryAcceptQuest(npc);
+            if (!isFinished && !isAvailable)
             {
-                World.Player.QuestProgression.TryAcceptQuest(npc);
-                return;
+                TUI.WriteLine($"{npc.Name}: Hi! How's it going?");
             }
-
-            // // if there is an active quest
-            World.Player.QuestProgression.TryFinishQuest(npc, World);
         }
         
 

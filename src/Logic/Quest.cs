@@ -17,6 +17,7 @@ public class Quest
 
     public CompletionTrigger? FindCompletionTrigger(GameState world, NPC npc)
     {
+        bool isTheOne = false;
         foreach (var trigger in CompletionTriggers)
         {
             switch (trigger.Type)
@@ -28,6 +29,11 @@ public class Quest
                     }
                     break;
                 case "zone_item":
+                    if (trigger.NPCName != npc.Name)
+                    {
+                        continue;
+                    }
+                    isTheOne = true;
                     if (trigger.ItemId != null && trigger.Room != null)
                     {
                         var room = world.RoomManager.GetRoom(trigger.Room[0], trigger.Room[1]);
@@ -36,6 +42,11 @@ public class Quest
                     }
                     break;
                 case "own_item":
+                    if (trigger.NPCName != npc.Name)
+                    {
+                        continue;
+                    }
+                    isTheOne = true;
                     if (trigger.ItemId != null)
                     {
                         int count = world.Player.Inventory.Count(i => i.Id == trigger.ItemId);
@@ -45,6 +56,11 @@ public class Quest
                     break;
             }
         }
+        if (isTheOne)
+        {
+            TUI.WriteLine("Quest conditions are not fulfilled!");
+        }
+
         return null;
     }
 
