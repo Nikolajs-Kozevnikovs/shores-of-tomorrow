@@ -36,9 +36,10 @@ public class Player : IItemContainer
 
         return true;
     }
-    public void RemoveItem(Item item)
+    
+    public bool RemoveItem(Item item)
     {
-        Inventory.Remove(item);
+        return Inventory.Remove(item);
     }
 
     // inside Player.cs

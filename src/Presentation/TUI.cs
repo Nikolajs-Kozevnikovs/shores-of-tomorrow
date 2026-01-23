@@ -17,6 +17,9 @@ public static class TUI
     // layout constants
     private const int RequiredWidth = 132;
     private const int RequiredHeight = 43;
+    private const int DialogWidth = 70;
+    private const int DialogHeight = 12;
+    private const int DialogPadding = 1;
 
     // pixel buffer
     private static readonly Color[,] pixelBuffer = new Color[RequiredWidth, RequiredHeight];
@@ -47,9 +50,6 @@ public static class TUI
 
     // dialog handling
     private static readonly List<string> lines = new List<string>();
-    private const int DialogWidth = 70;
-    private const int DialogHeight = 12;
-    private const int DialogPadding = 1;
 
     public static void StartGame()
     {
