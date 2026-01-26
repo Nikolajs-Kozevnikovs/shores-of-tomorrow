@@ -24,7 +24,7 @@ public static class TUI
     // pixel buffer
     private static readonly Color[,] pixelBuffer = new Color[RequiredWidth, RequiredHeight];
 
-    // colour map for minimap tiles
+    // colour map for minimap tilesSS
     private static readonly Dictionary<char, Color> MiniMapTileColors = new()
     {
         { 'B', new Color(160,  60,  60) }, // boat
@@ -130,7 +130,7 @@ public static class TUI
 
     public static void LoadStartScreen()
     {
-        string path = "./assets/graphics/startScreen.csv";
+        const string path = "./assets/graphics/startScreen.csv";
         if (!File.Exists(path)) throw new FileNotFoundException(path);
         var bg = ParseTextImage(path);
         DrawColorsToBuffer(bg, 0, 0);
